@@ -1,3 +1,4 @@
+<<<<<<< Updated upstream
 #include <iostream>
 #include <string>
 #include <fstream>
@@ -20,4 +21,21 @@ public:
 private:
 	string path;
 	ofstream* new_file_pointer;// voir pq pas fstream
+=======
+#include <iostream>
+#include <string>
+#include <fstream>
+
+
+using namespace std;
+
+
+class OutputStream{
+public:
+	OutputStream(string filename);
+	~OutputStream();
+	virtual void writeln(string str, fstream &output_file);
+	virtual void close();
+	virtual void create(string name_file);
+>>>>>>> Stashed changes
 };
