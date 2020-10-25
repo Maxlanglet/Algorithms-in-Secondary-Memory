@@ -1,7 +1,6 @@
 #include <iostream>
 #include <string>
 #include <fstream>
-
 #ifdef _WIN32
 #include <io.h>
 
@@ -12,19 +11,18 @@
 
 #include <stdio.h>
 
-
 using namespace std;
 
 
-class OutputStream{
+class OutputStream4{
 public:
-	OutputStream();
-	~OutputStream();
-	void writeln(string str);
+	OutputStream4(string filename);
+	~OutputStream4();
+	void writeln(string str, fstream &output_file);
 	void close();
 	void create(string name_file);
 
 private:
 	string path;
-	ofstream new_file;// voir pq pas fstream
+	ofstream* new_file_pointer;// voir pq pas fstream
 };

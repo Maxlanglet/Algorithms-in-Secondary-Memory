@@ -1,39 +1,24 @@
-#include "InputStream.hpp"
-//#include <unistd.h>
-#ifdef _WIN32
-#include <io.h>
+#include "InputStream3.hpp"
 
-#elif defined(__APPLE__)
-#include <unistd.h>
-//#define bswap_64(x) OSSwapInt64(x)
-#endif
 
-#include <stdio.h>
-
-using namespace std;
-
-InputStream::InputStream(string filename){
+InputStream3::InputStream3(string filename){
 	path = filename;
 }
 
-InputStream::~InputStream(){}
+InputStream3::~InputStream3(){}
 
-void InputStream::open(){
+void InputStream3::open(){
 	// open the file
-	file.open(path);
+	ifstream file (path);
 	if(!file.is_open()){
 		cout << "Impossible to open the file" << endl;
 	}
-	
 }
-
-
 
 //caractère par caractère
 //peut etre faut il utiliser fonction read() de unistd mais pas reussis a faire fonctionner
 //peut etre file.read(c,1)
-void InputStream::readln1(){
-	
+void InputStream3::readln(){
 	if (file){
 		string line;
 		char c;
@@ -51,11 +36,11 @@ void InputStream::readln1(){
 	}
 }
 
-void InputStream::seek(int pos){
+void InputStream3::seek(int pos){
 	file.seekg(pos);
 }
 
-bool InputStream::end_of_stream(){
+bool InputStream3::end_of_stream(){
 	if(file.eof()){
 		return true;
 	}
@@ -64,7 +49,7 @@ bool InputStream::end_of_stream(){
 	}
 }
 
-void InputStream::close(){
+void InputStream3::close(){
 	file.close();
 }
 

@@ -1,6 +1,8 @@
 #include "Timer.hpp"
 
 
+using namespace std;
+
 Timer::Timer(){
 	m_Start = chrono::high_resolution_clock::now();
 }

@@ -1,5 +1,9 @@
 #include <chrono>
+#include <stdio.h>
+#include <iostream>
 
+
+using namespace std;
 
 class Timer{
 	public:
