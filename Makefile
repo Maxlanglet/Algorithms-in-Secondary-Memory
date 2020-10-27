@@ -31,4 +31,4 @@ Timer.o: Timer.cpp Timer.hpp
 	g++ -O3 -std=c++11 -c Timer.cpp
 
 clean:
-	rm -f *.o
+	

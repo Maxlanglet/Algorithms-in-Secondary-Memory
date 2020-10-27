@@ -19,7 +19,7 @@
 
 int main(int argc, char* argv[]){
 
-	InputStream instream("/Users/langletmaxime/Desktop/Database Systems Architecture/Algorithms in Secondary Memory/imdb/role_type.csv");
+	InputStream instream("./role_type.csv");
 	instream.open();
 	//stream.seek_pos(9); //test de seek_pos
 {
