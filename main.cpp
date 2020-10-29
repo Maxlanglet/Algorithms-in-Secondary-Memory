@@ -19,12 +19,14 @@
 
 int main(int argc, char* argv[]){
 
-	InputStream instream("./role_type.csv");
+	InputStream4 instream("./role_type.csv");
 	instream.open();
+	instream.readln();
+	
 	//stream.seek_pos(9); //test de seek_pos
 {
 	Timer timer;
-	instream.readln1();
+	//instream.readln();
 }
 	instream.close();
 /*
@@ -32,10 +34,11 @@ int main(int argc, char* argv[]){
 		cout << "end of stream" << endl;
 	}
 	*/
+	/*ghita did this 
 	OutputStream outstream;
 	outstream.create("hello.txt");
 	//fstream hello("hello.txt");//voir si y a pas un moyen mieux mais c est deja ca 
 	outstream.writeln("hello");
 	//outstream.close();  //segmentation fault a cause de close je pense pbm avec pointeur
-	return 0;
+	return 0;*/
 }

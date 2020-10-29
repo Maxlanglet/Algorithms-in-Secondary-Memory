@@ -10,6 +10,7 @@
 #endif
 
 #include <stdio.h>
+#include <windows.h>
 
 using namespace std;
 
@@ -23,8 +24,13 @@ public:
 	void seek(int pos);
 	bool end_of_stream();
 	void close();
+	int create_map();
+	void writemap();
+	void readmap();
 private:
 	string path;
 	fstream file;
+	LPCTSTR pBuf;
+	HANDLE hMapFile;
 	
 };
