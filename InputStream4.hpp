@@ -3,6 +3,9 @@
 #include <fstream>
 #ifdef _WIN32
 #include <io.h>
+#include <windows.h>
+#include <conio.h>
+#include <tchar.h>
 
 #elif defined(__APPLE__)
 #include <unistd.h>
@@ -10,7 +13,6 @@
 #endif
 
 #include <stdio.h>
-#include <windows.h>
 
 using namespace std;
 
