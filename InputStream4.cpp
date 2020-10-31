@@ -8,6 +8,7 @@
 
 //Input stream for the memory mapping process, creates mapped handle 
 InputStream4::InputStream4(string filename){
+	this->path=filename;
 	path = filename;
 	LPCTSTR pBuf;	//pointer to constant TCHAR string
 	HANDLE hMapFile;  //generic identifier to represent something, generally never used directly but rather gets 
@@ -16,7 +17,7 @@ InputStream4::InputStream4(string filename){
 	//TCHAR covers both multibyte and unicode, TEXT defines a string as unicode
 	//"Global\" allows processes to communicate with each other even if they are in different terminal server sessions.
 	//This requires that the first process must have the SeCreateGlobalPrivilege privilege. (run VS as admin)
-	TCHAR szName[]=TEXT("Global\\MyFileMappingObjectGhita"); 
+	TCHAR szName[]=TEXT("Global\\MapObjct"); 
 	TCHAR szMsg[]=TEXT("Message from first process tested by ghita.");
 	
    	this->hMapFile = CreateFileMapping( 		  
@@ -46,7 +47,6 @@ void InputStream4::open(){ //we need to stock the entire file input in a mapped 
                         0,
                         0,
                         BUF_SIZE);
-
    if (pBuf == NULL)
    {
       _tprintf(TEXT("1Could not map view of file (%d).\n"),
@@ -57,7 +57,9 @@ void InputStream4::open(){ //we need to stock the entire file input in a mapped 
    std::cout<< "here so far \n";
 	TCHAR szMsg[]=TEXT("Message from first process tested by ghita.");
 	LPCTSTR bu=this->pBuf;
-	CopyMemory((PVOID)bu, szMsg, (_tcslen(szMsg) * sizeof(TCHAR)));
+	FILE *pFile;
+	pFile = fopen ((this->path).c_str() , "r");
+	CopyMemory((PVOID)bu, pFile, (_tcslen(szMsg) * sizeof(TCHAR)));
 	std::cout<< "done\n";
    UnmapViewOfFile(pBuf);
    
@@ -76,7 +78,7 @@ void InputStream4::readln(){
 	this->hMapFile = OpenFileMapping(
                    FILE_MAP_ALL_ACCESS,   // read/write access
                    FALSE,                 // do not inherit the name
-                   TEXT("Global\\MyFileMappingObjectGhita"));               // name of mapping object
+                   TEXT("Global\\MapObjct"));               // name of mapping object
 
    if (this->hMapFile == NULL)
    {
