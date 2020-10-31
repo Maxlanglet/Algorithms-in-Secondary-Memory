@@ -8,8 +8,9 @@
 #include <unistd.h>
 //#define bswap_64(x) OSSwapInt64(x)
 #endif
-
+#include "InputStream.hpp"
 #include <stdio.h>
+
 
 using namespace std;
 

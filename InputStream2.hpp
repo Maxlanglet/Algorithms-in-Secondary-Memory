@@ -8,7 +8,7 @@
 #include <unistd.h>
 //#define bswap_64(x) OSSwapInt64(x)
 #endif
-
+#include "InputStream.hpp"
 #include <stdio.h>
 
 using namespace std;
@@ -16,7 +16,7 @@ using namespace std;
 
 class InputStream2{
 public:
-	InputStream2(string filename);
+	InputStream2(char filename);
 	~InputStream2();
 	void open();
 	void readln();
@@ -24,7 +24,7 @@ public:
 	bool end_of_stream();
 	void close();
 private:
-	string path;
-	fstream file;
+	const char* path;
+	FILE * file;
 	
 };

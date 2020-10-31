@@ -27,8 +27,8 @@
 
 int main(int argc, char* argv[]){
 
-	string title = "/Users/langletmaxime/Desktop/Database Systems Architecture/Algorithms in Secondary Memory/imdb/role_type.csv";
-	InputStream instream(title.c_str());
+	string title = "C:/Users/User/Downloads/MA1/DB ARCHITECTURE/projet/role_type.csv";
+	InputStream2 instream(title.c_str());
 	instream.open();
 	//stream.seek_pos(9); //test de seek_pos
 {

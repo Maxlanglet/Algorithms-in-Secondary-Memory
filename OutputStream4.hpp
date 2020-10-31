@@ -1,6 +1,7 @@
 #include <iostream>
 #include <string>
 #include <fstream>
+#include "OutputStream.hpp"
 #ifdef _WIN32
 #include <io.h>
 
