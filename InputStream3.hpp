@@ -10,13 +10,15 @@
 #include <unistd.h>
 //#define bswap_64(x) OSSwapInt64(x)
 #endif
-
+//#include "InputStream.hpp"
 #include <stdio.h>
+
 
 using namespace std;
 
 
-class InputStream3{
+class InputStream3// : public InputStream pour interface mais ca fait des erreurs de partout alors j'enleve pour le moment
+{
 public:
 	InputStream3(string filename);
 	~InputStream3();

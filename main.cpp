@@ -1,6 +1,6 @@
 #include "Timer.hpp"
-#include "OutputStream.hpp"
-#include "InputStream.hpp"
+#include "OutputStream1.hpp"
+#include "InputStream1.hpp"
 #include "OutputStream2.hpp"
 #include "InputStream2.hpp"
 #include "OutputStream3.hpp"
@@ -33,14 +33,16 @@ int main(int argc, char* argv[]){
 
 	string title = "/Users/langletmaxime/Desktop/Database Systems Architecture/Algorithms in Secondary Memory/imdb/role_type.csv";
 
-	printf("Test InputStream\n\n");
+	printf("Test InputStream1\n\n");
 
-	InputStream instream(title.c_str());
+	InputStream1 instream(title.c_str());
+
+	//InputStream2 instream2(title.c_str());
 	instream.open();
 	//stream.seek_pos(9); //test de seek_pos
 {
 	Timer timer;
-	instream.readln1();
+	instream.readln();
 }
 	//instream.close();
 
@@ -115,8 +117,8 @@ int main(int argc, char* argv[]){
 		cout << "end of stream" << endl;
 	}
 	*/
-	OutputStream outstream;
-	outstream.create("hello.txt");
+	OutputStream1 outstream;
+	outstream.create();
 	//fstream hello("hello.txt");//voir si y a pas un moyen mieux mais c est deja ca 
 	outstream.writeln("hello");
 	//outstream.close();  //segmentation fault a cause de close je pense pbm avec pointeur

@@ -1,6 +1,7 @@
 #include <iostream>
 #include <string>
 #include <fstream>
+//#include "OutputStream.hpp"
 #ifdef _WIN32
 #include <io.h>
 
@@ -14,7 +15,8 @@
 using namespace std;
 
 
-class OuputStream3{
+class OuputStream3// : public OutputStream enlever pour le moment
+{
 public:
 	OuputStream3(string filename);
 	~OuputStream3();
