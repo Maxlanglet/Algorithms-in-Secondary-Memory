@@ -37,7 +37,7 @@ void InputStream::readln1(){
 	if (file){
 		string line;
 		char c;
-		while (file.get(c))
+		while (file.get(c))//c == '\n' || c == '\r' pour lire la ligne en particulier
 		{
 			line += c;
 			if (c == '\n' || c == '\r'){

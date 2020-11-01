@@ -21,6 +21,10 @@
 #include <stdlib.h>
 #include <unistd.h>
 
+//#include <boost/iostream/devices/mmapped_file.hpp>
+
+
+
 #define handle_error(msg) \
            do { perror(msg); exit(EXIT_FAILURE); } while (0)
 
@@ -28,6 +32,9 @@
 int main(int argc, char* argv[]){
 
 	string title = "/Users/langletmaxime/Desktop/Database Systems Architecture/Algorithms in Secondary Memory/imdb/role_type.csv";
+
+	printf("Test InputStream\n\n");
+
 	InputStream instream(title.c_str());
 	instream.open();
 	//stream.seek_pos(9); //test de seek_pos
@@ -35,9 +42,24 @@ int main(int argc, char* argv[]){
 	Timer timer;
 	instream.readln1();
 }
+	//instream.close();
+
+
+
+	printf("Test InputStream3\n\n");
+//Test InputStream3
+	InputStream3 instream3(title.c_str());
+
+	instream3.open();
+	//stream.seek_pos(9); //test de seek_pos
+{
+	Timer timer;
+	instream3.readln();
+}
+	instream3.close();
 	instream.close();
 
-	 printf("\n");
+	 printf("Test MMAP\n\n");
 //ESSAIS DE MMAP	 Essayer Boost
 	int fd;
 	fd = open(title.c_str(), O_RDONLY);

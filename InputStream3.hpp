@@ -1,6 +1,8 @@
 #include <iostream>
 #include <string>
 #include <fstream>
+#include <cstdio>//a voir si sur windows
+
 #ifdef _WIN32
 #include <io.h>
 
@@ -26,5 +28,6 @@ public:
 private:
 	string path;
 	fstream file;
+	FILE * filp; 
 	
 };

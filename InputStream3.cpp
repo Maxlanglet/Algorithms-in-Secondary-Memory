@@ -1,6 +1,8 @@
 #include "InputStream3.hpp"
 
 
+#define BUFFER_SIZE 20
+
 InputStream3::InputStream3(string filename){
 	path = filename;
 }
@@ -9,26 +11,39 @@ InputStream3::~InputStream3(){}
 
 void InputStream3::open(){
 	// open the file
-	ifstream file (path);
+	//file.open(path);
+	filp = fopen(path.c_str(), "rb"); 
+	if (!filp) { printf("Error: could not open file %s\n", path.c_str());}
+	/*
 	if(!file.is_open()){
 		cout << "Impossible to open the file" << endl;
-	}
+	}*/
 }
 
-//caractère par caractère
-//peut etre faut il utiliser fonction read() de unistd mais pas reussis a faire fonctionner
-//peut etre file.read(c,1)
+//buffer by buffer
 void InputStream3::readln(){
-	if (file){
-		string line;
-		char c;
-		while (file.get(c))
-		{
-			line += c;
-			if (c == '\n' || c == '\r'){
-				cout << line;
-				line="";
+
+	if (filp){
+
+		int bytes_read =1;
+
+		while( bytes_read > 0){//temporary but read the entire file
+			char buffer[BUFFER_SIZE];
+
+			bytes_read = fread(buffer, sizeof(char), BUFFER_SIZE, filp);		//buffer overwritten not flushed
+
+
+			
+			for (int j=0; j<BUFFER_SIZE;j++){
+				//printf("%s",&buf[j]);
+				//cout << buf[j];
+				cout << buffer[j];
+				buffer[j] = '\0';
+				//buffer[j] = 0;
 			}
+
+
+			//delete[] buffer;
 		}
 	}
 	else{
@@ -50,7 +65,8 @@ bool InputStream3::end_of_stream(){
 }
 
 void InputStream3::close(){
-	file.close();
+	//file.close();
+	fclose(filp);
 }
 
 
