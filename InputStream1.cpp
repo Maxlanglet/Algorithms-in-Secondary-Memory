@@ -1,4 +1,4 @@
-#include "InputStream.hpp"
+#include "InputStream1.hpp"
 //#include <unistd.h>
 #ifdef _WIN32
 #include <io.h>

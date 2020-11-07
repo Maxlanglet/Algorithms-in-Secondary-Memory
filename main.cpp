@@ -1,6 +1,8 @@
 #include "Timer.hpp"
-#include "OutputStream.hpp"
+
 #include "InputStream.hpp"
+#include "OutputStream1.hpp"
+#include "InputStream1.hpp"
 #include "OutputStream2.hpp"
 #include "InputStream2.hpp"
 #include "OutputStream3.hpp"
