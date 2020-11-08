@@ -2,25 +2,26 @@
 
 
 
-OuputStream2::OuputStream2(string filename){
+OutputStream2::OutputStream2(const char * filename){
 	path = filename;
 }
 
-OuputStream2::~OuputStream2(){}
+OutputStream2::~OutputStream2(){}
 
 
-void OuputStream2::create(string name_file){
-	ofstream new_file(name_file.c_str());
-	new_file_pointer = &new_file;
+void OutputStream2::create(){
+	new_file = fopen(path.c_str(),"a");
 }
 
 
-void OuputStream2::writeln(string str, fstream &output_file){
-	output_file << str << endl;
+void OutputStream2::writeln(string str){
+	new_file = fopen(path.c_str(),"a");
+	fputs(str.c_str(),new_file);
+	fputs("\n",new_file);
 }
 
 
-void OuputStream2::close(){
-	new_file_pointer->close();
+void OutputStream2::close(FILE * pFile){
+	fclose(pFile);
 }
 

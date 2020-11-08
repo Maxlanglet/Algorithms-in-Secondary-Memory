@@ -1,3 +1,6 @@
+#ifndef INPUTSTREAM3_H
+#define INPUTSTREAM3_H
+#endif
 #include <iostream>
 #include <string>
 #include <fstream>

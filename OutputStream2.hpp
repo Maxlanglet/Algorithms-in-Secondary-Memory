@@ -15,16 +15,16 @@
 using namespace std;
 
 
-class OuputStream2// : public OutputStream enlever pour le moment
+class OutputStream2// : public OutputStream enlever pour le moment
 {
 public:
-	OuputStream2(string filename);
-	~OuputStream2();
-	void writeln(string str, fstream &output_file);
-	void close();
-	void create(string name_file);
+	OutputStream2(const char * filename);
+	~OutputStream2();
+	void writeln(string str);
+	void close(FILE * pFile);
+	void create();
 
 private:
 	string path;
-	ofstream* new_file_pointer;// voir pq pas fstream
+	FILE * new_file;// voir pq pas fstream
 };

@@ -31,11 +31,12 @@
 
 int main(int argc, char* argv[]){
 
-	string title = "/Users/langletmaxime/Desktop/Database Systems Architecture/Algorithms in Secondary Memory/imdb/role_type.csv";
+	//string title = "/Users/langletmaxime/Desktop/Database Systems Architecture/Algorithms in Secondary Memory/imdb/role_type.csv";
+	string title = "C:/Users/User/Downloads/MA1/DB ARCHITECTURE/projet/role_type.csv";
 
-	printf("Test InputStream1\n\n");
+	//printf("Test InputStream1\n\n");
 
-	InputStream1 instream(title.c_str());
+	/*InputStream1 instream(title.c_str());
 
 	//InputStream2 instream2(title.c_str());
 	instream.open();
@@ -43,13 +44,24 @@ int main(int argc, char* argv[]){
 {
 	Timer timer;
 	instream.readln();
+}*/
+
+
+
+	//printf("Test InputStream3\n\n");
+//Test InputStream2
+
+	InputStream2 instream2(title.c_str());
+
+	instream2.open();
+	//stream.seek_pos(9); //test de seek_pos
+{
+	Timer timer;
+	instream2.readln();
 }
-	//instream.close();
+	instream2.close();
 
-
-
-	printf("Test InputStream3\n\n");
-//Test InputStream3
+/*Test InputStream3
 	InputStream3 instream3(title.c_str());
 
 	instream3.open();
@@ -58,17 +70,19 @@ int main(int argc, char* argv[]){
 	Timer timer;
 	instream3.readln();
 }
-	instream3.close();
-	instream.close();
+	instream3.close();*/
 
-	 printf("Test MMAP\n\n");
+
+	 //printf("Test MMAP\n\n");
+
+	 /*
 //ESSAIS DE MMAP	 Essayer Boost
 	int fd;
 	fd = open(title.c_str(), O_RDONLY);
 {
 	Timer timer;
 	char *addr;
-	
+
 	struct stat sb;
 
 	
@@ -76,7 +90,7 @@ int main(int argc, char* argv[]){
 	if (fd == -1)
 	   handle_error("open");
 
-	if (fstat(fd, &sb) == -1)           /* To obtain file size */
+	if (fstat(fd, &sb) == -1)           
 	   handle_error("fstat");
 
 	addr =  static_cast<char*>(mmap(NULL, sb.st_size, PROT_READ,
@@ -93,11 +107,11 @@ int main(int argc, char* argv[]){
     if(n != sb.st_size){
         printf("Write failed\n");
     }
-/*
-    for(int i=0; i<length; i++){
-        printf("[%d] ",addr[i]);
-    }
-    */
+
+//    for(int i=0; i<length; i++){
+  //    printf("[%d] ",addr[i]);
+    //}
+   
 
     printf("\n");
     
@@ -110,17 +124,23 @@ int main(int argc, char* argv[]){
 
 }
     close(fd);
-
+*/
 
 /*
 	if (stream.end_of_stream()){// test de end of stream
 		cout << "end of stream" << endl;
 	}
 	*/
-	OutputStream1 outstream;
+	string title2="C:/Users/User/Downloads/MA1/DB ARCHITECTURE/projet/test.txt";
+	/*OutputStream1 outstream(title2.c_str());
 	outstream.create();
 	//fstream hello("hello.txt");//voir si y a pas un moyen mieux mais c est deja ca 
-	outstream.writeln("hello");
+	outstream.writeln("hello");*/
+	
+	OutputStream2 outstream2(title2.c_str());
+	outstream2.create();
+	outstream2.writeln("hello");
+	
 	//outstream.close();  //segmentation fault a cause de close je pense pbm avec pointeur
 	return 0;
 }

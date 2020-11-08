@@ -17,7 +17,7 @@ using namespace std;
 class InputStream2// : public InputStream pour interface mais ca fait des erreurs de partout alors j'enleve pour le moment
 {
 public:
-	InputStream2(char filename);
+	InputStream2(const char * filename);
 	~InputStream2();
 	void open();
 	void readln();
@@ -25,7 +25,7 @@ public:
 	bool end_of_stream();
 	void close();
 private:
-	const char* path;
+	const char * path;
 	FILE * file;
 	
 };

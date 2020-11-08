@@ -1,7 +1,7 @@
 #include "InputStream2.hpp"
 
-InputStream2::InputStream2(char filename){
-	path = &filename;
+InputStream2::InputStream2(const char * filename){
+	path = filename;
 }
 
 InputStream2::~InputStream2(){}
@@ -16,11 +16,20 @@ void InputStream2::open(){
 
 //reads in a buffer
 void InputStream2::readln(){
+	
 	char buffer [100];
+	 if ( ! feof (file) ){
+       
+	   //while(buffer[99] != '\n' && buffer[99]!='\0')
+		if ( fgets (buffer , 100 , file) == NULL ) cout<<"error, NULL"<<endl;
+       	fputs (buffer , stdout);
+		
+     }
+	 /*
      while ( ! feof (file) ){
        if ( fgets (buffer , 100 , file) == NULL ) break;
        fputs (buffer , stdout);
-     }
+     }*/
 }
 
 
