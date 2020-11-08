@@ -6,6 +6,9 @@
 
 #elif defined(__APPLE__)
 #include <unistd.h>
+#include <fcntl.h>
+#include <sys/mman.h>
+#include <sys/stat.h>
 //#define bswap_64(x) OSSwapInt64(x)
 #endif
 //#include "InputStream.hpp"
@@ -20,13 +23,13 @@ class InputStream4// : public InputStream pour interface mais ca fait des erreur
 public:
 	InputStream4(string filename);
 	~InputStream4();
-	void open();
+	void open2();
 	void readln();
 	void seek(int pos);
 	bool end_of_stream();
-	void close();
+	void close2();
 private:
 	string path;
-	fstream file;
+	int fd;
 	
 };

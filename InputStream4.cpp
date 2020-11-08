@@ -1,5 +1,8 @@
 #include "InputStream4.hpp"
 
+#define handle_error(msg) \
+           do { perror(msg); exit(EXIT_FAILURE); } while (0)
+
 
 InputStream4::InputStream4(string filename){
 	path = filename;
@@ -7,53 +10,68 @@ InputStream4::InputStream4(string filename){
 
 InputStream4::~InputStream4(){}
 
-void InputStream4::open(){
+void InputStream4::open2(){
 	// open the file
-	ifstream file (path);
-	if(!file.is_open()){
-		cout << "Impossible to open the file" << endl;
-	}
+	fd = open(path.c_str(), O_RDONLY);
+	if (fd == -1)
+	   handle_error("open");
 }
 
 
-
-//caractère par caractère
-//peut etre faut il utiliser fonction read() de unistd mais pas reussis a faire fonctionner
-//peut etre file.read(c,1)
 void InputStream4::readln(){
-	if (file){
-		string line;
-		char c;
-		while (file.get(c))
-		{
-			line += c;
-			if (c == '\n' || c == '\r'){
-				cout << line;
-				line="";
-			}
-		}
-	}
-	else{
-		cout << "File is not open" << endl;
-	}
+	char *addr;
+	
+	struct stat sb;
+
+	
+
+	if (fd == -1)
+	   handle_error("open");
+
+	if (fstat(fd, &sb) == -1) 
+	  handle_error("fstat");
+
+	addr =  static_cast<char*>(mmap(NULL, sb.st_size, PROT_READ,
+	           MAP_PRIVATE, fd, 0));
+
+	if(addr == MAP_FAILED){
+        printf("Mapping Failed\n");
+        handle_error("mmap");
+    }
+
+    ssize_t n = write(1 ,addr,sb.st_size);//obligé d etre 1 sinon pas de output
+
+    if(n != sb.st_size){
+        printf("Write failed\n");
+    }
+
+    printf("\n");
+    
+    int err = munmap(addr, sb.st_size);
+
+    if(err != 0){
+        printf("UnMapping Failed\n");
+    }
 }
 
 
 void InputStream4::seek(int pos){
-	file.seekg(pos);
+	//fd.seekg(pos);
 }
 
 bool InputStream4::end_of_stream(){
-	if(file.eof()){
+	/*
+	if(fd.eof()){
 		return true;
 	}
 	else{
 		return false;
 	}
+	*/
 }
 
-void InputStream4::close(){
-	file.close();
+void InputStream4::close2(){
+	close(fd);
 }
 
 
