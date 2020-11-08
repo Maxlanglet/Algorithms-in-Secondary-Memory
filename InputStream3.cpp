@@ -27,41 +27,40 @@ void InputStream3::readln(){
 	if (fd){
 
 		ssize_t bytes_read =1;
-		ssize_t len = 0;
-		//char buffer[BUFFER_SIZE];
 		char* buffer = (char*) malloc(BUFFER_SIZE*sizeof(char));
 		size_t nbytes = BUFFER_SIZE*sizeof(char);
 		off_t offset = 0;
-
-		
-
+		char* addition = NULL;
 
 		while( bytes_read > 0){//temporary but read the entire file
 			ssize_t idx = 0;
+			ssize_t size = 0;
 			char *p = NULL;
 
 
 			if ((bytes_read = lseek (fd, offset, SEEK_SET)) != -1)
 	        bytes_read = read (fd, buffer, nbytes);
+
+	    	//ssize_t n = write(1, buffer, bytes_read);
 			
 
 			if (bytes_read == -1) {   /* read error   */
 				cout << "Error" << endl;
-		        len = bytes_read;
 		    }
 
 		    p = buffer;    /* check each chacr */
 		    while (idx < bytes_read && *p != '\n' && *p != '\r') p++, idx++;
-		    *p = 0;
 
-		    offset += idx +1;
 
-		    ssize_t n = write(1, buffer, bytes_read);
+		    if ( *p == '\n'){
+		    	offset += idx +1;
+		    	size = idx+1;
+		    }
+		    else offset += idx, size = idx;
 
-			n = write(1, buffer, idx+2);//obligé d etre 1 sinon pas de output, je sais pas pq ca fonctionne pas avec file descriptor
-			printf("\n");
+			ssize_t n = write(1, buffer, size);//obligé d etre 1 sinon pas de output, je sais pas pq ca fonctionne pas avec file descriptor
 			
-		    if(n != idx+2){
+		    if(n != size){
 		        printf("Write failed\n");
 		    }
 		}
