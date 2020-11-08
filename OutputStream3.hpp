@@ -15,11 +15,11 @@
 using namespace std;
 
 
-class OuputStream3// : public OutputStream enlever pour le moment
+class OutputStream3// : public OutputStream enlever pour le moment
 {
 public:
-	OuputStream3(string filename);
-	~OuputStream3();
+	OutputStream3(string filename);
+	~OutputStream3();
 	void writeln(string str, fstream &output_file);
 	void close();
 	void create(string name_file);

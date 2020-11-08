@@ -2,7 +2,8 @@
 //#include <unistd.h>
 
 
-OutputStream1::OutputStream1(){
+OutputStream1::OutputStream1(string filename){
+	path = filename;
 	//;
 }
 

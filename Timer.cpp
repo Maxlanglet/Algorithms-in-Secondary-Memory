@@ -20,7 +20,7 @@ void Timer::Stop()
 
 	auto duration = end - start;
 
-	cout << "Temps d'execution " << duration << " us" << endl;
+	cout << "Temps d'execution " << duration << " us\n" << endl;
 
 
 }

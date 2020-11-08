@@ -18,13 +18,13 @@ using namespace std;
 class OutputStream2// : public OutputStream enlever pour le moment
 {
 public:
-	OutputStream2(string filename);
+	OutputStream2(const char * filename);
 	~OutputStream2();
-	void writeln(string str, fstream &output_file);
-	void close();
-	void create(string name_file);
+	void writeln(string str);
+	void close(FILE * pFile);
+	void create();
 
 private:
 	string path;
-	ofstream* new_file_pointer;// voir pq pas fstream
+	FILE * new_file;// voir pq pas fstream
 };

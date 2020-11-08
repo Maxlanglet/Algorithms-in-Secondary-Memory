@@ -1,3 +1,4 @@
+
 #include <iostream>
 #include <string>
 #include <fstream>
@@ -19,7 +20,7 @@ using namespace std;
 class OutputStream1// : public OutputStream enlever pour le moment
 {
 public:
-	OutputStream1();
+	OutputStream1(string filename);
 	~OutputStream1();
 	void writeln(string str);
 	void close();

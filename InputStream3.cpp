@@ -30,7 +30,6 @@ void InputStream3::readln(){
 		char* buffer = (char*) malloc(BUFFER_SIZE*sizeof(char));
 		size_t nbytes = BUFFER_SIZE*sizeof(char);
 		off_t offset = 0;
-		char* addition = NULL;
 
 		while( bytes_read > 0){//temporary but read the entire file
 			ssize_t idx = 0;
