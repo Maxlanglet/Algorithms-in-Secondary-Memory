@@ -8,6 +8,9 @@
 
 #elif defined(__APPLE__)
 #include <unistd.h>
+#include <sys/mman.h>
+#include <sys/stat.h>
+#include <fcntl.h>
 //#define bswap_64(x) OSSwapInt64(x)
 #endif
 
@@ -23,10 +26,10 @@ public:
 	OutputStream1(string filename);
 	~OutputStream1();
 	void writeln(string str);
-	void close();
+	void close2();
 	void create();
 
 private:
 	string path;
-	ofstream new_file;// voir pq pas fstream
+	int new_file;// voir pq pas fstream
 };

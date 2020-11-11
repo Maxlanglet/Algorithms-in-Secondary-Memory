@@ -31,7 +31,7 @@ public:
 	void close2();
 private:
 	string path;
-	ifstream file;
+	off_t offset;
 	int filp; 
 	
 };

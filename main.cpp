@@ -90,15 +90,16 @@ int main(int argc, char* argv[]){
 	*/
 
 	string title2="hello2.txt";
-	/*OutputStream1 outstream(title2.c_str());
+	OutputStream1 outstream(title2.c_str());
 	outstream.create();
-	//fstream hello("hello.txt");//voir si y a pas un moyen mieux mais c est deja ca 
-	outstream.writeln("hello");*/
+	outstream.writeln("hello");
+	outstream.close2();
 	
+	/*
 	OutputStream2 outstream2(title2.c_str());
 	outstream2.create();
 	outstream2.writeln("hello");
-	
+	*/
 	//outstream.close();  //segmentation fault a cause de close je pense pbm avec pointeur
 	return 0;
 }

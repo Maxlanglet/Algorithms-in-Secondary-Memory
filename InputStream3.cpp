@@ -5,20 +5,14 @@
 
 InputStream3::InputStream3(string filename){
 	path = filename;
+	offset = 0;
 }
 
 InputStream3::~InputStream3(){}
 
 void InputStream3::open2(){
-	// open the file
-	//file.open(path);
-	//filp = fopen(path.c_str(), "rb"); 
 	fd = open(path.c_str(), O_RDONLY);
-	//if (!filp) { printf("Error: could not open file %s\n", path.c_str());}
-	/*
-	if(!file.is_open()){
-		cout << "Impossible to open the file" << endl;
-	}*/
+	if (!fd) { printf("Error: could not open file %s\n", path.c_str());}
 }
 
 //buffer by buffer
@@ -29,7 +23,6 @@ void InputStream3::readln(){
 		ssize_t bytes_read =1;
 		char* buffer = (char*) malloc(BUFFER_SIZE*sizeof(char));
 		size_t nbytes = BUFFER_SIZE*sizeof(char);
-		off_t offset = 0;
 
 		while( bytes_read > 0){//temporary but read the entire file
 			ssize_t idx = 0;
@@ -72,11 +65,13 @@ void InputStream3::readln(){
 }
 
 void InputStream3::seek(int pos){
-	file.seekg(pos);
+	lseek (fd, pos, SEEK_SET);
 }
 
 bool InputStream3::end_of_stream(){
-	if(file.eof()){
+	int bytes_read = 1;
+
+	if((bytes_read = lseek (fd, offset, SEEK_SET)) == -1){
 		return true;
 	}
 	else{
