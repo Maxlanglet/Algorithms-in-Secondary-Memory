@@ -40,7 +40,7 @@ void InputStream3::readln(){
 				cout << "Error" << endl;
 		    }
 
-		    p = buffer;    /* check each chacr */
+		    p = buffer;
 		    while (idx < bytes_read && *p != '\n' && *p != '\r') p++, idx++;
 
 
@@ -50,7 +50,7 @@ void InputStream3::readln(){
 		    }
 		    else offset += idx, size = idx;
 
-			ssize_t n = write(1, buffer, size);//obligé d etre 1 sinon pas de output, je sais pas pq ca fonctionne pas avec file descriptor
+			ssize_t n = write(1, buffer, size);//obligé d etre 1 sinon pas de output, je sais pas pq ca fonctionne pas avec file descriptor, temporaire
 			
 		    if(n != size){
 		        printf("Write failed\n");

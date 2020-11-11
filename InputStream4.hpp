@@ -31,5 +31,6 @@ public:
 private:
 	string path;
 	int fd;
+	off_t offset;
 	
 };
