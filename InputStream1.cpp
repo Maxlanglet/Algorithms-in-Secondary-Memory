@@ -7,6 +7,7 @@ using namespace std;
 
 InputStream1::InputStream1(string filename){
 	path = filename;
+	offset =0;
 }
 
 InputStream1::~InputStream1(){}
@@ -14,14 +15,6 @@ InputStream1::~InputStream1(){}
 void InputStream1::open2(){
 	// open the file
 	filp = open(path.c_str(), O_RDONLY);
-	/*
-	file.open(path);
-	if(!file.is_open()){
-		cout << "Impossible to open the file" << endl;
-	}
-	filp = fopen(path.c_str(), "rb"); 
-	if (!filp) { printf("Error: could not open file %s\n", path.c_str());}
-	*/
 	
 }
 
@@ -33,17 +26,15 @@ void InputStream1::open2(){
 void InputStream1::readln(){
 
 	if (filp){
-
 		int bytes_read =1;
 		char* c = (char*) malloc(sizeof(char));
 		string line;
 
 		while( bytes_read > 0){//temporary but read the entire file
-			
-
-			
+						
 			bytes_read = read(filp, c, sizeof(char));		//buffer overwritten not flushed
 			line += c;
+			offset ++;
 			if (*c == '\n' || *c == '\r'){
 				cout << line;
 				line = "";
@@ -54,32 +45,17 @@ void InputStream1::readln(){
 	else{
 		cout << "File is not open" << endl;
 	}
-	/*
 	
-	if (file){
-		string line;
-		char c;
-		while (file.get(c))//c == '\n' || c == '\r' pour lire la ligne en particulier
-		{
-			line += c;
-			if (c == '\n' || c == '\r'){
-				cout << line;
-				line="";
-			}
-		}
-	}
-	else{
-		cout << "File is not open" << endl;
-	}
-	*/
 }
 
 void InputStream1::seek(int pos){
-	file.seekg(pos);
+	lseek (filp, pos, SEEK_SET);
 }
 
 bool InputStream1::end_of_stream(){
-	if(file.eof()){
+	int bytes_read = 1;
+
+	if((bytes_read = lseek (filp, offset, SEEK_SET)) == -1){
 		return true;
 	}
 	else{
