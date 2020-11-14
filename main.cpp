@@ -27,7 +27,7 @@
 
 int main(int argc, char* argv[]){
 
-	string title = "/Users/langletmaxime/Desktop/Database Systems Architecture/Algorithms in Secondary Memory/imdb/role_type.csv";
+	string title = "./role_type.csv";
 	//string title = "C:/Users/User/Downloads/MA1/DB ARCHITECTURE/projet/role_type.csv";
 
 	printf("Test InputStream1\n\n");
@@ -57,7 +57,7 @@ int main(int argc, char* argv[]){
 	instream2.readln();
 }
 	instream2.close();
-
+	printf("Fin Test InputStream2\n\n");
 
 	printf("Test InputStream3\n\n");
 //Test InputStream3
@@ -88,13 +88,20 @@ int main(int argc, char* argv[]){
 		cout << "end of stream" << endl;
 	}
 	*/
-
+/*
 	string title2="hello2.txt";
 	OutputStream1 outstream(title2.c_str());
 	outstream.create();
 	outstream.writeln("hello");
 	outstream.close2();
-	
+*/	
+
+	string title3="testwriteln3.txt";
+	OutputStream3 outstream3(title3.c_str());
+	outstream3.create();
+	outstream3.writeln("mama zwina et baba zwin et koulna zwinin et denya zwina layali\n");
+	outstream3.close2();
+
 	/*
 	OutputStream2 outstream2(title2.c_str());
 	outstream2.create();
