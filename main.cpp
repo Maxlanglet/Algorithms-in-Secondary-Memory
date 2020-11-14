@@ -7,15 +7,15 @@
 #include "InputStream3.hpp"
 #include "OutputStream4.hpp"
 #include "InputStream4.hpp"
-#ifdef _WIN32
-#include <io.h>
+//#ifdef _WIN32
+//#include <io.h>
 
-#elif defined(__APPLE__)
+//#elif defined(__APPLE__)
 #include <unistd.h>
 #include <sys/mman.h>
 #include <sys/stat.h>
 //#define bswap_64(x) OSSwapInt64(x)
-#endif
+//#endif
 #include <fcntl.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -26,8 +26,8 @@
 
 
 int main(int argc, char* argv[]){
-
-	string title = "/Users/langletmaxime/Desktop/Database Systems Architecture/Algorithms in Secondary Memory/imdb/role_type.csv";
+/*
+	string title = "role_type.csv";
 	//string title = "C:/Users/User/Downloads/MA1/DB ARCHITECTURE/projet/role_type.csv";
 
 	printf("Test InputStream1\n\n");
@@ -47,8 +47,8 @@ int main(int argc, char* argv[]){
 
 	printf("Test InputStream2\n\n");
 //Test InputStream2
-
-	InputStream2 instream2(title.c_str());
+*/
+	/*InputStream2 instream2(title.c_str());
 
 	instream2.open();
 	//stream.seek_pos(9); //test de seek_pos
@@ -81,25 +81,30 @@ int main(int argc, char* argv[]){
 	Timer timer;
 	instream4.readln();
 }
-	instream4.close2();
+	instream4.close2();*/
 
 /*
 	if (stream.end_of_stream()){// test de end of stream
 		cout << "end of stream" << endl;
 	}
 	*/
-
+/*
 	string title2="hello2.txt";
 	OutputStream1 outstream(title2.c_str());
 	outstream.create();
 	outstream.writeln("hello");
-	outstream.close2();
+	outstream.close2();*/
 	
 	/*
 	OutputStream2 outstream2(title2.c_str());
 	outstream2.create();
 	outstream2.writeln("hello");
 	*/
+	string title4="hellonew.txt";
+	OutputStream4 outstream4(title4.c_str());
+	outstream4.create();
+	string str = "hello";
+	outstream4.writeln(str.c_str());
 	//outstream.close();  //segmentation fault a cause de close je pense pbm avec pointeur
 	return 0;
 }

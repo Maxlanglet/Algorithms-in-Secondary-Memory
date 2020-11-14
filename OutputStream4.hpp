@@ -2,15 +2,19 @@
 #include <string>
 #include <fstream>
 //#include "OutputStream.hpp"
-#ifdef _WIN32
-#include <io.h>
+//#ifdef _WIN32
+//#include <io.h>
 
-#elif defined(__APPLE__)
+//#elif defined(__APPLE__)
 #include <unistd.h>
 //#define bswap_64(x) OSSwapInt64(x)
-#endif
-
+//#endif
+#include <sys/mman.h>
+#include <sys/stat.h>
 #include <stdio.h>
+#include <stdlib.h>
+#include <fcntl.h>
+#include <string.h>
 
 using namespace std;
 
@@ -18,13 +22,13 @@ using namespace std;
 class OutputStream4// : public OutputStream enlever pour le moment
 {
 public:
-	OutputStream4(string filename);
+	OutputStream4(const char* filename);
 	~OutputStream4();
-	void writeln(string str, fstream &output_file);
-	void close();
-	void create(string name_file);
+	void writeln(const char* str);
+	void close2();
+	void create();
 
 private:
-	string path;
-	ofstream* new_file_pointer;// voir pq pas fstream
+	const char* path;
+	int new_file;// voir pq pas fstream
 };

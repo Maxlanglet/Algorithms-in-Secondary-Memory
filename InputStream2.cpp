@@ -6,6 +6,7 @@ InputStream2::InputStream2(const char * filename){
 
 InputStream2::~InputStream2(){}
 
+
 void InputStream2::open(){
 	// open the file
 	file = fopen (path , "r");
@@ -16,16 +17,19 @@ void InputStream2::open(){
 
 //reads in a buffer
 void InputStream2::readln(){
-	
+	// initialize a buffer of fixed size 100
 	char buffer [100];
+	// if we are not at the end of the file, we read the size of the buffer
 	 if ( ! feof (file) ){
        
 	   //while(buffer[99] != '\n' && buffer[99]!='\0')
 		if ( fgets (buffer , 100 , file) == NULL ) cout<<"error, NULL"<<endl;
+		// verify that we indeed read the right characters
        	fputs (buffer , stdout);
 		
      }
 	 /*
+	 // this is the code to read the entire file
      while ( ! feof (file) ){
        if ( fgets (buffer , 100 , file) == NULL ) break;
        fputs (buffer , stdout);
