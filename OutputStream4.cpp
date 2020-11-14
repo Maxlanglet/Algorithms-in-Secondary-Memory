@@ -68,6 +68,7 @@ void OutputStream4::writeln(const char* str){
         perror("Error calling lseek() to 'stretch' the file");
         exit(EXIT_FAILURE);
     }
+	// add this to have the right size
 	if (write(new_file, "", 1) == -1)
     {
         close(new_file);
@@ -76,11 +77,16 @@ void OutputStream4::writeln(const char* str){
     }
 	
 	printf("before mapping \n");
-	// this loop will check until we reach the end of the string
+
+	
+	
+	// offset is where the map is looking at in the string
 	size_t offset = 0;
+	// this will loop until we reach the end of the string, if the offset is equal or greater than
+	// the size of the string, we finished to write everything
 	while(offset < textsize){
 		
-		// now we can map the file
+		// now we can map the file, we map a size B and begin at the offset
 		char* map = static_cast<char*>(mmap(NULL, B, PROT_READ | PROT_WRITE,MAP_SHARED, new_file, offset));
 		if (map == MAP_FAILED)
 		{
@@ -88,16 +94,17 @@ void OutputStream4::writeln(const char* str){
 			perror("Error mmapping the file");
 			exit(EXIT_FAILURE);
 		}
-		// for the size of our map, we write what is in the string str
-		
-				//as long as there is a character
+
+		// if there is still enough space to read an entire map of size B
 		if((textsize-offset>=B)){
+			// write B char of the string in the map
 			for (size_t j = 0; j < B; j++){
 				printf("Writing character %c at %zu\n", str[j+offset], j);
 				map[j] = str[j+offset];
 			}
 		}
 		else{
+			// write the char remaining in the map (not of size B)
 			for (size_t j = 0; j < textsize-offset-1; j++){
 				printf("Writing character %c at %zu\n", str[j+offset], j);
 				map[j] = str[j+offset];
