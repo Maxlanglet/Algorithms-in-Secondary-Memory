@@ -5,17 +5,17 @@
 #include <string>
 #include <fstream>
 #include <cstdio>//a voir si sur windows
+//#include "InputStream.hpp"
+//#ifdef _WIN32
+//#include <io.h>
 
-#ifdef _WIN32
-#include <io.h>
-
-#elif defined(__APPLE__)
+//#elif defined(__APPLE__)
 #include <unistd.h>
 #include <sys/mman.h>
 #include <sys/stat.h>
 //#define bswap_64(x) OSSwapInt64(x)
-#endif
-//#include "InputStream.hpp"
+//#endif
+
 #include <stdio.h>
 #include <fcntl.h>
 #include <stdlib.h>

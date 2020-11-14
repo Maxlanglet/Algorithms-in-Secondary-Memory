@@ -7,15 +7,15 @@
 #include "InputStream3.hpp"
 #include "OutputStream4.hpp"
 #include "InputStream4.hpp"
-#ifdef _WIN32
-#include <io.h>
+//#ifdef _WIN32
+//#include <io.h>
 
-#elif defined(__APPLE__)
+//#elif defined(__APPLE__)
 #include <unistd.h>
 #include <sys/mman.h>
 #include <sys/stat.h>
 //#define bswap_64(x) OSSwapInt64(x)
-#endif
+//#endif
 #include <fcntl.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -27,7 +27,7 @@
 
 int main(int argc, char* argv[]){
 
-	string title = "/Users/langletmaxime/Desktop/Database Systems Architecture/Algorithms in Secondary Memory/imdb/role_type.csv";
+	string title = "role_type.csv";
 	//string title = "C:/Users/User/Downloads/MA1/DB ARCHITECTURE/projet/role_type.csv";
 
 	printf("Test InputStream1\n\n");
@@ -100,6 +100,11 @@ int main(int argc, char* argv[]){
 	outstream2.create();
 	outstream2.writeln("hello");
 	*/
+	string title4="hellonew.txt";
+	OutputStream4 outstream4(title2.c_str());
+	outstream4.create();
+	string str = "hello";
+	outstream4.writeln(str.c_str());
 	//outstream.close();  //segmentation fault a cause de close je pense pbm avec pointeur
 	return 0;
 }

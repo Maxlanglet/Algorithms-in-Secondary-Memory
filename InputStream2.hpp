@@ -1,13 +1,14 @@
 #include <iostream>
 #include <string>
 #include <fstream>
-#ifdef _WIN32
-#include <io.h>
 
-#elif defined(__APPLE__)
+//#ifdef _WIN32
+//#include <io.h>
+
+//#elif defined(__APPLE__)
 #include <unistd.h>
 //#define bswap_64(x) OSSwapInt64(x)
-#endif
+//#endif
 //#include "InputStream.hpp"
 #include <stdio.h>
 
