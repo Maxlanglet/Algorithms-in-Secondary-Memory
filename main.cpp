@@ -74,7 +74,8 @@ int main(int argc, char* argv[]){
 	 printf("Test MMAP\n\n");
 
 //ESSAIS DE MMAP	 Essayer Boost
-	 InputStream4 instream4(title.c_str());
+	 string titlemap = "../imdb/complete_cast.csv";//role_type.csv
+	 InputStream4 instream4(titlemap.c_str());
 
 	 instream4.open2();
 {
