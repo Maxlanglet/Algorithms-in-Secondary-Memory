@@ -37,11 +37,10 @@ void InputStream4::readln(){
 	if (fstat(fd, &sb) == -1) 
 	  handle_error("fstat");
 
-	cout << sb.st_size << endl;
+	//cout << sb.st_size << endl;
 
 	while (sb.st_size > 0) {
 		size_t len = 4096;//20*sizeof(char), same as pagesize
-		ssize_t idx = 0;
 		ssize_t size = 0;
 
 		if (sb.st_size < len){

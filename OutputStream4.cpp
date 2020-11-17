@@ -4,7 +4,7 @@
 
 
 
-OutputStream4::OutputStream4(const char* filename){
+OutputStream4::OutputStream4(string filename){
 	path = filename;
 }
 
@@ -41,7 +41,7 @@ Its effect on other file types is implementation-defined. The result of using O_
 void OutputStream4::create(){
 	//new_file =open(path, O_RDWR | O_CREAT | O_TRUNC, S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH);
 	mode_t mode = S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH;
-	new_file = creat(path, mode);
+	new_file = creat(path.c_str(), mode);
 	if (new_file == -1){
 	   handle_error("open");
 	}
@@ -50,18 +50,65 @@ void OutputStream4::create(){
 
 void OutputStream4::open2(){
 	// open the file
-	new_file = open(path, O_RDWR|O_APPEND|O_TRUNC|O_CREAT,S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH);
+	new_file = open(path.c_str(), O_RDWR | O_APPEND); 
 	if (new_file == -1){
 	   handle_error("open");
 	}
 }
 
-void OutputStream4::writeln(const char* str){
+void OutputStream4::writeln(string str){
 	// open a file to write only ->OPEN IN ANOTHER METHOD
-	new_file = open(path,  O_RDWR|O_APPEND|O_TRUNC|O_CREAT,S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH);
+	/*
+	new_file = open(path.c_str(), O_APPEND); // en fait pas trop de sens on le fera toujours avant soit un open ou create
 	if (new_file == -1){
 	   handle_error("open");
 	}
+	*/
+	int offset = 0;
+
+	char *addr= NULL;
+
+	struct stat sb;
+
+	int pagesize = getpagesize();
+
+	
+
+	if (fstat(new_file, &sb) == -1) 
+	  handle_error("fstat");
+
+	size_t len = 4096;//20*sizeof(char), same as pagesize
+
+	if (sb.st_size==0){
+		len=0;
+	}
+
+	else offset = (int)floor(sb.st_size/len);
+
+	addr =  static_cast<char*>(mmap(NULL, len, PROT_READ,MAP_PRIVATE, new_file, offset*pagesize));//
+
+	//TODO: pas oublier condition au cas ou page presque remplie
+
+	char* addr2 = (char*) malloc(sizeof(char)*len+str.size()+1);
+	memcpy(addr2, addr, sizeof(char)*len);
+
+
+	//TODO: trouver meilleur moyen que for loop
+	
+	for (int i=0; i<str.size(); i++){
+		addr2[len+i] = str[i];
+	}
+	addr2[len+str.size()] = '\n';
+
+	addr2+=len;
+
+
+	ssize_t n = write(new_file ,addr2, len+str.size()+1);
+
+	//free(addr2); //TODO: voir pq on doit pas le mettre
+	
+}
+/*
 	// size of our map
 	size_t B = 2*sizeof(char);
 
@@ -93,19 +140,19 @@ void OutputStream4::writeln(const char* str){
 		// if there is still enough space to read an entire map of size B
 		if((textsize-offset)>=B){
 			// write B char of the string in the map
-			/*for (size_t j = 0; j < B; j++){
-				printf("CASE1 Writing character %c at %zu\n", str[j+offset], j);
-				map[j] = str[j+offset];
-			}*/
+			//for (size_t j = 0; j < B; j++){
+			//	printf("CASE1 Writing character %c at %zu\n", str[j+offset], j);
+			//	map[j] = str[j+offset];
+			//}
 			memcpy(map, str, B);
 		}
 
 		else{
 			// write the char remaining in the map (not of size B)
-			/*for (size_t j = 0; j < textsize-offset-1; j++){
-				printf("CASE2 Writing character %c at %zu\n", str[j+offset], j);
-				map[j] = str[j+offset];
-			}*/
+			//for (size_t j = 0; j < textsize-offset-1; j++){
+			//	printf("CASE2 Writing character %c at %zu\n", str[j+offset], j);
+			//	map[j] = str[j+offset];
+			//}
 			memcpy(map, str, textsize-offset-1);
 		}
 		printf("1 \n");
@@ -134,7 +181,7 @@ void OutputStream4::writeln(const char* str){
 
     // Un-mmaping doesn't close the file, so we still need to do that.
     close2();
-}
+    */
 
 	// we want the file to be the size of the string we put
 	/*if (lseek(new_file, getpagesize(), SEEK_SET) == -1){

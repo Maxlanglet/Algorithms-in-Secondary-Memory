@@ -26,7 +26,7 @@
 
 
 int main(int argc, char* argv[]){
-
+/*
 	string title = "role_type.csv";
 	//string title = "C:/Users/User/Downloads/MA1/DB ARCHITECTURE/projet/role_type.csv";
 
@@ -83,29 +83,34 @@ int main(int argc, char* argv[]){
 	instream4.readln();
 }
 	instream4.close2();
-
+*/
 /*
 	if (stream.end_of_stream()){// test de end of stream
 		cout << "end of stream" << endl;
 	}
 	*/
 
+/*
 	string title2="hello2.txt";
 	OutputStream1 outstream(title2.c_str());
 	outstream.create();
 	outstream.writeln("hello");
 	outstream.close2();
-	
+	*/
 	/*
 	OutputStream2 outstream2(title2.c_str());
 	outstream2.create();
 	outstream2.writeln("hello");
 	*/
+
 	string title4="hellonew.txt";
-	OutputStream4 outstream4(title2.c_str());
-	outstream4.create();
+	OutputStream4 outstream4(title4.c_str());
+	//outstream4.create();
+	outstream4.open2();
 	string str = "hello";
+	cout << "beginning" << endl;
 	outstream4.writeln(str.c_str());
+	outstream4.close2();
 	//outstream.close();  //segmentation fault a cause de close je pense pbm avec pointeur
 	return 0;
 }
