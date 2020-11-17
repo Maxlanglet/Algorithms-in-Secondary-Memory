@@ -88,13 +88,14 @@ void OutputStream4::writeln(string str){
 	addr =  static_cast<char*>(mmap(NULL, len, PROT_READ,MAP_PRIVATE, new_file, offset*pagesize));//
 
 	//TODO: pas oublier condition au cas ou page presque remplie
+	// et voir comment augmenter taille char* sans par apres devoir copier
 
 	char* addr2 = (char*) malloc(sizeof(char)*len+str.size()+1);
 	memcpy(addr2, addr, sizeof(char)*len);
 
 
 	//TODO: trouver meilleur moyen que for loop
-	
+
 	for (int i=0; i<str.size(); i++){
 		addr2[len+i] = str[i];
 	}
