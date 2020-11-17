@@ -91,22 +91,22 @@ void OutputStream4::writeln(string str){
 	// et voir comment augmenter taille char* sans par apres devoir copier
 
 	char* addr2 = (char*) malloc(sizeof(char)*len+str.size()+1);
-	memcpy(addr2, addr, sizeof(char)*len);
+	addr = addr2;
 
 
 	//TODO: trouver meilleur moyen que for loop
 
 	for (int i=0; i<str.size(); i++){
-		addr2[len+i] = str[i];
+		addr[len+i] = str[i];
 	}
-	addr2[len+str.size()] = '\n';
+	addr[len+str.size()] = '\n';
 
-	addr2+=len;
+	addr+=len;
 
 
-	ssize_t n = write(new_file ,addr2, len+str.size()+1);
+	ssize_t n = write(new_file ,addr, len+str.size()+1);
 
-	//free(addr2); //TODO: voir pq on doit pas le mettre
+	free(addr2); //TODO: voir pq on doit pas le mettre
 	
 }
 /*
