@@ -27,6 +27,7 @@ public:
 	void writeln(const char* str);
 	void close2();
 	void create();
+	void open2();
 
 private:
 	const char* path;

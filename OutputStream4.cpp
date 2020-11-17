@@ -48,78 +48,78 @@ void OutputStream4::create(){
 }
 
 
+void OutputStream4::open2(){
+	// open the file
+	new_file = open(path, O_RDWR|O_APPEND|O_TRUNC|O_CREAT,S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH);
+	if (new_file == -1){
+	   handle_error("open");
+	}
+}
+
 void OutputStream4::writeln(const char* str){
-	// open a file to write only
+	// open a file to write only ->OPEN IN ANOTHER METHOD
 	new_file = open(path,  O_RDWR|O_APPEND|O_TRUNC|O_CREAT,S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH);
 	if (new_file == -1){
 	   handle_error("open");
 	}
 	// size of our map
-	size_t B = 20*sizeof(char);
+	size_t B = 2*sizeof(char);
 
 	// size of our text
-	size_t textsize = strlen(str) + 1; // + \0 null character
+	size_t textsize = (strlen(str)+1); // + \0 null character
+	printf("text is %lu long\n",textsize);
 
-	printf("before seeking \n");
-	// we want the file to be the size of the string we put
-	if (lseek(new_file, textsize-1, SEEK_SET) == -1)
-    {
-        close(new_file);
-        perror("Error calling lseek() to 'stretch' the file");
-        exit(EXIT_FAILURE);
-    }
-	// add this to have the right size
-	if (write(new_file, "", 1) == -1)
-    {
-        close(new_file);
-        perror("Error writing last byte of the file");
-        exit(EXIT_FAILURE);
-    }
-	
-	printf("before mapping \n");
+	int result = ftruncate(new_file, (textsize-1)*getpagesize());
 
-	
-	
+
 	// offset is where the map is looking at in the string
 	size_t offset = 0;
+	int loop = 0;
 	// this will loop until we reach the end of the string, if the offset is equal or greater than
 	// the size of the string, we finished to write everything
 	while(offset < textsize){
-		
+		printf("offset is %zu \n", offset);
+
 		// now we can map the file, we map a size B and begin at the offset
-		char* map = static_cast<char*>(mmap(NULL, B, PROT_READ | PROT_WRITE,MAP_SHARED, new_file, offset));
-		if (map == MAP_FAILED)
-		{
+		char* map = static_cast<char*>(mmap(NULL, B, PROT_READ | PROT_WRITE,MAP_SHARED, new_file, loop*getpagesize()));
+		if (map == MAP_FAILED){
 			close(new_file);
 			perror("Error mmapping the file");
 			exit(EXIT_FAILURE);
 		}
 
+
+		// add the char in the map
 		// if there is still enough space to read an entire map of size B
-		if((textsize-offset>=B)){
+		if((textsize-offset)>=B){
 			// write B char of the string in the map
-			for (size_t j = 0; j < B; j++){
-				printf("Writing character %c at %zu\n", str[j+offset], j);
+			/*for (size_t j = 0; j < B; j++){
+				printf("CASE1 Writing character %c at %zu\n", str[j+offset], j);
 				map[j] = str[j+offset];
-			}
+			}*/
+			memcpy(map, str, B);
 		}
+
 		else{
 			// write the char remaining in the map (not of size B)
-			for (size_t j = 0; j < textsize-offset-1; j++){
-				printf("Writing character %c at %zu\n", str[j+offset], j);
+			/*for (size_t j = 0; j < textsize-offset-1; j++){
+				printf("CASE2 Writing character %c at %zu\n", str[j+offset], j);
 				map[j] = str[j+offset];
-			}
+			}*/
+			memcpy(map, str, textsize-offset-1);
 		}
 		printf("1 \n");
+		for (size_t j = 0; j < textsize-offset-1; j++){
+				printf("Writing character %c\n", map[j]);
+		}
 		// Write it now to disk
-		if (msync(map, B, MS_SYNC) == -1)
-		{
+		msync(map, B, MS_SYNC);
+		if (msync(map, B, MS_SYNC) == -1){
 			perror("Could not sync the file to disk");
 		}
 		printf("2 \n");
 		// Don't forget to free the mmapped memory
-		if (munmap(map, textsize) == -1)
-		{
+		if (munmap(map, textsize) == -1){
 			close(new_file);
 			perror("Error un-mmapping the file");
 			exit(EXIT_FAILURE);
@@ -127,6 +127,7 @@ void OutputStream4::writeln(const char* str){
 		printf("3 \n");
 		// incremente the offset of B
 		offset += B;
+		loop+=1;
 	}
 	
 	
@@ -134,6 +135,19 @@ void OutputStream4::writeln(const char* str){
     // Un-mmaping doesn't close the file, so we still need to do that.
     close2();
 }
+
+	// we want the file to be the size of the string we put
+	/*if (lseek(new_file, getpagesize(), SEEK_SET) == -1){
+        close(new_file);
+        perror("Error calling lseek() to 'stretch' the file");
+        exit(EXIT_FAILURE);
+    }
+	// add this to have the right size
+	if (write(new_file, "", 1) == -1){
+        close(new_file);
+        perror("Error writing last byte of the file");
+        exit(EXIT_FAILURE);
+    }*/
 
 void OutputStream4::close2(){
 	close(new_file);

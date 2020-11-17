@@ -100,10 +100,10 @@ int main(int argc, char* argv[]){
 	outstream2.create();
 	outstream2.writeln("hello");
 	*/
-	string title4="hellonew.txt";
+	string title4="hellow.txt";
 	OutputStream4 outstream4(title4.c_str());
 	outstream4.create();
-	string str = "hello";
+	string str = "fourhello";
 	outstream4.writeln(str.c_str());
 	//outstream.close();  //segmentation fault a cause de close je pense pbm avec pointeur
 	return 0;
