@@ -25,10 +25,11 @@ public:
 	InputStream1(string filename);
 	~InputStream1();
 	void open2();
-	void readln();
+	int readln();
 	void seek(int pos);
 	bool end_of_stream();
 	void close2();
+	int length();
 private:
 	string path;
 	off_t offset;

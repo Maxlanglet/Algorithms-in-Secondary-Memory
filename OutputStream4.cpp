@@ -64,6 +64,7 @@ void OutputStream4::writeln(string str){
 	   handle_error("open");
 	}
 	*/
+
 	int offset = 0;
 
 	char *addr= NULL;
@@ -72,41 +73,84 @@ void OutputStream4::writeln(string str){
 
 	int pagesize = getpagesize();
 
-	
+	//string + \n
 
 	if (fstat(new_file, &sb) == -1) 
 	  handle_error("fstat");
 
-	size_t len = 4096;//20*sizeof(char), same as pagesize
+	int sizetobe = sb.st_size+str.size()/pagesize;
+
+	int result = ftruncate(new_file, sizetobe);
+
+	if (result == -1){
+		handle_error("ftruncate");
+	}
+	cout << sb.st_size+str.size() << endl;
+	//check result
+
+	size_t len = 4096;
 
 	if (sb.st_size==0){
 		len=0;
 	}
 
-	else offset = (int)floor(sb.st_size/len);
+	else offset = (int)floor(sb.st_size/pagesize);
 
-	addr =  static_cast<char*>(mmap(NULL, len, PROT_READ,MAP_PRIVATE, new_file, offset*pagesize));//
+	int rest = sb.st_size%pagesize;
+	int leftover = rest+str.size();
+
+	while (leftover>0){
+
+		if (leftover>pagesize){
+			len = pagesize;
+			leftover-=pagesize;
+		}
+		else{
+			len = leftover;
+			leftover=0;
+		}
+
+		addr =  static_cast<char*>(mmap(NULL, len, PROT_READ,MAP_PRIVATE, new_file, offset*pagesize));//
+		offset++;
+
+		if(addr == MAP_FAILED){
+	        printf("Mapping Failed\n");
+	        handle_error("mmap");
+	    }
+
+	    for (int i=0; i<len; i++){
+			addr[rest+i] = str[i];
+		}
+		//addr[len+str.size()] = '\n';
+
+		addr+=rest;
+		rest=0;
+
+
+		ssize_t n = write(new_file ,addr, len);
+
+
+	    int err = munmap(addr, len);
+
+	    if(err != 0){
+	        printf("UnMapping Failed\n");
+	    }
+	}
+
 
 	//TODO: pas oublier condition au cas ou page presque remplie
 	// et voir comment augmenter taille char* sans par apres devoir copier
+	//TODO: pas oublier condition au cas ou page presque remplie
 
-	char* addr2 = (char*) malloc(sizeof(char)*len+str.size()+1);
-	addr = addr2;
+	//char* addr2 = (char*) malloc(sizeof(char)*len+str.size()+1);
+	//addr = addr2;
 
 
 	//TODO: trouver meilleur moyen que for loop
 
-	for (int i=0; i<str.size(); i++){
-		addr[len+i] = str[i];
-	}
-	addr[len+str.size()] = '\n';
+	
 
-	addr+=len;
-
-
-	ssize_t n = write(new_file ,addr, len+str.size()+1);
-
-	free(addr2); //TODO: voir pq on doit pas le mettre
+	//free(addr2); //TODO: voir pq on doit pas le mettre
 	
 }
 /*

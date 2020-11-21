@@ -26,8 +26,8 @@
 
 
 int main(int argc, char* argv[]){
-/*
-	string title = "role_type.csv";
+
+	string title = "../imdb/complete_cast.csv";
 	//string title = "C:/Users/User/Downloads/MA1/DB ARCHITECTURE/projet/role_type.csv";
 
 	printf("Test InputStream1\n\n");
@@ -39,12 +39,12 @@ int main(int argc, char* argv[]){
 	//stream.seek_pos(9); //test de seek_pos
 {
 	Timer timer;
-	instream.readln();
+	cout << instream.length() << endl;
 }
 	instream.close2();
 
 
-
+/*
 	printf("Test InputStream2\n\n");
 //Test InputStream2
 
@@ -102,15 +102,16 @@ int main(int argc, char* argv[]){
 	outstream2.create();
 	outstream2.writeln("hello");
 	*/
-
+/*
 	string title4="hellonew.txt";
 	OutputStream4 outstream4(title4.c_str());
 	//outstream4.create();
 	outstream4.open2();
-	string str = "hello";
+	string str = "yoyoyoyyoy";
 	cout << "beginning" << endl;
 	outstream4.writeln(str.c_str());
 	outstream4.close2();
 	//outstream.close();  //segmentation fault a cause de close je pense pbm avec pointeur
+	*/
 	return 0;
 }
