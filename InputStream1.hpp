@@ -24,7 +24,7 @@ public:
 	void close();
 	int length(string file);
 private:
-	string path;
+	//string path;
 	off_t offset;
 	int filp; 
 	

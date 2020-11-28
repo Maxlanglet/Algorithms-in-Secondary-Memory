@@ -1,24 +1,21 @@
 #include "InputStream1.hpp"
-//#include <unistd.h>
+using namespace std;
 
 #define handle_error(msg) \
            do { perror(msg); exit(EXIT_FAILURE); } while (0)
 
-using namespace std;
-
 #define BUFFER_SIZE 20
 
-InputStream1::InputStream1(string filename){
-	path = filename;
+
+InputStream1::InputStream1(){
 	offset =0;
 }
 
 InputStream1::~InputStream1(){}
 
-void InputStream1::open2(){
+void InputStream1::open(string path){
 	// open the file
-	filp = open(path.c_str(), O_RDONLY);
-	
+	filp = ::open(path.c_str(), O_RDONLY);	
 }
 
 
@@ -26,35 +23,30 @@ void InputStream1::open2(){
 //caractère par caractère
 //peut etre faut il utiliser fonction read() de unistd mais pas reussis a faire fonctionner
 //peut etre file.read(c,1)
-int InputStream1::readln(){
+int InputStream1::readln(){ //returns length of the read line  
 
 	string line;
 	int bytes_read =1;
 	if (filp){
 		
 		char* c = (char*) malloc(sizeof(char));
-		
-
 		while( bytes_read > 0){//temporary but read the entire file
 						
 			bytes_read = read(filp, c, sizeof(char));		//buffer overwritten not flushed
 			line += c;
 			offset ++;
 			if (*c == '\n' || *c == '\r'){
-				//cout << line;
-				//line = "";
 				break;
 			}
 		}
 		free(c);
-	}
-	else{
-		cout << "File is not open" << endl;
-	}
+	}else{
+		cout << "File is not open" << endl;}
+
 	if (bytes_read ==0){
 		return 0;
-	}
-	else{return line.size();}
+	}else{
+		return line.size();}
 	
 }
 
@@ -73,15 +65,17 @@ bool InputStream1::end_of_stream(){
 	}
 }
 
-void InputStream1::close2(){
-	close(filp);
+void InputStream1::close(){
+	::close(filp);
 }
 
-int InputStream1::length(){
+int InputStream1::length(string file){
+	open(file);
 	struct stat sb;
+
 	if (fstat(filp, &sb) == -1) 
 	  handle_error("fstat");
-	cout << sb.st_size <<endl;
+	//cout << sb.st_size <<endl;
 	int line_size =1;
 	int sum=0;
 	while (line_size>0){

@@ -7,58 +7,40 @@
 #include "InputStream3.hpp"
 #include "OutputStream4.hpp"
 #include "InputStream4.hpp"
-//#ifdef _WIN32
-//#include <io.h>
-
-//#elif defined(__APPLE__)
-#include <unistd.h>
-#include <sys/mman.h>
-#include <sys/stat.h>
-//#define bswap_64(x) OSSwapInt64(x)
-//#endif
-#include <fcntl.h>
-#include <stdio.h>
-#include <stdlib.h>
-
-//#include <boost/iostream/devices/mmapped_file.hpp>
-
-
-
 
 int main(int argc, char* argv[]){
 
-	string title = "../imdb/complete_cast.csv";
+	string title = "./role_type.csv";
 	//string title = "C:/Users/User/Downloads/MA1/DB ARCHITECTURE/projet/role_type.csv";
 
 	printf("Test InputStream1\n\n");
-
-	InputStream1 instream(title.c_str());
-
-	//InputStream2 instream2(title.c_str());
-	instream.open2();
-	//stream.seek_pos(9); //test de seek_pos
+	InputStream1 instream ; //if () considers it a function in main 
+	instream.open(title.c_str());
 {
 	Timer timer;
-	cout << instream.length() << endl;
+	cout << "length is " << instream.length(title) << endl;
 }
-	instream.close2();
+	instream.close();
 
 
-/*
-	printf("Test InputStream2\n\n");
+
+	printf("Test InputStream2\n");
 //Test InputStream2
 
-	InputStream2 instream2(title.c_str());
-
-	instream2.open();
+	InputStream2 instream2;
+	
+	instream2.open(title.c_str());
 	//stream.seek_pos(9); //test de seek_pos
 {
 	Timer timer;
-	instream2.readln();
+	/*cout<< instream2.readln() <<endl;
+	cout<< instream2.readln() <<endl;
+	cout<< instream2.readln() <<endl;*/
+	cout<<"length is " << instream2.length(title) <<endl;
 }
 	instream2.close();
 
-
+/*
 	printf("Test InputStream3\n\n");
 //Test InputStream3
 	InputStream3 instream3(title.c_str());
