@@ -33,26 +33,25 @@ int main(int argc, char* argv[]){
 	//stream.seek_pos(9); //test de seek_pos
 {
 	Timer timer;
-	/*cout<< instream2.readln() <<endl;
-	cout<< instream2.readln() <<endl;
-	cout<< instream2.readln() <<endl;*/
+
 	cout<<"length is " << instream2.length(title) <<endl;
 }
 	instream2.close();
 
-/*
+
+
 	printf("Test InputStream3\n\n");
 //Test InputStream3
-	InputStream3 instream3(title.c_str());
+	InputStream3 instream3;
 
-	instream3.open2();
+	instream3.open(title);
 	//stream.seek_pos(9); //test de seek_pos
 {
 	Timer timer;
-	instream3.readln();
+	cout<<"size is "<<instream3.length(title)<<endl;
 }
-	instream3.close2();
-
+	instream3.close();
+/*
 	 printf("Test MMAP\n\n");
 
 //ESSAIS DE MMAP	 Essayer Boost
