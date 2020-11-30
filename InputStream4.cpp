@@ -23,74 +23,66 @@ void InputStream4::readln(){
 	char *addr= NULL;
 	
 	//struct stat sb;
-
-	size_t len = 20*sizeof(char);
 	char *p = NULL;
+	char *m = NULL;
 
-	ssize_t idx = 0;
-	ssize_t size = 0;
+	struct stat sb;
+
+	int pagesize = getpagesize();
 
 	
 	if (fd == -1)
 	   handle_error("open");
 
-	//if (fstat(fd, &sb) == -1) 
-	  //handle_error("fstat");
+	if (fstat(fd, &sb) == -1) 
+	  handle_error("fstat");
 
-	addr =  static_cast<char*>(mmap(NULL, len, PROT_READ,
-	           MAP_PRIVATE, fd, offset));//
+	//cout << sb.st_size << endl;
 
-	if(addr == MAP_FAILED){
-        printf("Mapping Failed\n");
-        handle_error("mmap");
-    }
+	while (sb.st_size > 0) {
+		size_t len = 4096;//20*sizeof(char), same as pagesize
+		ssize_t size = 0;
 
-    p = addr;
-	while (idx < len && *p != '\n' && *p != '\r') p++, idx++;
+		if (sb.st_size < len){
+			len = sb.st_size;
+			sb.st_size = 0;
+		}
+		else {
+			sb.st_size -= len;
+			//cout << "\n" <<  sb.st_size << "\n" << endl;
+		}
 
-	if ( *p == '\n'){
-	    	offset += idx +1;
-	    	size = idx+1;
+		addr =  static_cast<char*>(mmap(NULL, len, PROT_READ,MAP_PRIVATE, fd, offset*pagesize));//
+		offset ++;
+
+		if(addr == MAP_FAILED){
+	        printf("Mapping Failed\n");
+	        handle_error("mmap");
 	    }
-    else offset += idx, size = idx;
+	    p = addr;
+	    m = addr;
+	    for ( int i = 0; i<len; i++ ){
+	    	if (*p=='\n'){
+	    		ssize_t n = write(1 ,m, size);
+	    		if(n != size){
+			        printf("Write failed\n");
+			    }
+	    		m+=size;
+	    		size=0;
+	    	}
+	    	//cout << i << " " << *p << endl;
+	    	p++;
+	    	size++;
+	    }
+	    int err = munmap(addr, len);
+
+	    if(err != 0){
+	        printf("UnMapping Failed\n");
+	    }
 
 
-    ssize_t n = write(1 ,addr, size);//obligé d etre 1 sinon pas de output
-    cout << offset << endl;
-
-
-    if(n != size){
-        printf("Write failed\n");
-    }
-
-    printf("\n");
-
-    int err = munmap(addr, sizeof(addr));
-
-    if(err != 0){
-        printf("UnMapping Failed\n");
-    }
-
-/*
-////////////
-    addr =  static_cast<char*>(mmap(NULL, len, PROT_READ,
-	           MAP_PRIVATE, fd, offset));						//offset fait segfault
-
-
-    n = write(1 ,addr, len);//obligé d etre 1 sinon pas de output
-
-    if(n != size){
-        printf("Write failed\n");
-    }
-
-    printf("\n");
-    
-    int err = munmap(addr, len);
-
-    if(err != 0){
-        printf("UnMapping Failed\n");
-    }
-    */
+	}
+    //cout << offset << endl;
 }
 
 

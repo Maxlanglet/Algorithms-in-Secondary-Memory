@@ -1,5 +1,6 @@
 #include <iostream>
 #include <string>
+#include <cstring>
 #include <fstream>
 //#include "OutputStream.hpp"
 //#ifdef _WIN32
@@ -7,6 +8,9 @@
 
 //#elif defined(__APPLE__)
 #include <unistd.h>
+#include <sys/mman.h>
+#include <sys/stat.h>
+#include <fcntl.h>
 //#define bswap_64(x) OSSwapInt64(x)
 //#endif
 
@@ -20,11 +24,12 @@ class OutputStream3// : public OutputStream enlever pour le moment
 public:
 	OutputStream3(string filename);
 	~OutputStream3();
-	void writeln(string str, fstream &output_file);
-	void close();
-	void create(string name_file);
+	void writeln(string str);
+	void close2();
+	void create();
 
 private:
 	string path;
-	ofstream* new_file_pointer;// voir pq pas fstream
+	int new_file;
+	//ofstream* new_file_pointer;// voir pq pas fstream
 };

@@ -1,28 +1,28 @@
 #include "InputStream3.hpp"
 
 
-#define BUFFER_SIZE 20
+#define BUFFER_SIZE 5
 
-InputStream3::InputStream3(string filename){
-	path = filename;
+InputStream3::InputStream3(){
 	offset = 0;
 }
 
 InputStream3::~InputStream3(){}
 
-void InputStream3::open2(){
-	fd = open(path.c_str(), O_RDONLY);
+void InputStream3::open(string path){
+	fd = ::open(path.c_str(), O_RDONLY);
 	if (!fd) { printf("Error: could not open file %s\n", path.c_str());}
 }
 
 //buffer by buffer
-void InputStream3::readln(){
-
+int InputStream3::readln(){
+//NEED TO SEE HOW TO COUNT OF BUFFER TOO SMALL 
 	if (fd){
 
 		ssize_t bytes_read =1;
 		char* buffer = (char*) malloc(BUFFER_SIZE*sizeof(char));
 		size_t nbytes = BUFFER_SIZE*sizeof(char);
+		int sizeline = 0;
 
 		while( bytes_read > 0){//temporary but read the entire file
 			ssize_t idx = 0;
@@ -32,9 +32,6 @@ void InputStream3::readln(){
 
 			if ((bytes_read = lseek (fd, offset, SEEK_SET)) != -1)
 	        bytes_read = read (fd, buffer, nbytes);
-
-	    	//ssize_t n = write(1, buffer, bytes_read);
-			
 
 			if (bytes_read == -1) {   /* read error   */
 				cout << "Error" << endl;
@@ -47,21 +44,35 @@ void InputStream3::readln(){
 		    if ( *p == '\n'){
 		    	offset += idx +1;
 		    	size = idx+1;
+				sizeline+=idx+1;
+				break;
 		    }
-		    else offset += idx, size = idx;
-
-			ssize_t n = write(1, buffer, size);//obligé d etre 1 sinon pas de output, je sais pas pq ca fonctionne pas avec file descriptor, temporaire
+		    else{ 
+				offset += idx, size = idx;
+				sizeline+=idx;}
 			
-		    if(n != size){
-		        printf("Write failed\n");
-		    }
+			
+			
 		}
 		free(buffer);
+		return sizeline;
 	}
 	else{
 		cout << "File is not open" << endl;
+		exit(1);
 	}
 
+}
+
+int InputStream3::length(string filename){
+	open(filename);
+	int sum = 0 ;
+	int line_size = 1 ;
+	 while (line_size > 0 ){
+		line_size = readln();
+		sum += line_size ;
+	 }
+	 return sum ;
 }
 
 void InputStream3::seek(int pos){
@@ -79,9 +90,9 @@ bool InputStream3::end_of_stream(){
 	}
 }
 
-void InputStream3::close2(){
+void InputStream3::close(){
 	//file.close();
-	close(fd);
+	::close(fd);
 }
 
 

@@ -15,6 +15,7 @@
 #include <stdlib.h>
 #include <fcntl.h>
 #include <string.h>
+#include <math.h>
 
 using namespace std;
 
@@ -22,14 +23,13 @@ using namespace std;
 class OutputStream4// : public OutputStream enlever pour le moment
 {
 public:
-	OutputStream4(const char* filename);
+	OutputStream4(string filename);
 	~OutputStream4();
-	void writeln(const char* str);
+	void writeln(string str);
 	void close2();
 	void create();
-	void open2();
 
 private:
-	const char* path;
+	string path;
 	int new_file;// voir pq pas fstream
 };

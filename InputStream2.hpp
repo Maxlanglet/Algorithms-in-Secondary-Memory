@@ -1,32 +1,25 @@
 #include <iostream>
 #include <string>
 #include <fstream>
-
-//#ifdef _WIN32
-//#include <io.h>
-
-//#elif defined(__APPLE__)
 #include <unistd.h>
-//#define bswap_64(x) OSSwapInt64(x)
-//#endif
-//#include "InputStream.hpp"
 #include <stdio.h>
-
+#include <cstring>
 using namespace std;
 
 
 class InputStream2// : public InputStream pour interface mais ca fait des erreurs de partout alors j'enleve pour le moment
 {
 public:
-	InputStream2(const char * filename);
+	InputStream2();
 	~InputStream2();
-	void open();
-	void readln();
+	void open(const char* path);
+	int readln();
 	void seek(int pos);
 	bool end_of_stream();
 	void close();
+	int length(string filename);
 private:
-	const char * path;
+	//const char * path;
 	FILE * file;
 	
 };

@@ -21,19 +21,22 @@ void OutputStream1::create(){
 
 void OutputStream1::writeln(string str){//pour respliquer le vis a vis avec le input 1
 
-	string line = "";
 
 	for (int i=0; i<str.length();i++){
+		ssize_t n = write(new_file, &str[i], sizeof(char));
+		if (n != sizeof(char)){
+			printf("Error writing output file");
+			break;
+		}
+		/*
 		line += str[i];
 		if (str[i] == '\n' || i==str.length()-1){
 			ssize_t n = write(new_file, &line, sizeof(line));
 			cout << line << endl;
 			line = "";
-			if (n != sizeof(line)){
-				printf("Error writing output file");
-				break;
-			}
+			
 		}
+		*/
 	}
 
 }
