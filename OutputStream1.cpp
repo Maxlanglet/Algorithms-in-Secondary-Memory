@@ -1,31 +1,31 @@
 #include "OutputStream1.hpp"
-//#include <unistd.h>
 
 
-OutputStream1::OutputStream1(string filename){
-	path = filename;
 
+OutputStream1::OutputStream1(){
 }
 
 OutputStream1::~OutputStream1(){}
 
 
-void OutputStream1::create(){
-	new_file = open(path.c_str(), O_WRONLY | O_APPEND);
+void OutputStream1::create(string path){
+	new_file = open(path.c_str(), O_CREAT | O_WRONLY | O_TRUNC,S_IWUSR |S_IRUSR);
 	if (new_file < 0) {
-		printf("Error creating output file");
+		cout<<errno<<endl;
+		printf("Error creating output file\n");
+		exit(1);
     }
-	//new_file_pointer = &new_file;
+	
 }
 
 
 void OutputStream1::writeln(string str){//pour respliquer le vis a vis avec le input 1
-
-
+	str+="\n";
+	
 	for (int i=0; i<str.length();i++){
 		ssize_t n = write(new_file, &str[i], sizeof(char));
 		if (n != sizeof(char)){
-			printf("Error writing output file");
+			printf("Error writing output file\n");
 			break;
 		}
 		/*
@@ -41,7 +41,7 @@ void OutputStream1::writeln(string str){//pour respliquer le vis a vis avec le i
 
 }
 
-void OutputStream1::close2(){
-	close(new_file);
+void OutputStream1::close(){
+	::close(new_file);
 }
 

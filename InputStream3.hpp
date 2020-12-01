@@ -24,7 +24,7 @@ public:
 	~InputStream3();
 	void open(string filename);
 	int readln(int buf_size);
-	int length(string filename);
+	int length(string filename,int buf_size);
 	void seek(int pos);
 	bool end_of_stream();
 	void close();
@@ -33,5 +33,6 @@ private:
 	//string path;
 	int fd; 
 	off_t offset;
+	int buffer_size ; 
 	
 };
