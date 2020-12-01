@@ -103,7 +103,7 @@ void OutputStream4::writeln(string str){
 
     // Un-mmaping doesn't close the file, so we still need to do that.
     close2();
-
+}
 
 void OutputStream4::close2(){
 	close(new_file);

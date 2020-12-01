@@ -1,8 +1,6 @@
 #include "InputStream3.hpp"
 
 
-#define BUFFER_SIZE 5
-
 InputStream3::InputStream3(){
 	offset = 0;
 }
@@ -15,24 +13,24 @@ void InputStream3::open(string path){
 }
 
 //buffer by buffer
-int InputStream3::readln(){
-//NEED TO SEE HOW TO COUNT OF BUFFER TOO SMALL 
+int InputStream3::readln(int buf_size){
+	buffer_size=buf_size;
 	if (fd){
 
 		ssize_t bytes_read =1;
-		char* buffer = (char*) malloc(BUFFER_SIZE*sizeof(char));
-		size_t nbytes = BUFFER_SIZE*sizeof(char);
+		char* buffer = (char*) malloc(buffer_size*sizeof(char));
+		size_t nbytes = buffer_size*sizeof(char);
 		int sizeline = 0;
 
 		while( bytes_read > 0){//temporary but read the entire file
 			ssize_t idx = 0;
 			ssize_t size = 0;
 			char *p = NULL;
-
+			
 
 			if ((bytes_read = lseek (fd, offset, SEEK_SET)) != -1)
 	        bytes_read = read (fd, buffer, nbytes);
-
+			
 			if (bytes_read == -1) {   /* read error   */
 				cout << "Error" << endl;
 		    }
@@ -64,12 +62,12 @@ int InputStream3::readln(){
 
 }
 
-int InputStream3::length(string filename){
+int InputStream3::length(string filename,int buf_size){
 	open(filename);
 	int sum = 0 ;
 	int line_size = 1 ;
 	 while (line_size > 0 ){
-		line_size = readln();
+		line_size = readln(buf_size);
 		sum += line_size ;
 	 }
 	 return sum ;
