@@ -4,22 +4,22 @@
            do { perror(msg); exit(EXIT_FAILURE); } while (0)
 
 
-InputStream4::InputStream4(string filename){
-	path = filename;
+InputStream4::InputStream4(){
+	
 	offset = 0;
 }
 
 InputStream4::~InputStream4(){}
 
-void InputStream4::open2(){
+void InputStream4::open(string filename){
 	// open the file
-	fd = open(path.c_str(), O_RDONLY);
+	fd = ::open(filename.c_str(), O_RDONLY);
 	if (fd == -1)
 	   handle_error("open");
 }
 
 
-void InputStream4::readln(){
+void InputStream4::readln(){//LIT TJS TT LE FICHIER + add \n +add buf param
 	char *addr= NULL;
 	
 	//struct stat sb;
@@ -63,7 +63,7 @@ void InputStream4::readln(){
 	    m = addr;
 	    for ( int i = 0; i<len; i++ ){
 	    	if (*p=='\n'){
-	    		ssize_t n = write(1 ,m, size);
+	    		ssize_t n = write(1 ,m, size);//stdout
 	    		if(n != size){
 			        printf("Write failed\n");
 			    }
@@ -101,8 +101,8 @@ bool InputStream4::end_of_stream(){
 	}
 }
 
-void InputStream4::close2(){
-	close(fd);
+void InputStream4::close(){
+	::close(fd);
 }
 
 

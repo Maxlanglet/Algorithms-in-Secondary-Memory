@@ -1,3 +1,5 @@
+#ifndef INPUTSTREAM2_H
+#define INPUTSTREAM2_H
 #include <iostream>
 #include <string>
 #include <fstream>
@@ -24,3 +26,4 @@ private:
 	FILE * file;
 	
 };
+#endif
