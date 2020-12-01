@@ -84,6 +84,27 @@ int main(int argc, char* argv[]){
 	outstream2.writeln("hello");
 	*/
 
+	string title = "./role_type.csv";
+	//string title = "C:/Users/User/Downloads/MA1/DB ARCHITECTURE/projet/role_type.csv";
+
+	printf("Test InputStream1\n\n");
+	InputStream1 instream ; //if () considers it a function in main 
+	instream.open(title.c_str());
+{
+	Timer timer;
+	cout << "sum rand is " << instream.randjump(title,800) << endl;
+}
+	instream.close();
+
+	printf("Test InputStream3\n\n");
+	InputStream3 instream3 ; //if () considers it a function in main 
+	instream3.open(title.c_str());
+{
+	Timer timer;
+	cout << "sum rand is " << instream3.randjump(title,800) << endl;
+}
+	instream.close();
+
 	string title4="longasstext.txt";
 	OutputStream4 outstream4(title4.c_str());
 	outstream4.create();

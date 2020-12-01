@@ -8,6 +8,7 @@
 #include <fcntl.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <random>
 
 using namespace std;
 
@@ -23,6 +24,7 @@ public:
 	bool end_of_stream();
 	void close();
 	int length(string file);
+	int randjump(string file, int j);
 private:
 	//string path;
 	off_t offset;

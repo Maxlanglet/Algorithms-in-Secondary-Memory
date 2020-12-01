@@ -25,8 +25,9 @@ int InputStream2::readln(){ //returns length of file read
 		if ( fgets (buffer , 100 , file) == NULL ){
 			//cout<<"error, NULL"<<endl;
 			return 0;
-		} return strlen(buffer);
+		}
      }
+     return strlen(buffer);
 }
 
 
@@ -57,6 +58,10 @@ bool InputStream2::end_of_stream(){
 
 void InputStream2::close(){
 	fclose (file);
+}
+
+int InputStream2::randjump(string file, int j){
+	
 }
 
 

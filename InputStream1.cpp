@@ -1,6 +1,9 @@
 #include "InputStream1.hpp"
 using namespace std;
 
+
+
+
 #define handle_error(msg) \
            do { perror(msg); exit(EXIT_FAILURE); } while (0)
 
@@ -25,7 +28,7 @@ void InputStream1::open(string path){
 //peut etre file.read(c,1)
 int InputStream1::readln(){ //returns length of the read line  
 
-	string line;
+	string line ="";
 	int bytes_read =1;
 	if (filp){
 		
@@ -36,7 +39,7 @@ int InputStream1::readln(){ //returns length of the read line
 			line += c;
 			offset ++;
 			if (*c == '\n' || *c == '\r'){
-				break;
+				return line.size();
 			}
 		}
 		free(c);
@@ -45,7 +48,8 @@ int InputStream1::readln(){ //returns length of the read line
 
 	if (bytes_read ==0){
 		return 0;
-	}else{
+	}
+	else{
 		return line.size();}
 	
 }
@@ -82,5 +86,32 @@ int InputStream1::length(string file){
 		line_size = readln();
 		sum+=line_size;
 	}
+	return sum;
+}
+
+
+int InputStream1::randjump(string file, int j){//seems to work fine
+	int sum=0;
+	int k=0;
+
+
+	open(file);
+	struct stat sb;
+
+	if (fstat(filp, &sb) == -1) 
+	  handle_error("fstat");
+	
+	srand ( time(NULL) );//for true random else seeded
+	int pos = rand();
+
+	while (k<j){
+		srand ( pos );
+		pos = 0 + (rand() % static_cast<int>(sb.st_size - 0 + 1));
+		seek(pos);
+		int line_size = readln();
+		sum+=line_size;
+		k++;
+	}
+
 	return sum;
 }

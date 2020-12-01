@@ -18,6 +18,7 @@ public:
 	bool end_of_stream();
 	void close();
 	int length(string filename);
+	int randjump(string file, int j);
 private:
 	//const char * path;
 	FILE * file;

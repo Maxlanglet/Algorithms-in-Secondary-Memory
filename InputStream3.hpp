@@ -11,6 +11,7 @@
 #include <stdio.h>
 #include <fcntl.h>
 #include <stdlib.h>
+#include <random>
 
 
 using namespace std;
@@ -22,11 +23,12 @@ public:
 	InputStream3();
 	~InputStream3();
 	void open(string filename);
-	int readln();
+	int readln(int buf_size);
 	int length(string filename);
 	void seek(int pos);
 	bool end_of_stream();
 	void close();
+	int randjump(string file, int j);
 private:
 	//string path;
 	int fd; 
