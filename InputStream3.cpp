@@ -23,11 +23,8 @@ void InputStream3::open(string path){
 
 //buffer by buffer
 int InputStream3::readln(int buf_size){
-<<<<<<< HEAD
 	int buffer_size=buf_size;
-=======
-	buffer_size=buf_size;
->>>>>>> bf9422c9fa9eee69a7c88febdaab5956872ff4ad
+
 	if (fd){
 
 		ssize_t bytes_read =1;
