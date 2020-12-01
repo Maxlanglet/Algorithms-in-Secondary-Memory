@@ -101,7 +101,7 @@ int InputStream1::randjump(string file, int j){//seems to work fine
 	if (fstat(filp, &sb) == -1) 
 	  handle_error("fstat");
 	
-	srand ( time(NULL) );//for true random else seeded
+	srand ( 1 );//for true random else seeded
 	int pos = rand();
 
 	while (k<j){
