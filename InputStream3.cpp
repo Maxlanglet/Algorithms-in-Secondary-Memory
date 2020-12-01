@@ -1,15 +1,12 @@
 #include "InputStream3.hpp"
 
 
-<<<<<<< HEAD
 #define BUFFER_SIZE 5
 
 
 #define handle_error(msg) \
            do { perror(msg); exit(EXIT_FAILURE); } while (0)
 
-=======
->>>>>>> bf9422c9fa9eee69a7c88febdaab5956872ff4ad
 InputStream3::InputStream3(){
 	offset = 0;
 }
@@ -107,7 +104,6 @@ void InputStream3::close(){
 int InputStream3::randjump(string file, int j){
 	int sum=0;
 	int k=0;
-
 
 	open(file);
 	struct stat sb;
