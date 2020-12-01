@@ -1,3 +1,5 @@
+#ifndef INPUTSTREAM1_H
+#define INPUTSTREAM1_H
 #include <iostream>
 #include <string>
 #include <fstream>
@@ -31,3 +33,4 @@ private:
 	int filp; 
 	
 };
+#endif

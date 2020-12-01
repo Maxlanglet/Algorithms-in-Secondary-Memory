@@ -118,8 +118,7 @@ int InputStream3::randjump(string file, int j){
 		srand ( pos );
 		pos = 0 + (rand() % static_cast<int>(sb.st_size - 0 + 1));
 		seek(pos);
-		int line_size = readln(5);
-		sum+=line_size;
+		sum+=readln(5);
 		k++;
 	}
 	return sum;

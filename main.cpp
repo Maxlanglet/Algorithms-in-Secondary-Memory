@@ -92,7 +92,7 @@ int main(int argc, char* argv[]){
 	instream.open(title.c_str());
 {
 	Timer timer;
-	cout << "sum rand is " << instream.randjump(title,800) << endl;
+	cout << "sum rand is " << instream.randjump(title,8) << endl;
 }
 	instream.close();
 
@@ -101,17 +101,18 @@ int main(int argc, char* argv[]){
 	instream3.open(title.c_str());
 {
 	Timer timer;
-	cout << "sum rand is " << instream3.randjump(title,800) << endl;
+	cout << "sum rand is " << instream3.randjump(title,8) << endl;
 }
 	instream.close();
 
- 	InputStream4 instream4(title.c_str());
+ 	InputStream4 instream4;
+ 	instream4.open(title.c_str());
 
- 	instream4.open();
+	printf("Test InputStream4\n\n");
 
 {
 	Timer timer;
-	instream4.readln();
+	cout << "sum rand is " << instream4.randjump(title,8) << endl;
 }
 	instream4.close();
 
