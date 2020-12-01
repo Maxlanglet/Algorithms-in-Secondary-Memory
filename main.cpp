@@ -105,6 +105,16 @@ int main(int argc, char* argv[]){
 }
 	instream.close();
 
+ 	InputStream4 instream4(title.c_str());
+
+ 	instream4.open();
+
+{
+	Timer timer;
+	instream4.readln();
+}
+	instream4.close();
+
 	string title4="longasstext.txt";
 	string title2= "testout.txt";
 	OutputStream3 outstream3;

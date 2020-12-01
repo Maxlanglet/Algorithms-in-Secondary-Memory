@@ -11,9 +11,10 @@ InputStream4::InputStream4(string filename){
 
 InputStream4::~InputStream4(){}
 
-void InputStream4::open2(){
+
+void InputStream4::open(){
 	// open the file
-	fd = open(path.c_str(), O_RDONLY);
+	fd = ::open(path.c_str(), O_RDONLY);
 	if (fd == -1)
 	   handle_error("open");
 }
@@ -37,7 +38,6 @@ void InputStream4::readln(){
 	if (fstat(fd, &sb) == -1) 
 	  handle_error("fstat");
 
-	//cout << sb.st_size << endl;
 
 	while (sb.st_size > 0) {
 		size_t len = 4096;//20*sizeof(char), same as pagesize
@@ -49,7 +49,6 @@ void InputStream4::readln(){
 		}
 		else {
 			sb.st_size -= len;
-			//cout << "\n" <<  sb.st_size << "\n" << endl;
 		}
 
 		addr =  static_cast<char*>(mmap(NULL, len, PROT_READ,MAP_PRIVATE, fd, offset*pagesize));//
@@ -64,13 +63,15 @@ void InputStream4::readln(){
 	    for ( int i = 0; i<len; i++ ){
 	    	if (*p=='\n'){
 	    		ssize_t n = write(1 ,m, size);
+	    		/*
 	    		if(n != size){
 			        printf("Write failed\n");
 			    }
+				*/
 	    		m+=size;
 	    		size=0;
+	    		break;
 	    	}
-	    	//cout << i << " " << *p << endl;
 	    	p++;
 	    	size++;
 	    }
@@ -101,8 +102,10 @@ bool InputStream4::end_of_stream(){
 	}
 }
 
-void InputStream4::close2(){
-	close(fd);
+void InputStream4::close(){
+	::close(fd);
 }
+
+
 
 

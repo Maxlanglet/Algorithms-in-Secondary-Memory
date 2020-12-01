@@ -24,11 +24,11 @@ class InputStream4// : public InputStream pour interface mais ca fait des erreur
 public:
 	InputStream4(string filename);
 	~InputStream4();
-	void open2();
+	void open();
 	void readln();
 	void seek(int pos);
 	bool end_of_stream();
-	void close2();
+	void close();
 private:
 	string path;
 	int fd;
