@@ -19,7 +19,7 @@ void InputStream3::open(string path){
 }
 
 //buffer by buffer
-int InputStream3::readln(int buf_size){
+int InputStream3::readln(int buf_size){//TODO: probleme length 3
 	int buffer_size=buf_size;
 
 	if (fd){
@@ -51,13 +51,11 @@ int InputStream3::readln(int buf_size){
 		    if ( *p == '\n'){
 		    	offset += idx +1;
 				sizeline+=idx+1;
-				break;
+				return sizeline;
 		    }
 		    else{ 
 				offset += idx;
 				sizeline+=idx;}
-			
-			
 			
 		}
 		free(buffer);

@@ -30,6 +30,9 @@ private:
 	int fd;
 	off_t offset;
 	char *addr;
-	
+	int init;
+	int pos;
+	size_t rest;
+	bool jump;
 };
 #endif

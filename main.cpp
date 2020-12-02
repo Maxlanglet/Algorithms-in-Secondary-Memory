@@ -84,7 +84,7 @@ int main(int argc, char* argv[]){
 	outstream2.writeln("coucou la famille");
 	*/
 
-	string title = "./role_type.csv";
+	string title = "../imdb/complete_cast.csv";//./role_type.csv
 	//string title = "C:/Users/User/Downloads/MA1/DB ARCHITECTURE/projet/role_type.csv";
 
 	printf("Test InputStream1\n\n");
@@ -92,27 +92,43 @@ int main(int argc, char* argv[]){
 	instream.open(title.c_str());
 {
 	Timer timer;
-	cout << "sum rand is " << instream.randjump(title,8) << endl;
+	cout << "length is " << instream.length(title) << endl;
+}
+{
+	Timer timer;
+	cout << "sum rand is " << instream.randjump(title,800) << endl;
 }
 	instream.close();
 
 	printf("Test InputStream3\n\n");
 	InputStream3 instream3 ; //if () considers it a function in main 
 	instream3.open(title.c_str());
+	instream3.seek(0);
 {
 	Timer timer;
-	cout << "sum rand is " << instream3.randjump(title,8) << endl;
+	cout << "length is " << instream3.length(title,4096) << endl;
 }
-	instream.close();
+{
+	Timer timer;
+	cout << "sum rand is " << instream3.randjump(title,800) << endl;
+}
+	instream3.close();
 
- 	InputStream4 instream4;
- 	instream4.open(title.c_str());
 
 	printf("Test InputStream4\n\n");
 
+ 	InputStream4 instream4;
+ 	instream4.open(title.c_str());
+ 	instream3.seek(0);
+
 {
 	Timer timer;
-	cout << "sum rand is " << instream4.randjump(title,8) << endl;
+	cout << "length is " << instream4.length(title) << endl;
+}
+
+{
+	Timer timer;
+	cout << "sum rand is " << instream4.randjump(title,800) << endl;
 }
 	instream4.close();
 
