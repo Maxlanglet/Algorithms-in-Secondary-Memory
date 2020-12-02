@@ -109,12 +109,13 @@ void InputStream4::close(){
 int InputStream4::length(string file){
 	open(file);//TODO: enlever car on le fait avant 
 	struct stat sb;
+	seek(0);
+	int line_size =1;
+	int sum=0;
 
 	if (fstat(fd, &sb) == -1) 
 	  handle_error("fstat");
-	//cout << sb.st_size <<endl;
-	int line_size =1;
-	int sum=0;
+
 	while (line_size > 0 ){
 		line_size = readln(1);//mettre size of buffer in def of length
 		sum+=line_size;
@@ -132,7 +133,9 @@ int InputStream4::randjump(string file, int j){
 	int k=0;
 	open(file);
 	struct stat sb;
+	seek(0);
 	jump = true;
+
 	if (fstat(fd, &sb) == -1) 
 	  handle_error("fstat");
 	

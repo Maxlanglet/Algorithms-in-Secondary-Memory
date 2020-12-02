@@ -40,6 +40,7 @@ int InputStream2::length(string filename){
 	open(filename.c_str());
 	int sum = 0 ;
 	int line_size = 1 ;
+	//TODO: ajouter size of file juste pour etre sur, regarder autre length pour exemple
 	 while (line_size > 0 ){
 		line_size = readln();
 		sum += line_size ;

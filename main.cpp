@@ -87,6 +87,7 @@ int main(int argc, char* argv[]){
 	string title = "../imdb/complete_cast.csv";//./role_type.csv
 	//string title = "C:/Users/User/Downloads/MA1/DB ARCHITECTURE/projet/role_type.csv";
 
+
 	printf("Test InputStream1\n\n");
 	InputStream1 instream ; //if () considers it a function in main 
 	instream.open(title.c_str());
@@ -106,12 +107,14 @@ int main(int argc, char* argv[]){
 	instream3.seek(0);
 {
 	Timer timer;
-	cout << "length is " << instream3.length(title,4096) << endl;
+	cout << "length is " << instream3.length(title,40) << endl;
 }
+
 {
 	Timer timer;
 	cout << "sum rand is " << instream3.randjump(title,800) << endl;
 }
+
 	instream3.close();
 
 

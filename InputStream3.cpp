@@ -31,13 +31,22 @@ int InputStream3::readln(int buf_size){//TODO: probleme length 3
 
 		offset = lseek(fd, 0, SEEK_CUR);
 
-		while( bytes_read > 0){
+		struct stat sb;
+
+		if (fstat(fd, &sb) == -1) 
+	  		handle_error("fstat");
+
+	  	int rest = sb.st_size - offset;
+
+		char *p = NULL;
+		bool edl=false;
+		
+		while(!edl && bytes_read >0){
 			ssize_t idx = 0;
-			char *p = NULL;
-			
 
 			if ((bytes_read = lseek (fd, offset, SEEK_SET)) != -1)
-	        bytes_read = read (fd, buffer, nbytes);
+				bytes_read = read (fd, buffer, nbytes);
+
 			
 			if (bytes_read == -1) {   /* read error   */
 				cout << "Error" << endl;
@@ -50,16 +59,21 @@ int InputStream3::readln(int buf_size){//TODO: probleme length 3
 
 		    if ( *p == '\n'){
 		    	offset += idx +1;
+		    	lseek(fd, offset, SEEK_SET);
 				sizeline+=idx+1;
-				return sizeline;
+				edl=true;
+				rest-=offset;
 		    }
 		    else{ 
 				offset += idx;
-				sizeline+=idx;}
-			
+				sizeline+=idx;
+				lseek(fd, offset, SEEK_SET);
+				rest-=offset;
+			}
 		}
-		free(buffer);
+
 		return sizeline;
+		free(buffer);
 	}
 	else{
 		cout << "File is not open" << endl;
@@ -72,6 +86,12 @@ int InputStream3::length(string filename,int buf_size){
 	open(filename);
 	int sum = 0 ;
 	int line_size = 1 ;
+	struct stat sb;
+	seek(0);
+
+	if (fstat(fd, &sb) == -1) 
+	  handle_error("fstat");
+
 	 while (line_size > 0 ){
 		line_size = readln(buf_size);
 		sum += line_size ;
@@ -105,18 +125,21 @@ int InputStream3::randjump(string file, int j){
 
 	open(file);
 	struct stat sb;
+	seek(0);
 
 	if (fstat(fd, &sb) == -1) 
 	  handle_error("fstat");
-	
-	srand ( 1 );//for true random else seeded
+	int line_size = 1 ;
+
+	srand ( 1 );
 	int pos = rand();
 	
 	while (k<j){
 		srand ( pos );
 		pos = 0 + (rand() % static_cast<int>(sb.st_size - 0 + 1));
 		seek(pos);
-		sum+=readln(5);
+		line_size = readln(10);
+		sum+=line_size;
 		k++;
 	}
 	return sum;
