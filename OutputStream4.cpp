@@ -14,24 +14,26 @@ OutputStream4::~OutputStream4(){}
 void OutputStream4::create(){
 	//new_file =open(path, O_RDWR | O_CREAT | O_TRUNC, S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH);
 	mode_t mode = S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH;
-	new_file = creat(path.c_str(), mode);
+	//new_file = creat(path.c_str(), mode);
+	new_file = open(path.c_str(), O_RDWR | O_APPEND| O_CREAT , mode);
 	if (new_file == -1){
 	   handle_error("open");
 	}
 }
 
 void OutputStream4::writeln(string str){
+	str+="\n";
 
 	// open a file to write only ->OPEN IN ANOTHER METHOD
 
-	new_file = open(path.c_str(), O_RDWR | O_APPEND); // en fait pas trop de sens on le fera toujours avant soit un open ou create
+	/*new_file = open(path.c_str(), O_RDWR | O_APPEND); // en fait pas trop de sens on le fera toujours avant soit un open ou create
 	if (new_file == -1){
 	   handle_error("open");
-	}
+	}*/
 
 
 	// size of our map
-	size_t B = 2*getpagesize();
+	size_t B = getpagesize();
 
 	// size of our text
 	size_t textsize = (strlen(str.c_str())+1); // + \0 null character
@@ -39,9 +41,15 @@ void OutputStream4::writeln(string str){
 	int pagesize = getpagesize();
 	int numberpages = (-1+pagesize+textsize)/pagesize;
 	printf("textsize is %ld, pagsize is %d, number of pages is %d\n",textsize,pagesize, numberpages);
+	printf("B is %ld, pagsize is %d, loop is %ld\n",B,pagesize, numberpages*pagesize/B);
 	int result = ftruncate(new_file, (textsize-1));
 
 	int leftover = textsize-(numberpages * pagesize);
+
+	//in case B is too big
+	if(numberpages*pagesize/B == 0){
+		size_t B = getpagesize();
+	}
 	// offset is where the map is looking at in the string
 	size_t offset = 0;
 	int loop = 0;
@@ -77,6 +85,7 @@ void OutputStream4::writeln(string str){
 			//	map[j] = str[j+offset];
 			//}
 			memcpy(map, str.c_str()+offset, textsize-offset-1);
+			printf("after writing2 \n");
 		}
 		printf("1 \n");
 		/*for (size_t j = 0; j < textsize-offset-1; j++){
@@ -100,9 +109,6 @@ void OutputStream4::writeln(string str){
 		loop+=1;
 	}
 	
-
-    // Un-mmaping doesn't close the file, so we still need to do that.
-    close2();
 }
 
 void OutputStream4::close2(){

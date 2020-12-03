@@ -61,8 +61,29 @@ void InputStream2::close(){
 	fclose (file);
 }
 
-int InputStream2::randjump(string file, int j){
-	
+
+int InputStream2::randjump(string filename, int j){//seems to work fine
+	int sum=0;
+	//number of lines read
+	int k=0;
+
+	open(filename.c_str());
+
+	//sz is the length of the file
+	fseek(file, 0L, SEEK_END);
+	int sz = ftell(file);
+	fseek(file, 0L, SEEK_SET);
+	srand ( 1 ); //for true random else seeded
+	int pos = rand();
+
+	while (k<j){
+		srand ( pos );
+		pos = 0 + (rand() % static_cast<int>(sz - 0 + 1));
+		seek(pos);
+		int line_size = readln();
+		sum+=line_size;
+		k++;
+	}
+
+	return sum;
 }
-
-
