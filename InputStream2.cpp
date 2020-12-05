@@ -1,6 +1,8 @@
 #include "InputStream2.hpp"
+#define BUFFER_SIZE 100
 
 InputStream2::InputStream2(){
+	offset=0;
 }
 
 InputStream2::~InputStream2(){}
@@ -16,14 +18,31 @@ void InputStream2::open(const char* path){
 
 //reads in a buffer
 int InputStream2::readln(){ //returns length of file read
-	// initialize a buffer of fixed size 100
-	char buffer [100];
+	// initialize a buffer of fixed size BUFFER_SIZE
+	char buffer [BUFFER_SIZE];
+	int idx = 0;
+	int i =0;
 	// if we are not at the end of the file, we read the size of the buffer
 	 if ( ! feof (file) ){
        
 	   //while(buffer[99] != '\n' && buffer[99]!='\0')
-		if ( fgets (buffer , 100 , file) == NULL ){
+		if ( fgets (buffer , 100 , file) != NULL ){
 			//cout<<"error, NULL"<<endl;
+			while (idx < BUFFER_SIZE-1 && buffer[i] != '\n' && buffer[i] != '\r') i++, idx++;
+
+			if ( buffer[i] == '\n' || buffer[i] == '\r'){
+				offset += i+1;
+				seek(offset);
+				return i+1;
+			}
+			else{
+				offset+=i;
+				seek(offset);
+				return i;
+			}
+
+		}
+		else{
 			return 0;
 		}
      }

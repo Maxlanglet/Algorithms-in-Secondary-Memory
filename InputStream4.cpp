@@ -37,12 +37,12 @@ int InputStream4::readln(int mult_page){
 	  handle_error("fstat");
 
 	pos = lseek(fd, 0, SEEK_CUR);
-	int off = pos%getpagesize();
-	int page = floor(pos / getpagesize());
+	int off = pos%pagesize;
+	int page = floor(pos / pagesize);
 
-	size_t len=getpagesize();
+	size_t len=pagesize;
 	int idx=0;
-	len-=off;
+	
 
 	rest = sb.st_size-pos;
 
@@ -51,6 +51,10 @@ int InputStream4::readln(int mult_page){
 
 	if (offset != page || init !=1){
 		offset = page;
+		if (offset*pagesize >= sb.st_size){
+			pagesize = getpagesize();
+			len=getpagesize();
+		}
 		addr =  static_cast<char*>(mmap(NULL, len, PROT_READ,MAP_PRIVATE, fd, offset*pagesize));//
 		init=1;
 	}
@@ -61,6 +65,7 @@ int InputStream4::readln(int mult_page){
     }
     p = addr;
     p+=off;
+    len-=off;
 
     while (idx < len-1 && *p != '\n' && *p != '\r') p++, idx++;
 
@@ -71,15 +76,25 @@ int InputStream4::readln(int mult_page){
     }
 
     else{
-
     	pos = lseek(fd,idx+1,SEEK_CUR);					//true if randjump and then add the rest to account for when the line ends on the next page
     	if(jump){
     		page++;
-    		addr =  static_cast<char*>(mmap(NULL, len, PROT_READ,MAP_PRIVATE, fd, page*pagesize));//
     		offset++;
-    		len=4096;
+    		len = pagesize;
+    		if (offset*pagesize >= sb.st_size){
+    			pagesize = getpagesize();
+    			len=getpagesize();
+    		}
+    		addr =  static_cast<char*>(mmap(NULL, len, PROT_READ,MAP_PRIVATE, fd, offset*pagesize));//
+    		p = addr;
     		while (idx < len-1 && *p != '\n' && *p != '\r') p++, idx++;
+
+    		if (*p == '\n' || *p == '\r'){
+		    	pos = lseek(fd,idx+1,SEEK_CUR);
+		    	return idx+1;
+		    }
     	}
+    	
     	if (idx!=0){
     		return idx+1;
     	}
@@ -117,7 +132,7 @@ int InputStream4::length(string file){
 	  handle_error("fstat");
 
 	while (line_size > 0 ){
-		line_size = readln(1);//mettre size of buffer in def of length
+		line_size = readln(3);//mettre size of buffer in def of length
 		sum+=line_size;
 	}
 	int err = munmap(addr, getpagesize());
@@ -146,7 +161,7 @@ int InputStream4::randjump(string file, int j){
 		srand ( pos );
 		pos = 0 + (rand() % static_cast<int>(sb.st_size - 0 + 1));
 		seek(pos);
-		sum+=readln(1);
+		sum+=readln(2);
 		k++;
 	}
 	int err = munmap(addr, getpagesize());

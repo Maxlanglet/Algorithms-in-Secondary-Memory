@@ -84,11 +84,11 @@ int main(int argc, char* argv[]){
 	outstream2.writeln("coucou la famille");
 	*/
 
-	string title = "role_type.csv";//./role_type.csv
+	string title = "../imdb/complete_cast.csv";//./role_type.csv
 	//string title = "C:/Users/User/Downloads/MA1/DB ARCHITECTURE/projet/role_type.csv";
 
 
-	printf("Test InputStream1\n\n");
+	printf("\nTEST INPUTSTREAM1\n\n");
 	InputStream1 instream ; //if () considers it a function in main 
 	instream.open(title.c_str());
 {
@@ -97,11 +97,11 @@ int main(int argc, char* argv[]){
 }
 {
 	Timer timer;
-	cout << "sum rand is " << instream.randjump(title,800) << endl;
+	cout << "sum rand is " << instream.randjump(title,8000) << endl;
 }
 	instream.close();
 
-	printf("Test InputStream2\n\n");
+	printf("TEST INPUTSTREAM2\n\n");
 	InputStream2 instream2 ; //if () considers it a function in main 
 	instream2.open(title.c_str());
 	instream2.seek(0);
@@ -112,28 +112,28 @@ int main(int argc, char* argv[]){
 
 {
 	Timer timer;
-	cout << "sum rand is " << instream2.randjump(title,800) << endl;
+	cout << "sum rand is " << instream2.randjump(title,8000) << endl;
 }
 
 	instream2.close();
-	printf("Test InputStream3\n\n");
+	printf("TEST INPUTSTREAM3\n\n");
 	InputStream3 instream3 ; //if () considers it a function in main 
 	instream3.open(title.c_str());
 	instream3.seek(0);
 {
 	Timer timer;
-	cout << "length is " << instream3.length(title,40) << endl;
+	cout << "length is " << instream3.length(title,100) << endl;
 }
 
 {
 	Timer timer;
-	cout << "sum rand is " << instream3.randjump(title,800) << endl;
+	cout << "sum rand is " << instream3.randjump(title,8000) << endl;
 }
 
 	instream3.close();
 
 
-	printf("Test InputStream4\n\n");
+	printf("TEST INPUTSTREAM4\n\n");
 
  	InputStream4 instream4;
  	instream4.open(title.c_str());
@@ -146,7 +146,7 @@ int main(int argc, char* argv[]){
 
 {
 	Timer timer;
-	cout << "sum rand is " << instream4.randjump(title,800) << endl;
+	cout << "sum rand is " << instream4.randjump(title,8000) << endl;
 }
 	instream4.close();
 
