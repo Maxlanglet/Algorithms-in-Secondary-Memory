@@ -1,5 +1,5 @@
 #include "InputStream2.hpp"
-#define BUFFER_SIZE 100
+#define BUFFER_SIZE 2*4096
 
 InputStream2::InputStream2(){
 	offset=0;
@@ -26,7 +26,7 @@ int InputStream2::readln(){ //returns length of file read
 	 if ( ! feof (file) ){
        
 	   //while(buffer[99] != '\n' && buffer[99]!='\0')
-		if ( fgets (buffer , 100 , file) != NULL ){
+		if ( fgets (buffer , BUFFER_SIZE , file) != NULL ){
 			//cout<<"error, NULL"<<endl;
 			while (idx < BUFFER_SIZE-1 && buffer[i] != '\n' && buffer[i] != '\r') i++, idx++;
 
@@ -92,7 +92,7 @@ int InputStream2::randjump(string filename, int j){//seems to work fine
 	fseek(file, 0L, SEEK_END);
 	int sz = ftell(file);
 	fseek(file, 0L, SEEK_SET);
-	srand ( 1 ); //for true random else seeded
+	srand ( 2 ); //for true random else seeded
 	int pos = rand();
 
 	while (k<j){

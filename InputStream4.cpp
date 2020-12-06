@@ -1,4 +1,5 @@
 #include "InputStream4.hpp"
+#define BUFFER_SIZE 2
 
 #define handle_error(msg) \
            do { perror(msg); exit(EXIT_FAILURE); } while (0)
@@ -91,7 +92,7 @@ int InputStream4::readln(int mult_page){
 
     		if (*p == '\n' || *p == '\r'){
 		    	pos = lseek(fd,idx+1,SEEK_CUR);
-		    	return idx+1;
+		    	return idx+1;//maybe add one problem maybe because of lseek but freezes if idx, at least resolves the problem
 		    }
     	}
     	
@@ -132,7 +133,7 @@ int InputStream4::length(string file){
 	  handle_error("fstat");
 
 	while (line_size > 0 ){
-		line_size = readln(3);//mettre size of buffer in def of length
+		line_size = readln(BUFFER_SIZE);//mettre size of buffer in def of length
 		sum+=line_size;
 	}
 	int err = munmap(addr, getpagesize());
@@ -154,14 +155,14 @@ int InputStream4::randjump(string file, int j){
 	if (fstat(fd, &sb) == -1) 
 	  handle_error("fstat");
 	
-	srand ( 1 );
+	srand ( 2 );
 	int pos = rand();
 	
 	while (k<j){
 		srand ( pos );
 		pos = 0 + (rand() % static_cast<int>(sb.st_size - 0 + 1));
 		seek(pos);
-		sum+=readln(2);
+		sum+=readln(BUFFER_SIZE);
 		k++;
 	}
 	int err = munmap(addr, getpagesize());

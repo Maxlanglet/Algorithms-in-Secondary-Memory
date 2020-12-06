@@ -97,7 +97,7 @@ int main(int argc, char* argv[]){
 }
 {
 	Timer timer;
-	cout << "sum rand is " << instream.randjump(title,8000) << endl;
+	cout << "sum rand is " << instream.randjump(title,1000) << endl;
 }
 	instream.close();
 
@@ -112,7 +112,7 @@ int main(int argc, char* argv[]){
 
 {
 	Timer timer;
-	cout << "sum rand is " << instream2.randjump(title,8000) << endl;
+	cout << "sum rand is " << instream2.randjump(title,1000) << endl;
 }
 
 	instream2.close();
@@ -122,12 +122,12 @@ int main(int argc, char* argv[]){
 	instream3.seek(0);
 {
 	Timer timer;
-	cout << "length is " << instream3.length(title,100) << endl;
+	cout << "length is " << instream3.length(title,2*4096) << endl;
 }
 
 {
 	Timer timer;
-	cout << "sum rand is " << instream3.randjump(title,8000) << endl;
+	cout << "sum rand is " << instream3.randjump(title,1000,2*4096) << endl;
 }
 
 	instream3.close();
@@ -146,7 +146,7 @@ int main(int argc, char* argv[]){
 
 {
 	Timer timer;
-	cout << "sum rand is " << instream4.randjump(title,8000) << endl;
+	cout << "sum rand is " << instream4.randjump(title,1000) << endl;
 }
 	instream4.close();
 
