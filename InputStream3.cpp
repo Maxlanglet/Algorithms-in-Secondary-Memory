@@ -119,7 +119,7 @@ void InputStream3::close(){
 	::close(fd);
 }
 
-int InputStream3::randjump(string file, int j){
+int InputStream3::randjump(string file, int j, int buffer){
 	int sum=0;
 	int k=0;
 
@@ -131,14 +131,14 @@ int InputStream3::randjump(string file, int j){
 	  handle_error("fstat");
 	int line_size = 1 ;
 
-	srand ( 1 );
+	srand ( 2 );
 	int pos = rand();
 	
 	while (k<j){
 		srand ( pos );
 		pos = 0 + (rand() % static_cast<int>(sb.st_size - 0 + 1));
 		seek(pos);
-		line_size = readln(10);
+		line_size = readln(buffer);
 		sum+=line_size;
 		k++;
 	}
