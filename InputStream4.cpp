@@ -1,5 +1,5 @@
 #include "InputStream4.hpp"
-#define BUFFER_SIZE 2
+#define BUFFER_SIZE 1
 
 #define handle_error(msg) \
            do { perror(msg); exit(EXIT_FAILURE); } while (0)
@@ -77,8 +77,9 @@ int InputStream4::readln(int mult_page){
     }
 
     else{
-    	pos = lseek(fd,idx+1,SEEK_CUR);					//true if randjump and then add the rest to account for when the line ends on the next page
     	if(jump){
+    		pos = lseek(fd,idx+1,SEEK_CUR);					//true if randjump and then add the rest to account for when the line ends on the next page
+    		idx++;											//idx++ because jump to idx+1
     		page++;
     		offset++;
     		len = pagesize;
@@ -92,13 +93,17 @@ int InputStream4::readln(int mult_page){
 
     		if (*p == '\n' || *p == '\r'){
 		    	pos = lseek(fd,idx+1,SEEK_CUR);
-		    	return idx+1;//maybe add one problem maybe because of lseek but freezes if idx, at least resolves the problem
+		    	return idx+1;
 		    }
     	}
-    	
-    	if (idx!=0){
-    		return idx+1;
+    	else{
+    		pos = lseek(fd,idx+1,SEEK_CUR);					//true if randjump and then add the rest to account for when the line ends on the next page
+    		if (idx!=0){
+	    		return idx+1;
+	    	}
     	}
+    	
+    	
     }
 }
 

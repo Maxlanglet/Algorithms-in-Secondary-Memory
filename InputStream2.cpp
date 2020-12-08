@@ -1,5 +1,5 @@
 #include "InputStream2.hpp"
-#define BUFFER_SIZE 2*4096
+#define BUFFER_SIZE 1000
 
 InputStream2::InputStream2(){
 	offset=0;
@@ -46,7 +46,7 @@ int InputStream2::readln(){ //returns length of file read
 			return 0;
 		}
      }
-     return strlen(buffer);
+     //return strlen(buffer);
 }
 
 

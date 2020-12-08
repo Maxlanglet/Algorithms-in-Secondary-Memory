@@ -25,5 +25,7 @@ private:
 	//const char * path;
 	FILE * file;
 	int offset;
+	int res;
+
 };
 #endif
