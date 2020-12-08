@@ -79,6 +79,7 @@ int InputStream1::length(string file){
 
 	if (fstat(filp, &sb) == -1) 
 	  handle_error("fstat");
+	cout << sb.st_size << endl;
 	int line_size =1;
 	int sum=0;
 	while (line_size>0){

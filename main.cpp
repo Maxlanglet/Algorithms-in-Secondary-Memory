@@ -10,96 +10,44 @@
 
 int main(int argc, char* argv[]){
 
-	/*string title = "./role_type.csv";
+	string title = "../imdb/aka_name.csv";//./role_type.csv//complete_cast.csv//
 	//string title = "C:/Users/User/Downloads/MA1/DB ARCHITECTURE/projet/role_type.csv";
 
-	printf("Test InputStream1\n\n");
-	InputStream1 instream ; //if () considers it a function in main 
-	instream.open(title.c_str());
+	printf("TEST INPUTSTREAM4\n\n");
+
+ 	InputStream4 instream4;
+ 	instream4.open(title.c_str());
+ 	instream4.seek(0);
+
 {
 	Timer timer;
-	cout << "length is " << instream.length(title) << endl;
+	cout << "length is " << instream4.length(title) << endl;
 }
-	instream.close();
 
-
-
-	printf("Test InputStream2\n");
-//Test InputStream2
-
-	InputStream2 instream2;
-	
-	instream2.open(title.c_str());
-	//stream.seek_pos(9); //test de seek_pos
 {
 	Timer timer;
-
-	cout<<"length is " << instream2.length(title) <<endl;
+	cout << "sum rand is " << instream4.randjump(title,1000) << endl;
 }
-	instream2.close();
+	instream4.close();
 
 
-
-	printf("Test InputStream3\n\n");
-//Test InputStream3
-	InputStream3 instream3;
-
-	//instream3.open(title);
-	//stream.seek_pos(9); //test de seek_pos
-{
-	Timer timer;
-	cout<<"size is "<<instream3.length(title,5)<<endl;
-}
-	instream3.close();*/
 /*
-	 printf("Test MMAP\n\n");
-
-//ESSAIS DE MMAP	 Essayer Boost
-	 string titlemap = "../imdb/complete_cast.csv";//role_type.csv
-	 InputStream4 instream4(titlemap.c_str());
-
-	 instream4.open2();
-{
-	Timer timer;
-	instream4.readln();
-}
-	instream4.close2();
-*/
-/*
-	if (stream.end_of_stream()){// test de end of stream
-		cout << "end of stream" << endl;
-	}
-	*/
-
-
-	/*string title2="hello6.txt"; //NE LE CREE PAS et pas de \n
-	OutputStream1 outstream;
-	outstream.create(title2.c_str());
-	outstream.writeln("hello it's me, mario !");
-	outstream.close();
-	*/
-	/*string title2= "testagainandagain.txt";
-	OutputStream2 outstream2;
-	outstream2.create(title2.c_str());
-	outstream2.writeln("coucou la famille");
-	*/
-
-	string title = "../imdb/complete_cast.csv";//./role_type.csv
-	//string title = "C:/Users/User/Downloads/MA1/DB ARCHITECTURE/projet/role_type.csv";
-
-
 	printf("\nTEST INPUTSTREAM1\n\n");
 	InputStream1 instream ; //if () considers it a function in main 
 	instream.open(title.c_str());
+
 {
 	Timer timer;
 	cout << "length is " << instream.length(title) << endl;
 }
+
 {
 	Timer timer;
 	cout << "sum rand is " << instream.randjump(title,1000) << endl;
 }
 	instream.close();
+*/
+
 
 	printf("TEST INPUTSTREAM2\n\n");
 	InputStream2 instream2 ; //if () considers it a function in main 
@@ -114,48 +62,34 @@ int main(int argc, char* argv[]){
 	Timer timer;
 	cout << "sum rand is " << instream2.randjump(title,1000) << endl;
 }
-
 	instream2.close();
+
+
+/*
+
 	printf("TEST INPUTSTREAM3\n\n");
 	InputStream3 instream3 ; //if () considers it a function in main 
 	instream3.open(title.c_str());
 	instream3.seek(0);
 {
 	Timer timer;
-	cout << "length is " << instream3.length(title,2*4096) << endl;
+	cout << "length is " << instream3.length(title,4096) << endl;
 }
 
 {
 	Timer timer;
-	cout << "sum rand is " << instream3.randjump(title,1000,2*4096) << endl;
+	cout << "sum rand is " << instream3.randjump(title,1000,4096) << endl;
 }
 
 	instream3.close();
-
-
-	printf("TEST INPUTSTREAM4\n\n");
-
- 	InputStream4 instream4;
- 	instream4.open(title.c_str());
- 	instream3.seek(0);
-
-{
-	Timer timer;
-	cout << "length is " << instream4.length(title) << endl;
-}
-
-{
-	Timer timer;
-	cout << "sum rand is " << instream4.randjump(title,1000) << endl;
-}
-	instream4.close();
+*/
 
 	/*string title4="longasstext.txt";
 	string title2= "testout.txt";
 	OutputStream3 outstream3;
 	outstream3.create(title2.c_str());
 	outstream3.writeln("heololo");*/
-	
+	/*
 	string title4="shorttext.txt";
 	OutputStream4 outstream4(title4.c_str());
 	outstream4.create();
@@ -164,5 +98,6 @@ int main(int argc, char* argv[]){
 	//string str = "hello";
 	outstream4.writeln(str.c_str());
 	outstream4.close2();
+	*/
 	return 0;
 }
