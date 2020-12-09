@@ -4,17 +4,15 @@
 
 
 
-OutputStream4::OutputStream4(string filename){
-	path = filename;
+OutputStream4::OutputStream4(){
 }
 
 OutputStream4::~OutputStream4(){}
 
 
-void OutputStream4::create(){
-	//new_file =open(path, O_RDWR | O_CREAT | O_TRUNC, S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH);
+void OutputStream4::create(string filename){
+	path = filename;
 	mode_t mode = S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH;
-	//new_file = creat(path.c_str(), mode);
 	new_file = open(path.c_str(), O_RDWR | O_APPEND| O_CREAT , mode);
 	if (new_file == -1){
 	   handle_error("open");

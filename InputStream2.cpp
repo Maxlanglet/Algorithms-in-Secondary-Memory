@@ -25,9 +25,7 @@ int InputStream2::readln(){ //returns length of file read
 	// if we are not at the end of the file, we read the size of the buffer
 	 if ( ! feof (file) ){
        
-	   //while(buffer[99] != '\n' && buffer[99]!='\0')
 		if ( fgets (buffer , BUFFER_SIZE , file) != NULL ){
-			//cout<<"error, NULL"<<endl;
 			while (idx < BUFFER_SIZE-1 && buffer[i] != '\n' && buffer[i] != '\r') i++, idx++;
 
 			if ( buffer[i] == '\n' || buffer[i] == '\r'){
@@ -46,7 +44,6 @@ int InputStream2::readln(){ //returns length of file read
 			return 0;
 		}
      }
-     //return strlen(buffer);
 }
 
 

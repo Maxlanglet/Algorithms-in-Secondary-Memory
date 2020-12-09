@@ -23,11 +23,11 @@ using namespace std;
 class OutputStream4// : public OutputStream enlever pour le moment
 {
 public:
-	OutputStream4(string filename);
+	OutputStream4();
 	~OutputStream4();
 	void writeln(string str);
 	void close2();
-	void create();
+	void create(string filename);
 
 private:
 	string path;
