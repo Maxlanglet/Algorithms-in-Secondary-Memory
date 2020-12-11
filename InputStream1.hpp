@@ -21,7 +21,7 @@ public:
 	InputStream1();
 	~InputStream1();
 	void open(string path);
-	int readln();
+	string readln();
 	void seek(int pos);
 	bool end_of_stream();
 	void close();

@@ -17,31 +17,34 @@ void InputStream2::open(const char* path){
 
 
 //reads in a buffer
-int InputStream2::readln(){ //returns length of file read
+string InputStream2::readln(){ //returns length of file read
 	// initialize a buffer of fixed size BUFFER_SIZE
 	char buffer [BUFFER_SIZE];
+	string str="";
 	int idx = 0;
 	int i =0;
 	// if we are not at the end of the file, we read the size of the buffer
 	 if ( ! feof (file) ){
        
 		if ( fgets (buffer , BUFFER_SIZE , file) != NULL ){
-			while (idx < BUFFER_SIZE-1 && buffer[i] != '\n' && buffer[i] != '\r') i++, idx++;
+			while (idx < BUFFER_SIZE-1 && buffer[i] != '\n' && buffer[i] != '\r') str+=buffer[i], i++, idx++;
 
 			if ( buffer[i] == '\n' || buffer[i] == '\r'){
+				str+="\n";
 				offset += i+1;
 				seek(offset);
-				return i+1;
+
+				return str;
 			}
 			else{
 				offset+=i;
 				seek(offset);
-				return i;
+				return str;
 			}
 
 		}
 		else{
-			return 0;
+			return "";
 		}
      }
 }
@@ -58,7 +61,7 @@ int InputStream2::length(string filename){
 	int line_size = 1 ;
 	//TODO: ajouter size of file juste pour etre sur, regarder autre length pour exemple
 	 while (line_size > 0 ){
-		line_size = readln();
+		line_size = readln().size();
 		sum += line_size ;
 	 }
 	 return sum ;
@@ -96,7 +99,7 @@ int InputStream2::randjump(string filename, int j){//seems to work fine
 		srand ( pos );
 		pos = 0 + (rand() % static_cast<int>(sz - 0 + 1));
 		seek(pos);
-		int line_size = readln();
+		int line_size = readln().size();
 		sum+=line_size;
 		k++;
 	}

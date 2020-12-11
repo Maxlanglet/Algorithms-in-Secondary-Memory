@@ -15,7 +15,7 @@ public:
 	InputStream2();
 	~InputStream2();
 	void open(const char* path);
-	int readln();
+	string readln();
 	void seek(int pos);
 	bool end_of_stream();
 	void close();

@@ -20,7 +20,9 @@ void OutputStream4::create(string filename){
 }
 
 void OutputStream4::writeln(string str){
+	if(str.substr(str.length()-1) != "\n"){
 	str+="\n";
+	}
 
 	// open a file to write only ->OPEN IN ANOTHER METHOD
 

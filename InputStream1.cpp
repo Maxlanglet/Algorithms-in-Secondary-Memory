@@ -26,8 +26,7 @@ void InputStream1::open(string path){
 //caractère par caractère
 //peut etre faut il utiliser fonction read() de unistd mais pas reussis a faire fonctionner
 //peut etre file.read(c,1)
-int InputStream1::readln(){ //returns length of the read line  
-
+string InputStream1::readln(){ //returns length of the read line  
 	string line ="";
 	int bytes_read =1;
 	if (filp){
@@ -39,7 +38,7 @@ int InputStream1::readln(){ //returns length of the read line
 			line += c;
 			offset ++;
 			if (*c == '\n' || *c == '\r'){
-				return line.size();
+				return line;
 			}
 		}
 		free(c);
@@ -47,10 +46,10 @@ int InputStream1::readln(){ //returns length of the read line
 		cout << "File is not open" << endl;}
 
 	if (bytes_read ==0){
-		return 0;
+		return "";
 	}
 	else{
-		return line.size();}
+		return line;}
 	
 }
 
@@ -83,7 +82,7 @@ int InputStream1::length(string file){
 	int line_size =1;
 	int sum=0;
 	while (line_size>0){
-		line_size = readln();
+		line_size = readln().size();
 		sum+=line_size;
 	}
 	return sum;
@@ -103,12 +102,12 @@ int InputStream1::randjump(string file, int j){//seems to work fine
 	
 	srand ( 2 );//for true random else seeded
 	int pos = rand();
-
 	while (k<j){
 		srand ( pos );
 		pos = 0 + (rand() % static_cast<int>(sb.st_size - 0 + 1));
 		seek(pos);
-		int line_size = readln();
+		int line_size = readln().size();
+		
 		sum+=line_size;
 		k++;
 	}

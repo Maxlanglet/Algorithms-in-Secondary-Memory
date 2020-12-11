@@ -10,7 +10,7 @@
 #include <stdio.h>
 #include <cstdarg>
 #include <math.h> 
-#include "InputStream4.hpp"
+#include "InputStream2.hpp" ////change to 4
 #include "OutputStream1.hpp"
 #include "OutputStream2.hpp"
 #include "OutputStream3.hpp"
@@ -29,6 +29,6 @@ public:
 	void rrmerge3(string outputfile, int num, ... );
 	void rrmerge4(string outputfile, int num, ... );
 private:
-	InputStream4 instream4;
+	//InputStream4 instream4;
 };
 #endif
