@@ -26,6 +26,7 @@ string InputStream3::readln(int buf_size){//TODO: probleme length 3
 
 		ssize_t bytes_read =1;
 		char* buffer = (char*) malloc(buffer_size*sizeof(char));
+		if (!buffer) handle_error(malloc);
 		size_t nbytes = buffer_size*sizeof(char);
 		int sizeline = 0;
 		string str="";
@@ -73,9 +74,8 @@ string InputStream3::readln(int buf_size){//TODO: probleme length 3
 				rest-=offset;
 			}
 		}
-
-		return str;
 		free(buffer);
+		return str;
 	}
 	else{
 		cout << "File is not open" << endl;
