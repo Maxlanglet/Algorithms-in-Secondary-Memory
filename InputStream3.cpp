@@ -73,8 +73,8 @@ string InputStream3::readln(int buf_size){//TODO: probleme length 3
 				lseek(fd, offset, SEEK_SET);
 				rest-=offset;
 			}
-		}
 		free(buffer);
+		}
 		return str;
 	}
 	else{
