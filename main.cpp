@@ -9,29 +9,26 @@
 #include "InputStream4.hpp"
 #include "RrmergeMethod4.hpp"
 
+//#include <cstdlib>
+
+#include <string>
+
 int main(int argc, char* argv[]){
 	//string title = "../imdb/aka_name.csv";//./role_type.csv//complete_cast.csv//
 	//string title = "C:/Users/User/Downloads/MA1/DB ARCHITECTURE/projet/role_type.csv";
-	string title = "../imdb/complete_cast.csv";
+	string title = "/Users/langletmaxime/Desktop/Database_Systems_Architecture/Algorithms_in_Secondary_Memory/imdb/role_type.csv";
 
+	//cout << argv[0] << 	argv[1] << argv[2] << endl;
 
-	printf("TEST INPUTSTREAM4\n\n");
+	int size = atoi(argv[2]);
 
- 	InputStream4 instream4;
- 	instream4.open(title.c_str());
- 	instream4.seek(0);
+	string name = argv[1];
 
-{
-	Timer timer;
-	cout << "length is " << instream4.length(title) << endl;
-}
+	title = name;
 
-{
-	Timer timer;
-	cout << "sum rand is " << instream4.randjump(title,1000) << endl;
-}
+	cout << title  <<endl;
 
-	instream4.close();
+	cout << "Size of buffer :" << size << endl;
 
 
 	printf("\nTEST INPUTSTREAM1\n\n");
@@ -43,22 +40,15 @@ int main(int argc, char* argv[]){
 
 {
 	Timer timer;
-	cout << "length is " << instream.length(title) << endl;
+	cout << "1) " << instream.length(title) << endl;
 }
-
+/*
 {
 	Timer timer;
 	cout << "sum rand is " << instream.randjump(title,1000) << endl;
 }
+*/
 	instream.close();
-
-
-/*
-	printf("TEST RRMERGE4\n\n");
-	RrmergeMethod4 r;
-	r.rrmerge1("theoutput",2,"role_type.csv","test.csv");
-
-
 
 
 	printf("TEST INPUTSTREAM2\n\n");
@@ -69,14 +59,64 @@ int main(int argc, char* argv[]){
 	
 {
 	Timer timer;
-	cout << "length is " << instream2.length(title) << endl;
+	cout << "2) " << instream2.length(title) << endl;//TODO CHANGER TITLE PAS BESOIN
 }
-
+/*
 {
 	Timer timer;
 	cout << "sum rand is " << instream2.randjump(title,1000) << endl;
-}
+}*/
 	instream2.close();
+
+
+	printf("TEST INPUTSTREAM3\n\n");
+	InputStream3 instream3 ; //if () considers it a function in main 
+	instream3.open(title.c_str());
+	instream3.seek(0);
+	
+{
+	Timer timer;
+	cout << "3) " << instream3.length(size) << endl;
+}
+/*
+{
+	Timer timer;
+	cout << "sum rand is " << instream3.randjump(title,1000,size) << endl;
+}
+
+	instream3.close();
+*/
+	instream3.close();
+	int mul=1;
+
+	if (size >= 4096){
+		mul = size/getpagesize();
+	}
+
+
+	printf("TEST INPUTSTREAM4\n\n");
+
+ 	InputStream4 instream4;
+ 	instream4.open(title.c_str());
+ 	instream4.seek(0);
+
+{
+	Timer timer;
+	cout << "4) " << instream4.length(title, mul) << endl;
+}
+/*
+{
+	Timer timer;
+	cout << "sum rand is " << instream4.randjump(title,1000) << endl;
+}*/
+
+	instream4.close();
+
+
+/*
+	printf("TEST RRMERGE4\n\n");
+	RrmergeMethod4 r;
+	r.rrmerge1("theoutput",2,"role_type.csv","test.csv");
 
 
 

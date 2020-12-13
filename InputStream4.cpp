@@ -149,7 +149,7 @@ void InputStream4::close(){
 	::close(fd);
 }
 
-int InputStream4::length(string file){
+int InputStream4::length(string file, int mult){
 	open(file);//TODO: enlever car on le fait avant 
 	struct stat sb;
 	seek(0);
@@ -161,7 +161,7 @@ int InputStream4::length(string file){
 
 
 	while (sum < sb.st_size){//sb.st_size-1
-		line_size = readln(BUFFER_SIZE).size();//mettre size of buffer in def of length
+		line_size = readln(mult).size();//mettre size of buffer in def of length
 		sum+=line_size;
 	}
 

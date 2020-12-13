@@ -48,7 +48,7 @@ string InputStream3::readln(int buf_size){//TODO: probleme length 3
 		char *p = NULL;
 		bool edl=false;
 		
-		while(!edl && bytes_read >0){
+		while(!edl && bytes_read > 0){
 			ssize_t idx = 0;
 
 			if ((bytes_read = lseek (fd, offset, SEEK_SET)) != -1)
@@ -78,8 +78,8 @@ string InputStream3::readln(int buf_size){//TODO: probleme length 3
 				lseek(fd, offset, SEEK_SET);
 				rest-=offset;
 			}
-		free(buffer);
 		}
+		free(buffer);
 		return str;
 	}
 	else{
@@ -89,8 +89,7 @@ string InputStream3::readln(int buf_size){//TODO: probleme length 3
 
 }
 
-int InputStream3::length(string filename,int buf_size){
-	open(filename);
+int InputStream3::length(int buf_size){
 	int sum = 0 ;
 	int line_size = 1 ;
 	struct stat sb;
@@ -99,7 +98,7 @@ int InputStream3::length(string filename,int buf_size){
 	if (fstat(fd, &sb) == -1) 
 	  handle_error("fstat");
 
-	 while (line_size > 0 ){
+	 while (sum < sb.st_size ){
 		line_size = readln(buf_size).size();
 		sum += line_size ;
 	 }
