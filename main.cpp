@@ -14,28 +14,18 @@
 #include <string>
 
 int main(int argc, char* argv[]){
-	//string title = "../imdb/aka_name.csv";//./role_type.csv//complete_cast.csv//
-	//string title = "C:/Users/User/Downloads/MA1/DB ARCHITECTURE/projet/role_type.csv";
-	string title = "/Users/langletmaxime/Desktop/Database_Systems_Architecture/Algorithms_in_Secondary_Memory/imdb/role_type.csv";
-
-	//cout << argv[0] << 	argv[1] << argv[2] << endl;
-
 	int size = atoi(argv[2]);
 
 	string name = argv[1];
 
-	title = name;
-
-	cout << title  <<endl;
-
+	string title = name;
 	cout << "Size of buffer :" << size << endl;
 
 
-	printf("\nTEST INPUTSTREAM1\n\n");
+	//printf("\nTEST INPUTSTREAM1\n\n");
 	InputStream1 instream ; //if () considers it a function in main 
 	instream.open(title.c_str());
-	//cout<<instream.readln()<<endl;
-	//instream.close();
+
 	
 
 {
@@ -51,7 +41,7 @@ int main(int argc, char* argv[]){
 	instream.close();
 
 
-	printf("TEST INPUTSTREAM2\n\n");
+	//printf("TEST INPUTSTREAM2\n\n");
 	InputStream2 instream2 ; //if () considers it a function in main 
 	instream2.open(title.c_str());
 	instream2.seek(0);
@@ -69,7 +59,7 @@ int main(int argc, char* argv[]){
 	instream2.close();
 
 
-	printf("TEST INPUTSTREAM3\n\n");
+	//printf("TEST INPUTSTREAM3\n\n");
 	InputStream3 instream3 ; //if () considers it a function in main 
 	instream3.open(title.c_str());
 	instream3.seek(0);
@@ -90,11 +80,12 @@ int main(int argc, char* argv[]){
 	int mul=1;
 
 	if (size >= 4096){
-		mul = size/getpagesize();
+		mul = size/4096;
+		cout << mul<<endl;
 	}
 
 
-	printf("TEST INPUTSTREAM4\n\n");
+	//printf("TEST INPUTSTREAM4\n\n");
 
  	InputStream4 instream4;
  	instream4.open(title.c_str());
