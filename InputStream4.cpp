@@ -28,6 +28,7 @@ string InputStream4::readln(int mult_page){
 	string str = "";
 	char *p = NULL;
 	struct stat sb;
+	bool edl=false;
 
 	int pagesize = getpagesize()*mult_page;
 
@@ -39,6 +40,8 @@ string InputStream4::readln(int mult_page){
 	  handle_error("fstat");
 
 	pos = lseek(fd, 0, SEEK_CUR);
+
+
 	int off = pos%pagesize;
 	int page = floor(pos / pagesize);
 
@@ -51,64 +54,80 @@ string InputStream4::readln(int mult_page){
 	if (rest == 0) return "";
 
 
-	if (offset != page || init !=1){
-		offset = page;
-		if (offset*pagesize >= sb.st_size){
-			pagesize = getpagesize();
-			len=getpagesize();
+	while(!edl || pos<sb.st_size){
+
+		if (offset != page || init !=1){
+
+			offset = page;
+			if (offset*pagesize >= sb.st_size){
+				pagesize = getpagesize();
+				len=getpagesize();
+			}
+			addr =  static_cast<char*>(mmap(NULL, len, PROT_READ,MAP_PRIVATE, fd, offset*pagesize));//
+			init=1;
 		}
-		addr =  static_cast<char*>(mmap(NULL, len, PROT_READ,MAP_PRIVATE, fd, offset*pagesize));//
-		init=1;
+
+		if(addr == MAP_FAILED){
+	        printf("Mapping Failed\n");
+	        handle_error("mmap");
+	    }
+	    p = addr;
+	    p+=off;
+	    len-=off;
+
+	    while (idx < len-1 && *p != '\n' && *p != '\r') str+=*p, p++, idx++;
+		//cout<<str<<endl;
+
+	    if ( *p == '\n' || *p == '\r'){
+	    	pos += idx+1;
+	    	lseek(fd, pos, SEEK_SET);//changer offset
+			str+="\n";
+			edl=true;
+			rest-=pos;
+			return str;			
+	    }
+	    else{ 
+	    	//cout << "new page" << endl;
+			pos += idx;
+			lseek(fd, pos, SEEK_SET);
+			len=pagesize;
+			rest-=pos;
+			idx=0;
+			off=0;
+			page++;
+		}
 	}
+	return str;
+}
 
-	if(addr == MAP_FAILED){
-        printf("Mapping Failed\n");
-        handle_error("mmap");
-    }
-    p = addr;
-    p+=off;
-    len-=off;
+/*
+if(jump){
+	pos = lseek(fd,idx,SEEK_CUR);					//true if randjump and then add the rest to account for when the line ends on the next page
+	//idx++;											//idx++ because jump to idx+1
+	page++;
+	offset++;
+	len = pagesize;
+	if (offset*pagesize >= sb.st_size){
+		pagesize = getpagesize();
+		len=getpagesize();
+	}
+	addr =  static_cast<char*>(mmap(NULL, len, PROT_READ,MAP_PRIVATE, fd, offset*pagesize));//
+	p = addr;
+	while (idx < len-1 && *p != '\n' && *p != '\r') str+=*p, p++, idx++;
 
-    while (idx < len-1 && *p != '\n' && *p != '\r') str+=*p, p++, idx++;
-
-
-    if (*p == '\n' || *p == '\r'){
+	if (*p == '\n' || *p == '\r'){
     	pos = lseek(fd,idx+1,SEEK_CUR);
     	str+="\n";
     	return str;
     }
-
-    else{
-    	if(jump){
-    		pos = lseek(fd,idx+1,SEEK_CUR);					//true if randjump and then add the rest to account for when the line ends on the next page
-    		//idx++;											//idx++ because jump to idx+1
-    		page++;
-    		offset++;
-    		len = pagesize;
-    		if (offset*pagesize >= sb.st_size){
-    			pagesize = getpagesize();
-    			len=getpagesize();
-    		}
-    		addr =  static_cast<char*>(mmap(NULL, len, PROT_READ,MAP_PRIVATE, fd, offset*pagesize));//
-    		p = addr;
-    		while (idx < len-1 && *p != '\n' && *p != '\r') str+=*p, p++, idx++;
-
-    		if (*p == '\n' || *p == '\r'){
-		    	pos = lseek(fd,idx+1,SEEK_CUR);
-		    	str+="\n";
-		    	return str;
-		    }
-    	}
-    	else{
-    		pos = lseek(fd,idx+1,SEEK_CUR);					//true if randjump and then add the rest to account for when the line ends on the next page
-    		if (idx!=0){
-	    		return str;
-	    	}
-    	}
-    	
-    	
-    }
 }
+else{
+	pos = lseek(fd,idx,SEEK_CUR);					//true if randjump and then add the rest to account for when the line ends on the next page
+	if (idx!=0){
+		return str;
+	}
+}
+*/
 
 
 void InputStream4::seek(int pos){
@@ -140,13 +159,12 @@ int InputStream4::length(string file){
 	if (fstat(fd, &sb) == -1) 
 	  handle_error("fstat");
 
-	cout << sb.st_size << endl;
 
-	while (sum < sb.st_size-1){
+	while (sum < sb.st_size){//sb.st_size-1
 		line_size = readln(BUFFER_SIZE).size();//mettre size of buffer in def of length
-		cout << sum <<endl;
 		sum+=line_size;
 	}
+
 	int err = munmap(addr, getpagesize());
 	init=0;//to make sure we remap for real benchmarking
     if(err != 0){
