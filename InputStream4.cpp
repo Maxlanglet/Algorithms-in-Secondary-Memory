@@ -23,8 +23,9 @@ void InputStream4::open(string filename){
 }
 
 
-int InputStream4::readln(int mult_page){
+string InputStream4::readln(int mult_page){
 	
+	string str = "";
 	char *p = NULL;
 	struct stat sb;
 
@@ -47,7 +48,7 @@ int InputStream4::readln(int mult_page){
 
 	rest = sb.st_size-pos;
 
-	if (rest == 0) return 0;
+	if (rest == 0) return "";
 
 
 	if (offset != page || init !=1){
@@ -68,18 +69,19 @@ int InputStream4::readln(int mult_page){
     p+=off;
     len-=off;
 
-    while (idx < len-1 && *p != '\n' && *p != '\r') p++, idx++;
+    while (idx < len-1 && *p != '\n' && *p != '\r') str+=*p, p++, idx++;
 
 
     if (*p == '\n' || *p == '\r'){
     	pos = lseek(fd,idx+1,SEEK_CUR);
-    	return idx+1;
+    	str+="\n";
+    	return str;
     }
 
     else{
     	if(jump){
     		pos = lseek(fd,idx+1,SEEK_CUR);					//true if randjump and then add the rest to account for when the line ends on the next page
-    		idx++;											//idx++ because jump to idx+1
+    		//idx++;											//idx++ because jump to idx+1
     		page++;
     		offset++;
     		len = pagesize;
@@ -89,17 +91,18 @@ int InputStream4::readln(int mult_page){
     		}
     		addr =  static_cast<char*>(mmap(NULL, len, PROT_READ,MAP_PRIVATE, fd, offset*pagesize));//
     		p = addr;
-    		while (idx < len-1 && *p != '\n' && *p != '\r') p++, idx++;
+    		while (idx < len-1 && *p != '\n' && *p != '\r') str+=*p, p++, idx++;
 
     		if (*p == '\n' || *p == '\r'){
 		    	pos = lseek(fd,idx+1,SEEK_CUR);
-		    	return idx+1;
+		    	str+="\n";
+		    	return str;
 		    }
     	}
     	else{
     		pos = lseek(fd,idx+1,SEEK_CUR);					//true if randjump and then add the rest to account for when the line ends on the next page
     		if (idx!=0){
-	    		return idx+1;
+	    		return str;
 	    	}
     	}
     	
@@ -137,8 +140,11 @@ int InputStream4::length(string file){
 	if (fstat(fd, &sb) == -1) 
 	  handle_error("fstat");
 
-	while (line_size > 0 ){
-		line_size = readln(BUFFER_SIZE);//mettre size of buffer in def of length
+	cout << sb.st_size << endl;
+
+	while (sum < sb.st_size-1){
+		line_size = readln(BUFFER_SIZE).size();//mettre size of buffer in def of length
+		cout << sum <<endl;
 		sum+=line_size;
 	}
 	int err = munmap(addr, getpagesize());
@@ -167,7 +173,7 @@ int InputStream4::randjump(string file, int j){
 		srand ( pos );
 		pos = 0 + (rand() % static_cast<int>(sb.st_size - 0 + 1));
 		seek(pos);
-		sum+=readln(BUFFER_SIZE);
+		sum+=readln(BUFFER_SIZE).size();
 		k++;
 	}
 	int err = munmap(addr, getpagesize());

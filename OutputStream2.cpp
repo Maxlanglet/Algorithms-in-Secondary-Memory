@@ -14,7 +14,9 @@ void OutputStream2::create(const char * filename){
 
 // writes string in file and end with a new line
 void OutputStream2::writeln(string str){
+	if(str.substr(str.length()-1) != "\n"){
 	str+="\n";
+	}
 	fputs(str.c_str(),new_file);
 	//fputs("\n",new_file); // a voir pcq on sait jamais que le \n soit deja compris
 }

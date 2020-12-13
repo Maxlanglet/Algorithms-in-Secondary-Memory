@@ -19,15 +19,22 @@ void InputStream3::open(string path){
 }
 
 //buffer by buffer
-int InputStream3::readln(int buf_size){//TODO: probleme length 3
+string InputStream3::readln(int buf_size){//TODO: probleme length 3
 	int buffer_size=buf_size;
 
 	if (fd){
 
 		ssize_t bytes_read =1;
 		char* buffer = (char*) malloc(buffer_size*sizeof(char));
+
+
+		if (!buffer) {
+			printf("ERROR");
+			exit(1);
+		}
 		size_t nbytes = buffer_size*sizeof(char);
 		int sizeline = 0;
+		string str="";
 
 		offset = lseek(fd, 0, SEEK_CUR);
 
@@ -45,7 +52,7 @@ int InputStream3::readln(int buf_size){//TODO: probleme length 3
 			ssize_t idx = 0;
 
 			if ((bytes_read = lseek (fd, offset, SEEK_SET)) != -1)
-				bytes_read = read (fd, buffer, nbytes);
+				bytes_read =  read(fd, buffer, nbytes);
 
 			
 			if (bytes_read == -1) {   /* read error   */
@@ -53,14 +60,15 @@ int InputStream3::readln(int buf_size){//TODO: probleme length 3
 		    }
 
 		    p = buffer;
-		    while (idx < bytes_read && *p != '\n' && *p != '\r') p++, idx++;
-
+		    while (idx < bytes_read && *p != '\n' && *p != '\r') str+=*p,p++, idx++;
+			//cout<<str<<endl;
 
 
 		    if ( *p == '\n'){
 		    	offset += idx +1;
 		    	lseek(fd, offset, SEEK_SET);
 				sizeline+=idx+1;
+				str+="\n";
 				edl=true;
 				rest-=offset;
 		    }
@@ -70,10 +78,9 @@ int InputStream3::readln(int buf_size){//TODO: probleme length 3
 				lseek(fd, offset, SEEK_SET);
 				rest-=offset;
 			}
-		}
-
-		return sizeline;
 		free(buffer);
+		}
+		return str;
 	}
 	else{
 		cout << "File is not open" << endl;
@@ -93,7 +100,7 @@ int InputStream3::length(string filename,int buf_size){
 	  handle_error("fstat");
 
 	 while (line_size > 0 ){
-		line_size = readln(buf_size);
+		line_size = readln(buf_size).size();
 		sum += line_size ;
 	 }
 	 return sum ;
@@ -138,7 +145,7 @@ int InputStream3::randjump(string file, int j, int buffer){
 		srand ( pos );
 		pos = 0 + (rand() % static_cast<int>(sb.st_size - 0 + 1));
 		seek(pos);
-		line_size = readln(buffer);
+		line_size = readln(buffer).size();
 		sum+=line_size;
 		k++;
 	}

@@ -19,7 +19,7 @@ public:
 	InputStream4();
 	~InputStream4();
 	void open(string filename);
-	int readln(int mult_page);
+	string readln(int mult_page);
 	void seek(int pos);
 	bool end_of_stream();
 	void close();
