@@ -19,19 +19,27 @@ int main(int argc, char* argv[]){
 	string name = argv[1];
 
 	string title = name;
-	cout << "Size of buffer :" << size << endl;
+	cout << title << endl;
+	cout << "Method|Size of buffer |Characters read| average| average speed"<< endl;
 
 
 	//printf("\nTEST INPUTSTREAM1\n\n");
 	InputStream1 instream ; //if () considers it a function in main 
 	instream.open(title.c_str());
 
-	
 
-{
+float average=0;
+int length =0;
+for(int i=0; i<4; i++){
 	Timer timer;
-	cout << "1) " << instream.length(title) << endl;
+	length = instream.length(title);
+	timer.Stop();
+	average+=timer.getDuration();
 }
+cout << "1 "<<" & ";
+cout << size << " & ";
+cout << length << " & ";
+cout <<  average/4 << " & "<< length/(average/4) << " \\\\" << endl;
 /*
 {
 	Timer timer;
@@ -47,10 +55,17 @@ int main(int argc, char* argv[]){
 	instream2.seek(0);
 	
 	
-{
+float average2=0;
+int length2 =0;
+for(int i=0; i<4; i++){
 	Timer timer;
-	cout << "2) " << instream2.length(title) << endl;//TODO CHANGER TITLE PAS BESOIN
+	length2 = instream2.length(title);
+	timer.Stop();
+	average2+=timer.getDuration();
 }
+cout << "2 "<<" & ";
+cout << " & "<< length2 << " & ";
+cout <<  average2/4 << " & "<< length2/(average2/4) << " \\\\" << endl;
 /*
 {
 	Timer timer;
@@ -64,10 +79,17 @@ int main(int argc, char* argv[]){
 	instream3.open(title.c_str());
 	instream3.seek(0);
 	
-{
+float average3=0;
+int length3=0;
+for(int i=0; i<4; i++){
 	Timer timer;
-	cout << "3) " << instream3.length(size) << endl;
+	length3 =  instream3.length(size);
+	timer.Stop();
+	average3+=timer.getDuration();
 }
+cout << "3 "<<" & ";
+cout << " & "<< length3 << " & ";
+cout <<  average3/4 << " & "<< length3/(average3/4) << " \\\\" << endl;
 /*
 {
 	Timer timer;
@@ -81,7 +103,7 @@ int main(int argc, char* argv[]){
 
 	if (size >= 4096){
 		mul = size/4096;
-		cout << mul<<endl;
+		//cout << mul<<endl;
 	}
 
 
@@ -91,10 +113,17 @@ int main(int argc, char* argv[]){
  	instream4.open(title.c_str());
  	instream4.seek(0);
 
-{
+float average4=0;
+int length4=0;
+for(int i=0; i<4; i++){
 	Timer timer;
-	cout << "4) " << instream4.length(title, mul) << endl;
+	length4 = instream4.length(title, mul);
+	timer.Stop();
+	average4+=timer.getDuration();
 }
+cout << "4 "<<" & ";
+cout << " & "<< length4 << " & ";
+cout <<  average4/4 << " & "<< length4/(average4/4) << " \\\\" << endl;
 /*
 {
 	Timer timer;
@@ -102,6 +131,8 @@ int main(int argc, char* argv[]){
 }*/
 
 	instream4.close();
+
+	cout << "\\hline" << endl;
 
 
 /*

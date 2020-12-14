@@ -59,9 +59,10 @@ void InputStream2::seek(int pos){
 }
 
 int InputStream2::length(string filename){
-	open(filename.c_str());
+	//open(filename.c_str());
 	int sum = 0 ;
 	int line_size = 1 ;
+	seek(0);
 	//TODO: ajouter size of file juste pour etre sur, regarder autre length pour exemple
 	 while (line_size > 0 ){
 		line_size = readln().size();

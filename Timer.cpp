@@ -18,9 +18,13 @@ void Timer::Stop()
 	auto start = chrono::time_point_cast<chrono::microseconds>(m_Start).time_since_epoch().count();
 	auto end = chrono::time_point_cast<chrono::microseconds>(m_endTime).time_since_epoch().count();
 
-	auto duration = end - start;
+	duration = end - start;
 
-	cout << "Temps d'execution " << duration << " us\n" << endl;
+	//cout << "Temps d'execution " << duration << " us\n" << endl;
 
 
+}
+
+int Timer::getDuration(){
+	return duration;
 }

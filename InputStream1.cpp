@@ -73,12 +73,13 @@ void InputStream1::close(){
 }
 
 int InputStream1::length(string file){
-	open(file);
+	//open(file);
 	struct stat sb;
+	seek(0);
 
 	if (fstat(filp, &sb) == -1) 
 	  handle_error("fstat");
-	cout << sb.st_size << endl;
+
 	int line_size =1;
 	int sum=0;
 	while (line_size>0){
@@ -94,7 +95,7 @@ int InputStream1::randjump(string file, int j){//seems to work fine
 	int k=0;
 
 
-	open(file);
+	//open(file);
 	struct stat sb;
 
 	if (fstat(filp, &sb) == -1) 

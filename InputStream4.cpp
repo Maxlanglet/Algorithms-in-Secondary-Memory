@@ -150,7 +150,7 @@ void InputStream4::close(){
 }
 
 int InputStream4::length(string file, int mult){
-	open(file);//TODO: enlever car on le fait avant 
+	//open(file);//TODO: enlever car on le fait avant 
 	struct stat sb;
 	seek(0);
 	int line_size =1;
