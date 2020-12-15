@@ -1,3 +1,5 @@
+#ifndef OUTPUTSTREAM4_H
+#define OUTPUTSTREAM4_H
 #include <iostream>
 #include <string>
 #include <fstream>
@@ -20,7 +22,7 @@
 using namespace std;
 
 
-class OutputStream4// : public OutputStream enlever pour le moment
+class OutputStream4 // : public OutputStream enlever pour le moment
 {
 public:
 	OutputStream4();
@@ -33,3 +35,4 @@ private:
 	string path;
 	int new_file;// voir pq pas fstream
 };
+#endif

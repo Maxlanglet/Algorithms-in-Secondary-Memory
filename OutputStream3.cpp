@@ -19,7 +19,7 @@ void OutputStream3::create(string filepath){
 void OutputStream3::writeln(string str){
 	//str+="\n";
 	if(str.substr(str.length()-1) == "\n"){
-		str=str.substr(0,str.length()-2);
+		str=str.substr(0,str.length()-1);
 	}
 	int offset = 0; //starts reading the string for the first time
 	int over = 0; //1 if the line has been completely processed

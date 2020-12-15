@@ -10,11 +10,11 @@
 #include <stdio.h>
 #include <cstdarg>
 #include <math.h> 
-#include "InputStream2.hpp" ////change to 4
+#include "InputStream4.hpp" ////change to 4
 #include "OutputStream1.hpp"
 #include "OutputStream2.hpp"
 #include "OutputStream3.hpp"
-//#include "OutputStream4.hpp"
+#include "OutputStream4.hpp"
 
 using namespace std;
 
