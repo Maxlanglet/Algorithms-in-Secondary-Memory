@@ -8,6 +8,7 @@
 #include "OutputStream4.hpp"
 #include "InputStream4.hpp"
 #include "RrmergeMethod4.hpp"
+#include "RrmergeMethod2.hpp"
 
 //#include <cstdlib>
 
@@ -139,7 +140,7 @@ cout <<  average4/4 << " & "<< length4/(average4/4) << " \\\\" << endl;
 	cout << "\\hline" << endl;
 */
 
-
+	/*
 	printf("TEST RRMERGE4\n\n");
 	RrmergeMethod4 r;
 
@@ -148,6 +149,16 @@ cout <<  average4/4 << " & "<< length4/(average4/4) << " \\\\" << endl;
 	r.rrmerge2("theoutput2.txt",3,"info_type.csv","role_type.csv","test.csv");
 	r.rrmerge3("theoutput3.txt",3,"info_type.csv","role_type.csv","test.csv");
 	r.rrmerge4("theoutput4.txt",3,"info_type.csv","role_type.csv","test.csv");
+	*/
+
+	printf("TEST RRMERGE2\n\n");
+	RrmergeMethod2 r;
+
+	
+	r.rrmerge1("2theoutput1.txt",3,"info_type.csv","role_type.csv","test.csv");
+	r.rrmerge2("2theoutput2.txt",3,"info_type.csv","role_type.csv","test.csv");
+	r.rrmerge3("2theoutput3.txt",3,"info_type.csv","role_type.csv","test.csv");
+	r.rrmerge4("2theoutput4.txt",3,"info_type.csv","role_type.csv","test.csv");
 	
 
 /*

@@ -1,7 +1,7 @@
 all: main clean
 
-main: main.o InputStream1.o OutputStream1.o Timer.o InputStream2.o InputStream3.o InputStream4.o OutputStream2.o OutputStream3.o OutputStream4.o RrmergeMethod4.o
-	g++ -O3 -std=c++11 main.o OutputStream1.o InputStream1.o InputStream2.o InputStream3.o InputStream4.o OutputStream2.o OutputStream3.o OutputStream4.o RrmergeMethod4.o Timer.o -o main
+main: main.o InputStream1.o OutputStream1.o Timer.o InputStream2.o InputStream3.o InputStream4.o OutputStream2.o OutputStream3.o OutputStream4.o RrmergeMethod4.o  RrmergeMethod2.o
+	g++ -O3 -std=c++11 main.o OutputStream1.o InputStream1.o InputStream2.o InputStream3.o InputStream4.o OutputStream2.o OutputStream3.o OutputStream4.o RrmergeMethod4.o  RrmergeMethod2.o Timer.o -o main
 
 OutputStream1.o: OutputStream1.cpp OutputStream1.hpp
 	g++ -O3 -std=c++11 -c OutputStream1.cpp
@@ -29,6 +29,9 @@ InputStream4.o: InputStream4.cpp InputStream4.hpp
 
 RrmergeMethod4.o: RrmergeMethod4.cpp RrmergeMethod4.hpp
 	g++ -O3 -std=c++11 -c RrmergeMethod4.cpp
+
+RrmergeMethod2.o: RrmergeMethod2.cpp RrmergeMethod2.hpp
+	g++ -O3 -std=c++11 -c RrmergeMethod2.cpp
 
 Timer.o: Timer.cpp Timer.hpp
 	g++ -O3 -std=c++11 -c Timer.cpp
