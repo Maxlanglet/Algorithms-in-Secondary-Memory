@@ -19,8 +19,9 @@ public:
 	void seek(int pos);
 	bool end_of_stream();
 	void close();
-	int length(string filename);
+	int length();
 	int randjump(string file, int j);
+	int sizeoffile();
 private:
 	//const char * path;
 	FILE * file;

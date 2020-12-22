@@ -42,6 +42,7 @@ void RrmergeMethod4::rrmerge1(string outputfile, int num, ... ){
 			}
 		}
 	}
+	free(list);
 }
 
 void RrmergeMethod4::rrmerge2(string outputfile, int num, ... ){
@@ -74,6 +75,7 @@ void RrmergeMethod4::rrmerge2(string outputfile, int num, ... ){
 			}
 		}
 	}
+	free(list);
 }
 
 void RrmergeMethod4::rrmerge3(string outputfile, int num, ... ){
@@ -106,6 +108,7 @@ void RrmergeMethod4::rrmerge3(string outputfile, int num, ... ){
 			}
 		}
 	}
+	free(list);
 }
 
 void RrmergeMethod4::rrmerge4(string outputfile, int num, ... ){
@@ -138,6 +141,7 @@ void RrmergeMethod4::rrmerge4(string outputfile, int num, ... ){
 			}
 		}
 	}
+	free(list);
 }
 
 

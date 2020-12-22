@@ -9,6 +9,7 @@
 #include "InputStream4.hpp"
 #include "RrmergeMethod4.hpp"
 #include "RrmergeMethod2.hpp"
+#include "mergesort.hpp"
 
 //#include <cstdlib>
 
@@ -151,14 +152,18 @@ cout <<  average4/4 << " & "<< length4/(average4/4) << " \\\\" << endl;
 	r.rrmerge4("theoutput4.txt",3,"info_type.csv","role_type.csv","test.csv");
 	*/
 
+	printf("TEST MERGESORT\n\n");
+	class mergesort msort;
+	msort.extsort("../imdb/info_type.csv", 3, 10, 2);
+
 	printf("TEST RRMERGE2\n\n");
 	RrmergeMethod2 r;
 
 	
-	r.rrmerge1("2theoutput1.txt",3,"info_type.csv","role_type.csv","test.csv");
-	r.rrmerge2("2theoutput2.txt",3,"info_type.csv","role_type.csv","test.csv");
-	r.rrmerge3("2theoutput3.txt",3,"info_type.csv","role_type.csv","test.csv");
-	r.rrmerge4("2theoutput4.txt",3,"info_type.csv","role_type.csv","test.csv");
+	r.rrmerge1("2theoutput1.txt",2,"../imdb/info_type.csv","../imdb/role_type.csv");//2,"test.csv"
+	r.rrmerge2("2theoutput2.txt",2,"../imdb/info_type.csv","../imdb/role_type.csv");
+	r.rrmerge3("2theoutput3.txt",2,"../imdb/info_type.csv","../imdb/role_type.csv");
+	r.rrmerge4("2theoutput4.txt",2,"../imdb/info_type.csv","../imdb/role_type.csv");
 	
 
 /*

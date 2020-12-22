@@ -58,7 +58,7 @@ void InputStream2::seek(int pos){
 	fseek(file,pos,SEEK_SET);
 }
 
-int InputStream2::length(string filename){
+int InputStream2::length(){
 	//open(filename.c_str());
 	int sum = 0 ;
 	int line_size = 1 ;
