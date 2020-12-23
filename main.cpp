@@ -154,8 +154,10 @@ cout <<  average4/4 << " & "<< length4/(average4/4) << " \\\\" << endl;
 
 	printf("TEST MERGESORT\n\n");
 	class mergesort msort;
-	msort.extsort("../imdb/info_type.csv", 3, 10, 2);
+	//msort.extsort("../imdb/info_type.csv", 3, 10, 2);
 
+	msort.extsort("role_type.csv", 3, 10, 2);
+/*
 	printf("TEST RRMERGE2\n\n");
 	RrmergeMethod2 r;
 
@@ -165,7 +167,7 @@ cout <<  average4/4 << " & "<< length4/(average4/4) << " \\\\" << endl;
 	r.rrmerge3("2theoutput3.txt",2,"../imdb/info_type.csv","../imdb/role_type.csv");
 	r.rrmerge4("2theoutput4.txt",2,"../imdb/info_type.csv","../imdb/role_type.csv");
 	
-
+*/
 /*
 
 	printf("TEST INPUTSTREAM3\n\n");
