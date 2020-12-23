@@ -13,6 +13,7 @@
 #include <list>
 #include <cctype>
 #include "InputStream2.hpp"
+#include "InputStream3.hpp"//remove after
 #include "OutputStream1.hpp"
 #include "OutputStream2.hpp"
 #include "OutputStream3.hpp"

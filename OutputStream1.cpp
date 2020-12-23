@@ -20,9 +20,6 @@ void OutputStream1::create(string path){
 
 
 void OutputStream1::writeln(string str){//pour respliquer le vis a vis avec le input 1
-	if(str.substr(str.length()-1) != "\n"){
-	str+="\n";
-	}
 	
 	for (int i=0; i<str.length();i++){
 		ssize_t n = write(new_file, &str[i], sizeof(char));

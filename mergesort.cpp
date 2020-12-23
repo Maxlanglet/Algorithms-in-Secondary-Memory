@@ -4,10 +4,9 @@
            do { perror(msg); exit(EXIT_FAILURE); } while (0)
 
 
-bool compare(const string& first, const string& sec){
+bool compare(const string& first, const string& sec, int k){
 	//TODO: trouver moyen d'envoyer k ici
 
-	int k =10;
 	int i=k-1;
 	if (tolower(first[i])<tolower(sec[i])) return true;
 	else if (tolower(first[i])>tolower(sec[i])) return false;
@@ -20,8 +19,9 @@ bool compare(const string& first, const string& sec){
 struct Line
 {
     string line;
-	char kchar;
-	Line(string l, int k):line(l), kchar(line[k]){}
+	char kchar;//ajouter condition sur k ici quelque part
+	int column;
+	Line(string l, int k):line(l), kchar(line[k]), column(k){}
 };
 
 
@@ -44,11 +44,12 @@ mergesort::~mergesort(){}
 
 void mergesort::extsort(string inputfile, int k, int M, int d){
 	//tester savoir quel outputstream utiliser ici, pour le moment outputstream1
-	OutputStream1 outputstream1;
+	OutputStream3 outputstream1;
 
 
 	InputStream2 instream2;
 	instream2.open(inputfile.c_str());
+	instream2.seek(0);
 
 
 	list<Line> mylist;
@@ -57,7 +58,9 @@ void mergesort::extsort(string inputfile, int k, int M, int d){
 
 	int j=0;
 
+
 	column=k;
+	int l=0;
 
 	//int size = instream2.length(); not necessary because we want lines
 
@@ -65,7 +68,6 @@ void mergesort::extsort(string inputfile, int k, int M, int d){
 
 	// read the whole file, put in numberoflines/M files and sort them on the k character
 	while(!instream2.end_of_stream()){
-		outputstream1.create("outputfile"+to_string(j)+".txt");
 		addresses.push_back("outputfile"+to_string(j)+".txt");//ca devrait pas être une liste de pointeurs?
 
 		int i =0;
@@ -73,26 +75,29 @@ void mergesort::extsort(string inputfile, int k, int M, int d){
 		while(i<M){
 			if (!instream2.end_of_stream()){//toujours vérifié
 				string temp = instream2.readln();
-				cout << temp;
+				l++;
+				//cout << temp;
 				Line line_to_add = Line(temp, k);
-				cout << line_to_add.kchar << endl;
-				mylist.push_back(line_to_add);
-				
+				//cout << line_to_add.kchar << endl;
+				mylist.push_back(line_to_add);				
 			}
 			else{
 				i=M;
 			}
 			i++;
 		}
-//FAIRE LE CAS SI JAMAIS K DEPASSE
+		//instream2.close();
+
+		outputstream1.create("outputfile"+to_string(j)+".txt");
+
 		mylist.sort(LineComparator());
 		it = mylist.begin();
-		for (int i = 0; i < mylist.size()-2; ++i)
-		{
-			outputstream1.writeln(it->line);
-			++it;
-			assert(it != mylist.end());
-		}
+	    while(it != mylist.end())
+	    {
+			string fileline = it->line;
+	        outputstream1.writeln(fileline);//toujours probleme, write tout sauf au eof
+	        it++;
+	    }
 			mylist.clear();
 
 			j++;
@@ -102,7 +107,6 @@ void mergesort::extsort(string inputfile, int k, int M, int d){
 			cout << v;
 		}
 */
-
 		//for (it=mylist.begin(); it!=mylist.end(); ++it) outputstream1.writeln(it->line);
 		/*for (it=mylist.begin(); it!=mylist.end(); ++it){
 			string next = *it;
@@ -110,7 +114,16 @@ void mergesort::extsort(string inputfile, int k, int M, int d){
 			it = mylist.erase(it);
 			outputstream1.writeln(next->line);//enlever cout ici pour plus print dans terminal cout << *it,
 			mylist.push_front(next);
-		} */
+		} 
+		for (int i = 0; i < mylist.size(); ++i)//mylist.size()
+		{
+			//cout << i << endl;
+			outputstream1.writeln(it->line);
+			++it;
+			assert(it != mylist.end());
+		}
+
+		*/
 
 	/*it = mylist.begin();
     while(it != mylist.end())
@@ -126,11 +139,61 @@ void mergesort::extsort(string inputfile, int k, int M, int d){
 		}*/
 
 	}
-	cout << j << endl;
 	instream2.close();
-	//int y=0;
+	//TODO: add if j>d
 	int x=0;
 	string s;
+	list<string>::iterator paths;
+
+	InputStream2* lists = (InputStream2*)malloc(sizeof(InputStream2)*j);
+	paths = addresses.begin();
+    while(paths != addresses.end())
+    {
+    	s = paths->c_str();//change
+		InputStream2 in ;
+		in.open(s.c_str());
+		in.seek(0);
+		lists[x]=in;	
+        ++paths;
+        x++;
+    }
+
+    if(d>j){
+    	d=j;
+    }
+
+    list<string> lin;//should be size d
+    //string* lin; on peut pas pcq on a pas la taille de la ligne
+
+    outputstream1.create("winner.txt");
+
+    for(int i=0; i < d; i++){//init of lin
+    	lin.push_back(lists[i].readln());
+    	//cout << lists[i].readln();
+    }
+
+    int p=0;
+    while(p<l){//add remove file is eof 
+    	paths = lin.begin();
+    	string winner = paths->c_str();
+    	int win = 0;
+    	paths++;
+    	for(int i=1; i<d; i++){
+    		if(compare(winner, paths->c_str(), k)){
+    			winner = paths->c_str();
+    			cout << winner;
+    			win = i;
+    		}
+    		paths++;
+    	}
+    	outputstream1.writeln(winner);
+    	string rep = lists[win].readln();
+    	lin.assign(win,rep);
+    	p++;
+    	cout << p;
+    }
+
+	/*
 	while(addresses.size()!=1){
 		// number of files in addresses in this pass
 		int number_of_files = ceil(addresses.size()/d);
@@ -172,9 +235,10 @@ void mergesort::extsort(string inputfile, int k, int M, int d){
 		//supprimer les d ou moins fichiers merge de la luste d'addresses
 		outputstream1.close();
 		}
+		*/
 		x++;
 		
 
 		j++;
-	}
+	//}
 }

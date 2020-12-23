@@ -84,7 +84,7 @@ string InputStream4::readln(int mult_page){
 			str+="\n";
 			edl=true;
 			rest-=pos;
-			return str;			
+			return str;
 	    }
 	    else{ 
 	    	//cout << "new page" << endl;
