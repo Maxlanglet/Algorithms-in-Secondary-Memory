@@ -67,7 +67,7 @@ mergesort::mergesort(){}
 
 mergesort::~mergesort(){}
 
-void mergesort::extsort(string inputfile, int k, int M, int d){
+void mergesort::extsort(string inputfile, int k, int M, float d){
 	//tester savoir quel outputstream utiliser ici, pour le moment outputstream1
 	OutputStream3 outputstream1;
 
@@ -230,6 +230,7 @@ void mergesort::extsort(string inputfile, int k, int M, int d){
 	while(addresses.size()!=1){
 		// number of files in addresses in this pass (cant use j because it will change at each pass)
 		int number_of_files = ceil(addresses.size()/d);
+		cout << addresses.size()/d << endl;
 		
 		int addr_pass_size = addresses.size();
 
