@@ -12,6 +12,7 @@
 #include <math.h>
 #include <algorithm>
 #include <list>
+#include <cstdio>
 #include <cctype>
 #include<assert.h>
 #include <vector>
