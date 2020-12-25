@@ -157,7 +157,8 @@ cout <<  average4/4 << " & "<< length4/(average4/4) << " \\\\" << endl;
 	//msort.extsort("../imdb/info_type.csv", 3, 10, 2);
 
 	//msort.extsort("../imdb/movie_link.csv", 3, 15000, 2);
-	msort.extsort("movie_link.csv", 3, 10, 2);
+	msort.extsort("movie_link.csv", 3, 60, 30);
+	//msort.extsort("role_type.csv", 3, 10, 2);
 /*
 	printf("TEST RRMERGE2\n\n");
 	RrmergeMethod2 r;

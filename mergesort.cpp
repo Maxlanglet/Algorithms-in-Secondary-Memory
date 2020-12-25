@@ -123,9 +123,10 @@ void mergesort::extsort(string inputfile, int k, int M, int d){
 	        outputstream1.writeln(fileline);//toujours probleme, write tout sauf au eof
 	        it++;
 	    }
-			mylist.clear();
+		mylist.clear();
 
 		j++;
+		
 
 /*
 		for (auto const &v : mylist){
@@ -147,7 +148,7 @@ void mergesort::extsort(string inputfile, int k, int M, int d){
 			++it;
 			assert(it != mylist.end());
 		}
-
+		outputstream1.close();
 		
 
 	/*it = mylist.begin();
@@ -253,6 +254,7 @@ void mergesort::extsort(string inputfile, int k, int M, int d){
 					instream2.open((addresses[file]).c_str());
 					s= instream2.readln();
 					mylist.push_back(Line(s,k,file,s.size()));
+					instream2.close();
 				}
 
 				// while the list of lines is not empty
@@ -278,21 +280,27 @@ void mergesort::extsort(string inputfile, int k, int M, int d){
 					if(s.size()!=0){
 						//adds the line at the end of mylist so the index is the size of it
 						mylist.push_back(Line(s,k,mylist[0].index,(mylist[0].toseek)+(s.size())));
-
+						instream2.close();
 						//erases the winner from the list of lines
 						mylist.erase(mylist.begin());
 
 					}
 					//if we are at the end of the file
 					else{
+						instream2.close();
+
+						//removes the intermediary file
+						if (remove((addresses[(mylist[0].index)]).c_str()) != 0)
+							perror("File deletion failed");
+
 						//suppress	the file in addresses				
 						addresses.erase(addresses.begin() + (mylist[0]).index);
 						
 						//updates the index of the lines in mylist
-						//begin from the index of the file erased
-						for (int j =  (mylist[0]).index-1; j < mylist.size(); j++) {
+						for (int j =0; j < mylist.size(); j++) {
 							cout << " updating the index of mylist "<< endl;
-							mylist[j].index = mylist[j+1].index;
+							if(mylist[j].index>mylist[0].index)
+								mylist[j].index--;
 							}
 					
 						//erases the winner from the list of lines
@@ -320,6 +328,7 @@ void mergesort::extsort(string inputfile, int k, int M, int d){
 					instream2.open((addresses[file+(d*y)]).c_str());
 					s= instream2.readln();
 					mylist.push_back(Line(s,k,file,s.size()));
+					instream2.close();
 				}
 
 				
@@ -347,21 +356,27 @@ void mergesort::extsort(string inputfile, int k, int M, int d){
 					if(s.size()!=0){
 						//adds the line at the end of mylist so the index is the size of it
 						mylist.push_back(Line(s,k,mylist[0].index,(mylist[0].toseek)+(s.size())));
-
+						instream2.close();
 						//erases the winner from the list of lines
 						mylist.erase(mylist.begin());
 
 					}
 					//if we are at the end of the file
 					else{
+						instream2.close();
+
+						//removes the intermediary file
+						if (remove((addresses[(mylist[0].index)]).c_str()) != 0)
+							perror("File deletion failed");
+
 						//suppress	the file in addresses				
 						addresses.erase(addresses.begin() + (mylist[0]).index);
 						
 						//updates the index of the lines in mylist
-						//begin from the index of the file erased
 						cout << " updating the index of mylist "<< endl;
-						for (int j =  (mylist[0]).index; j < mylist.size(); j++) { 
-							mylist[j].index = mylist[j+1].index;
+						for (int j =  0; j < mylist.size(); j++) { 
+							if(mylist[j].index>mylist[0].index)
+								mylist[j].index--;
 							}
 					
 						//erases the winner from the list of lines
