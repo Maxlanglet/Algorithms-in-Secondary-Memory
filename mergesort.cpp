@@ -20,8 +20,33 @@ struct Line
 {
     string line;
 	char kchar;//ajouter condition sur k ici quelque part
-	int column;
-	Line(string l, int k):line(l), kchar(line[k]), column(k){}
+	//int column;
+	int index;
+	int toseek;
+	Line(string l, int k, int ind, int ts){
+		line=l;
+		if(k>l.length()){
+			kchar=(l.length()-1);
+		}
+		else{
+			kchar=line[k-1];
+		}
+		index=ind;
+		toseek=ts;
+		//column=k;
+	}
+	Line(string l, int k){
+		line=l;
+		if(k>l.length()){
+			kchar=(l.length()-1);
+		}
+		else{
+			kchar=line[k-1];
+		}
+		index=0;
+		toseek=0;
+		//column=k;
+	}
 };
 
 
@@ -52,9 +77,9 @@ void mergesort::extsort(string inputfile, int k, int M, int d){
 	instream2.seek(0);
 
 
-	list<Line> mylist;
-	list<string> addresses;
-	list<Line>::iterator it;
+	vector<Line> mylist;
+	vector<string> addresses;
+	vector<Line>::iterator it;
 
 	int j=0;
 
@@ -90,7 +115,7 @@ void mergesort::extsort(string inputfile, int k, int M, int d){
 
 		outputstream1.create("outputfile"+to_string(j)+".txt");
 
-		mylist.sort(LineComparator());
+		sort(mylist.begin(),mylist.end(),LineComparator());
 		it = mylist.begin();
 	    while(it != mylist.end())
 	    {
@@ -100,7 +125,7 @@ void mergesort::extsort(string inputfile, int k, int M, int d){
 	    }
 			mylist.clear();
 
-			j++;
+		j++;
 
 /*
 		for (auto const &v : mylist){
@@ -114,7 +139,7 @@ void mergesort::extsort(string inputfile, int k, int M, int d){
 			it = mylist.erase(it);
 			outputstream1.writeln(next->line);//enlever cout ici pour plus print dans terminal cout << *it,
 			mylist.push_front(next);
-		} 
+		} */
 		for (int i = 0; i < mylist.size(); ++i)//mylist.size()
 		{
 			//cout << i << endl;
@@ -123,7 +148,7 @@ void mergesort::extsort(string inputfile, int k, int M, int d){
 			assert(it != mylist.end());
 		}
 
-		*/
+		
 
 	/*it = mylist.begin();
     while(it != mylist.end())
@@ -139,10 +164,13 @@ void mergesort::extsort(string inputfile, int k, int M, int d){
 		}*/
 
 	}
+
+	
 	instream2.close();
 	//TODO: add if j>d
 	int x=0;
 	string s;
+	/*
 	list<string>::iterator paths;
 
 	InputStream2* lists = (InputStream2*)malloc(sizeof(InputStream2)*j);
@@ -192,53 +220,166 @@ void mergesort::extsort(string inputfile, int k, int M, int d){
     	p++;
     	cout << p;
     }
+	
+*/
 
-	/*
+	
+
+	//merge procedure until there is only 1 file left in addresses
 	while(addresses.size()!=1){
-		// number of files in addresses in this pass
+		// number of files in addresses in this pass (cant use j because it will change at each pass)
 		int number_of_files = ceil(addresses.size()/d);
 		
-		// merge d files, x is the pass we are at, y is the number of the file in that pass
-		for(int y; y<number_of_files; y++){
-			//OutputStream1 outputstream1_merge;
-			//InputStream2 instream2_merge;
-			outputstream1.create("mergedfile"+to_string(x)+"_"+to_string(y)+".txt");
-			
-			if(y==number_of_files-1){
-				// loop on the bucket
-				for(int file; file<(addresses.size()-(d*y)); file++){
-					instream2.open(addresses[file+(d*y)]);
-					//length_file= instream2.length();
-					while(!instream2.end_of_stream()){
-						s= instream2.readln();
-						//if not end of the file, write it
-						if(s.size()!=0){
-							outputstream1.writeln(s);
-						}
-					}
-				}
-			}
-			else{
-				for(int file; file<d; file++){
-					instream2.open(addresses[file+(d*y)]);
-					while(!instream2.end_of_stream()){
-						s= instream2.readln();
-						//if not end of the file, write it
-						if(s.size()!=0){
-							outputstream1.writeln(s);
-						}
-					}
-				
-				}
-			}
-		addresses.push_back("mergedfile"+to_string(x)+"_"+to_string(y)+".txt");
-		//supprimer les d ou moins fichiers merge de la luste d'addresses
-		outputstream1.close();
-		}
-		*/
-		x++;
-		
+		int addr_pass_size = addresses.size();
 
-		j++;
-	//}
+		// merge d files, x is the pass we are at, y is the number of the bucket of d file in that pass
+		for(int y=0; y<number_of_files; y++){
+			
+			
+
+			//in case we are at the end of the list of files to merge and there is less than d files
+			if(y==number_of_files-1){
+				cout << " creating the merging file" << endl;
+				//creates the file merging d or less files
+				outputstream1.create("mergedfile"+to_string(x)+"_"+to_string(y)+".txt");
+			
+				cout << "number of file to merge < d" << endl;
+				// the number of files left for the last bucket is
+				// the initial size of addresse of the pass minus d* the number of passes we did
+				int leftover = addr_pass_size-(d*y);
+				//adds the first line in the list of line
+				for(int file=0; file<(leftover); file++){
+					cout << " trying to open " << (addresses[file]).c_str() << endl;
+					instream2.open((addresses[file]).c_str());
+					s= instream2.readln();
+					mylist.push_back(Line(s,k,file,s.size()));
+				}
+
+				// while the list of lines is not empty
+				while(mylist.size()!=0){
+					cout << " size of mylist " << mylist.size() << endl;
+					cout << " size of addr " << addresses.size() << endl;
+					sort(mylist.begin(),mylist.end(),LineComparator());
+
+					//write the first line in the file
+					outputstream1.writeln((mylist[0].line).c_str());
+					cout << " index of WINNER " <<mylist[0].index << endl;
+					cout << " trying to open the WINNER " << (addresses[(mylist[0].index)]).c_str() << endl;
+					//opens the file of the winner using the index saved in the line structure
+					instream2.open((addresses[(mylist[0].index)]).c_str());
+
+					//reads the next line in the file
+					//on va devoir faire un LSEEK!!
+					instream2.seek(mylist[0].toseek);
+					//-> attribut en plus dans la structure Line sauvant là où on en est dans le fichier
+					s= instream2.readln();
+
+					//if we are not at the end of that file
+					if(s.size()!=0){
+						//adds the line at the end of mylist so the index is the size of it
+						mylist.push_back(Line(s,k,mylist[0].index,(mylist[0].toseek)+(s.size())));
+
+						//erases the winner from the list of lines
+						mylist.erase(mylist.begin());
+
+					}
+					//if we are at the end of the file
+					else{
+						//suppress	the file in addresses				
+						addresses.erase(addresses.begin() + (mylist[0]).index);
+						
+						//updates the index of the lines in mylist
+						//begin from the index of the file erased
+						for (int j =  (mylist[0]).index-1; j < mylist.size(); j++) {
+							cout << " updating the index of mylist "<< endl;
+							mylist[j].index = mylist[j+1].index;
+							}
+					
+						//erases the winner from the list of lines
+						mylist.erase(mylist.begin());
+					}
+				}
+				cout << " adding the file " << "mergedfile"+to_string(x)+"_"+to_string(y)+".txt" << endl;
+				//adds the new merged file to the list of addresses
+				addresses.push_back("mergedfile"+to_string(x)+"_"+to_string(y)+".txt");
+				//closes the stream of that merged file
+				outputstream1.close();
+			}
+
+
+			//there are still at least d files left
+			else{
+				cout << " creating the merging file" << endl;
+				//creates the file merging d or less files
+				outputstream1.create("mergedfile"+to_string(x)+"_"+to_string(y)+".txt");
+			
+				cout << " number of file to merge >= d" << endl;
+				//adds the first line in the list of lines
+				for(int file; file<d; file++){
+					cout << " trying to open " << (addresses[file]).c_str() << endl;
+					instream2.open((addresses[file+(d*y)]).c_str());
+					s= instream2.readln();
+					mylist.push_back(Line(s,k,file,s.size()));
+				}
+
+				
+				// while the list of lines is not empty
+				while(mylist.size()!=0){
+					cout << " size of mylist " << mylist.size() << endl;
+					cout << " size of addr " << addresses.size() << endl;
+
+					sort(mylist.begin(),mylist.end(),LineComparator());
+
+					//write the first line in the file
+					outputstream1.writeln((mylist[0].line).c_str());
+					cout << " index of WINNER " <<mylist[0].index << endl;
+					cout << " trying to open the WINNER " << (addresses[(mylist[0].index)]).c_str() << endl;
+					//opens the file of the winner using the index saved in the line structure
+					instream2.open((addresses[(mylist[0].index)]).c_str());
+
+					//reads the next line in the file
+					//on va devoir faire un LSEEK!!
+					instream2.seek(mylist[0].toseek);
+					//-> attribut en plus dans la structure Line sauvant là où on en est dans le fichier
+					s= instream2.readln();
+
+					//if we are not at the end of that file
+					if(s.size()!=0){
+						//adds the line at the end of mylist so the index is the size of it
+						mylist.push_back(Line(s,k,mylist[0].index,(mylist[0].toseek)+(s.size())));
+
+						//erases the winner from the list of lines
+						mylist.erase(mylist.begin());
+
+					}
+					//if we are at the end of the file
+					else{
+						//suppress	the file in addresses				
+						addresses.erase(addresses.begin() + (mylist[0]).index);
+						
+						//updates the index of the lines in mylist
+						//begin from the index of the file erased
+						cout << " updating the index of mylist "<< endl;
+						for (int j =  (mylist[0]).index; j < mylist.size(); j++) { 
+							mylist[j].index = mylist[j+1].index;
+							}
+					
+						//erases the winner from the list of lines
+						mylist.erase(mylist.begin());
+					}
+				}
+				cout << " adding the file " << "mergedfile"+to_string(x)+"_"+to_string(y)+".txt" << endl;
+				//adds the new merged file to the list of addresses
+				addresses.push_back("mergedfile"+to_string(x)+"_"+to_string(y)+".txt");
+				//closes the stream of that merged file
+				outputstream1.close();
+			}
+	
+		}
+
+		//we are going to another pass so increment x	
+		x++;
+
+		//j++;
+	}
 }

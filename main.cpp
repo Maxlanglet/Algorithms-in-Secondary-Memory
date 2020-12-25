@@ -42,14 +42,14 @@ cout << "1 "<<" & ";
 cout << size << " & ";
 cout << length << " & ";
 cout <<  average/4 << " & "<< length/(average/4) << " \\\\" << endl;
-*/
-/*
+
+
 {
 	Timer timer;
 	cout << "sum rand is " << instream.randjump(title,1000) << endl;
 }
-*/
-/*instream.close();
+
+instream.close();
 
 
 	//printf("TEST INPUTSTREAM2\n\n");
@@ -62,20 +62,20 @@ float average2=0;
 int length2 =0;
 for(int i=0; i<4; i++){
 	Timer timer;
-	length2 = instream2.length(title);
+	length2 = instream2.length();
 	timer.Stop();
 	average2+=timer.getDuration();
 }
 cout << "2 "<<" & ";
 cout << " & "<< length2 << " & ";
 cout <<  average2/4 << " & "<< length2/(average2/4) << " \\\\" << endl;
-*/
-/*
+
+
 {
 	Timer timer;
 	cout << "sum rand is " << instream2.randjump(title,1000) << endl;
-}*/
-/*	instream2.close();
+}
+	instream2.close();
 
 
 	//printf("TEST INPUTSTREAM3\n\n");
@@ -94,16 +94,16 @@ for(int i=0; i<4; i++){
 cout << "3 "<<" & ";
 cout << " & "<< length3 << " & ";
 cout <<  average3/4 << " & "<< length3/(average3/4) << " \\\\" << endl;
-*/
-/*
+
+
 {
 	Timer timer;
 	cout << "sum rand is " << instream3.randjump(title,1000,size) << endl;
 }
 
 	instream3.close();
-*/
-/*	instream3.close();
+
+	instream3.close();
 	int mul=1;
 
 	if (size >= 4096){
@@ -129,18 +129,18 @@ for(int i=0; i<4; i++){
 cout << "4 "<<" & ";
 cout << " & "<< length4 << " & ";
 cout <<  average4/4 << " & "<< length4/(average4/4) << " \\\\" << endl;
-*/
-/*
+
+
 {
 	Timer timer;
 	cout << "sum rand is " << instream4.randjump(title,1000) << endl;
-}*/
+}
 
-/*	instream4.close();
+	instream4.close();
 
 	cout << "\\hline" << endl;
-*/
 
+*/
 	/*
 	printf("TEST RRMERGE4\n\n");
 	RrmergeMethod4 r;
@@ -157,7 +157,7 @@ cout <<  average4/4 << " & "<< length4/(average4/4) << " \\\\" << endl;
 	//msort.extsort("../imdb/info_type.csv", 3, 10, 2);
 
 	//msort.extsort("../imdb/movie_link.csv", 3, 15000, 2);
-	msort.extsort("../imdb/role_type.csv", 3, 10, 2);
+	msort.extsort("movie_link.csv", 3, 10, 2);
 /*
 	printf("TEST RRMERGE2\n\n");
 	RrmergeMethod2 r;

@@ -9,9 +9,12 @@
 #include <sys/stat.h>
 #include <stdio.h>
 #include <cstdarg>
-#include <math.h> 
+#include <math.h>
+#include <algorithm>
 #include <list>
 #include <cctype>
+#include<assert.h>
+#include <vector>
 #include "InputStream2.hpp"
 #include "InputStream3.hpp"//remove after
 #include "OutputStream1.hpp"
