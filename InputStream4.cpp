@@ -159,6 +159,8 @@ int InputStream4::length(string file, int mult){
 	int line_size =1;
 	int sum=0;
 
+	offset = 1;
+
 	if (fstat(fd, &sb) == -1) 
 	  handle_error("fstat");
 
@@ -183,6 +185,8 @@ int InputStream4::randjump(string file, int j){
 	struct stat sb;
 	seek(0);
 	jump = true;
+
+	offset = 1;
 
 	if (fstat(fd, &sb) == -1) 
 	  handle_error("fstat");

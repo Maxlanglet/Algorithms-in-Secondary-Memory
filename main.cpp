@@ -28,9 +28,9 @@ int main(int argc, char* argv[]){
 	int buffer[] = {1, 2, 3,10, 100, 1000};
 	*/
 
-	//string title = "/Users/langletmaxime/Desktop/Database_Systems_Architecture/Algorithms_in_Secondary_Memory/imdb/aka_name.csv";
+	string title = "/Users/langletmaxime/Desktop/Database_Systems_Architecture/Algorithms_in_Secondary_Memory/imdb/aka_name.csv";
 
-	//int size = 10000;
+	int size = 10000;
 
 /*
 	//printf("\nTEST INPUTSTREAM1\n\n");
