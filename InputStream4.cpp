@@ -40,8 +40,8 @@ string InputStream4::readln(int mult_page){
 
 	pos = lseek(fd, 0, SEEK_CUR);
 
-	int off = pos%pagesize+1;
-	int page = floor(pos/pagesize);
+	int off = (pos%pagesize)+1;
+	int page = floor((float)pos/pagesize);
 
 	size_t len=pagesize;
 	int idx=0;
