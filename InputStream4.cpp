@@ -54,7 +54,7 @@ string InputStream4::readln(int mult_page){
 
 	while(!edl || pos < sb.st_size){
 
-		if (offset != page){
+		if (offset != page || init!=1){
 
 			offset = page;
 			
@@ -64,6 +64,7 @@ string InputStream4::readln(int mult_page){
 			}
 
 			addr =  static_cast<char*>(mmap(NULL, len, PROT_READ,MAP_PRIVATE, fd, offset*pagesize));
+			init=1;
 
 		}
 
@@ -157,6 +158,8 @@ int InputStream4::length(int mult){
 	int line_size =1;
 	int sum=0;
 
+	offset = 1;
+
 	if (fstat(fd, &sb) == -1) 
 	  handle_error("fstat");
 
@@ -181,6 +184,8 @@ int InputStream4::randjump(int j, int M){
 	struct stat sb;
 	seek(0);
 	jump = true;
+
+	offset = 1;
 
 	if (fstat(fd, &sb) == -1) 
 	  handle_error("fstat");

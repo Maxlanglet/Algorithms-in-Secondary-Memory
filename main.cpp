@@ -17,6 +17,7 @@
 
 int main(int argc, char* argv[]){
 	
+	/*
 	int size = atoi(argv[2]);
 
 	string name = argv[1];
@@ -25,12 +26,12 @@ int main(int argc, char* argv[]){
 	cout << title << endl;
 	cout << "Method|Size of buffer |Characters read| average| average speed"<< endl;
 
-	int buffer[] = {1, 2, 3,10, 100, 1000};
-	
+	//int buffer[] = {1, 2, 3,10, 100, 1000};
+	*/
 
-	//string title = "/Users/langletmaxime/Desktop/Database_Systems_Architecture/Algorithms_in_Secondary_Memory/imdb/aka_name.csv";
+	string title = "/Users/langletmaxime/Desktop/Database_Systems_Architecture/Algorithms_in_Secondary_Memory/imdb/aka_name.csv";
 
-	//int size = 10000;
+	int size = 10000;
 
 /*
 	//printf("\nTEST INPUTSTREAM1\n\n");
@@ -136,8 +137,9 @@ cout <<  average3/4 << " & "<< length3/(average3/4) << " \\\\" << endl;
 
 	for(int i=0; i<4; i++){
 		Timer timer;
-		length4 = instream4.length(mul);
-		//cout << length4 << " " << i << endl;
+		//length4 = instream4.length(mul);
+		length4 = instream4.randjump(1000, mul);
+		cout << length4 << " " << i << endl;
 		timer.Stop();
 		average4+=timer.getDuration();
 	}
