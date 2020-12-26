@@ -45,7 +45,7 @@ string InputStream4::readln(int mult_page){
 	int off = (pos%pagesize);
 
 	//cout << off << endl;
-	int page = floor((float)pos/pagesize);
+	int page = floor(pos/pagesize);
 
 
 	size_t len=pagesize;
@@ -61,14 +61,12 @@ string InputStream4::readln(int mult_page){
 
 		if (offset != page || init!=1){
 
-			int err = munmap(addr, mult_page*getpagesize());
+			int err = munmap(addr, len+1);
 			init=0;
 		    if(err != 0){
 		        printf("UnMapping Failed\n");
 		    }
 
-			offset = page;
-			
 			offset = page;
 			if (offset*pagesize >= sb.st_size){
 				pagesize = getpagesize();
@@ -173,7 +171,7 @@ void InputStream4::close(){
 	::close(fd);
 }
 
-int InputStream4::length(string file, int mult){
+int InputStream4::length(int mult){
 	//open(file);//TODO: enlever car on le fait avant 
 	struct stat sb;
 	seek(0);
@@ -199,10 +197,10 @@ int InputStream4::length(string file, int mult){
 	return sum;
 }
 
-int InputStream4::randjump(string file, int j){
+int InputStream4::randjump(int j, int M){
 	int sum=0;
 	int k=0;
-	open(file);
+	//open(file);
 	struct stat sb;
 	seek(0);
 	jump = true;
@@ -219,7 +217,7 @@ int InputStream4::randjump(string file, int j){
 		srand ( pos );
 		pos = 0 + (rand() % static_cast<int>(sb.st_size - 0 + 1));
 		seek(pos);
-		sum+=readln(BUFFER_SIZE).size();
+		sum+=readln(M).size();
 		k++;
 	}
 	int err = munmap(addr, getpagesize());

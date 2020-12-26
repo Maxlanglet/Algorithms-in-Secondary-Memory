@@ -28,9 +28,9 @@ int main(int argc, char* argv[]){
 	int buffer[] = {1, 2, 3,10, 100, 1000};
 	*/
 
-	string title = "/Users/langletmaxime/Desktop/Database_Systems_Architecture/Algorithms_in_Secondary_Memory/imdb/movie_link.csv";
+	string title = "/Users/langletmaxime/Desktop/Database_Systems_Architecture/Algorithms_in_Secondary_Memory/imdb/movie_info_idx.csv";
 
-	int size = 1000;
+	//int size = 1000;
 
 /*
 	//printf("\nTEST INPUTSTREAM1\n\n");
@@ -115,7 +115,7 @@ cout <<  average3/4 << " & "<< length3/(average3/4) << " \\\\" << endl;
 */
 {
 
-	string title = "./role_type.csv";
+	//string title = "./role_type.csv";
 	int mul=1;
 
 	/*if (size >= 4096){
@@ -132,15 +132,14 @@ cout <<  average3/4 << " & "<< length3/(average3/4) << " \\\\" << endl;
 	float average4=0;
 	int length4=0;
 
-	mul =1;
+	mul =2;
 
 	cout << instream4.length(1) << endl;
 
 	for(int i=0; i<4; i++){
-		cout<<"i= "<<i<<endl;
 		Timer timer;
 		//length4 = instream4.length(mul);
-		length4 = instream4.randjump(100000, mul);
+		length4 = instream4.randjump(1000000, mul);
 		cout << length4 << " " << i << endl;
 		timer.Stop();
 		average4+=timer.getDuration();
