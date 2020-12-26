@@ -24,13 +24,15 @@ void InputStream4::open(string filename){
 
 
 string InputStream4::readln(int mult_page){
-	
+	//42352
 	string str = "";
 	char *p = NULL;
 	struct stat sb;
 	bool edl=false;
 
 	int pagesize = getpagesize()*mult_page;
+
+	//cout << getpagesize() << endl;
 
 	if (fd == -1)
 	   handle_error("open");
@@ -40,11 +42,15 @@ string InputStream4::readln(int mult_page){
 
 	pos = lseek(fd, 0, SEEK_CUR);
 
-	int off = (pos%pagesize)+1;
+	//cout << pos << endl;
+
+	int off = (pos%pagesize);
+
+	//cout << off << endl;
 	int page = floor((float)pos/pagesize);
 
 	size_t len=pagesize;
-	int idx=0;
+	
 	
 
 	rest = sb.st_size-pos;
@@ -53,17 +59,24 @@ string InputStream4::readln(int mult_page){
 
 
 	while(!edl || pos < sb.st_size){
+		int idx=0;
 
 		if (offset != page || init!=1){
+
+			int err = munmap(addr, mult_page*getpagesize());
+			init=0;
+		    if(err != 0){
+		        printf("UnMapping Failed\n");
+		    }
 
 			offset = page;
 			
 			if (offset*pagesize >= sb.st_size){
 				pagesize = getpagesize();
-				len=getpagesize();
+				len=offset*pagesize - sb.st_size;
 			}
 
-			addr =  static_cast<char*>(mmap(NULL, len, PROT_READ,MAP_PRIVATE, fd, offset*pagesize));
+			addr =  static_cast<char*>(mmap(NULL, len+1, PROT_READ,MAP_PRIVATE, fd, offset*pagesize));
 			init=1;
 
 		}
@@ -74,12 +87,24 @@ string InputStream4::readln(int mult_page){
 	    }
 
 	    p = addr;
-	    p+=off-1;
-	    len-=off;
+	    //cout << p[off] << endl;
+	    p+=off;
 
-	    while (idx < len && *p != '\n' && *p != '\r') str+=*p, p++, idx++;//erreur ici sur macos bigsur ou m1
+
+	    while (idx+off < len && addr[idx+off] != '\n' && addr[idx+off] != '\r') str+=addr[idx+off], idx++;
+	    //while (idx < len && *p != '\n' && *p != '\r') str+=*p, p++, idx++;//erreur ici sur macos bigsur ou m1
 		//cout<<str<<endl;
 
+
+	    if ( addr[idx+off] == '\n' || addr[idx+off] == '\r'){
+	    	pos += idx+1;
+	    	lseek(fd, pos, SEEK_SET);
+			str+="\n";
+			edl=true;
+			rest-=pos;
+			return str;
+	    }
+	    /*
 	    if ( *p == '\n' || *p == '\r'){
 	    	pos += idx+1;
 	    	lseek(fd, pos, SEEK_SET);
@@ -88,6 +113,7 @@ string InputStream4::readln(int mult_page){
 			rest-=pos;
 			return str;
 	    }
+	    */
 	    else{ 
 			pos += idx;
 			lseek(fd, pos, SEEK_SET);
