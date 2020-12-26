@@ -76,7 +76,7 @@ string InputStream4::readln(int mult_page){
 	    p+=off-1;
 	    len-=off;
 
-	    while (idx < len && *p != '\n' && *p != '\r') str+=*p, p++, idx++;//erreur ici
+	    while (idx < len && *p != '\n' && *p != '\r') str+=*p, p++, idx++;//erreur ici sur macos bigsur ou m1
 		//cout<<str<<endl;
 
 	    if ( *p == '\n' || *p == '\r'){
