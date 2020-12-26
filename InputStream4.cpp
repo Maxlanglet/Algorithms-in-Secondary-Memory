@@ -62,7 +62,7 @@ string InputStream4::readln(int mult_page){
 			
 			if (offset*pagesize >= sb.st_size){
 				pagesize = getpagesize();
-				len=getpagesize();
+				//len=getpagesize();
 			}
 
 			addr =  static_cast<char*>(mmap(NULL, len, PROT_READ,MAP_PRIVATE, fd, offset*pagesize));
