@@ -221,7 +221,7 @@ InputStream4 instream2;
 	r.rrmerge4("theoutput4.txt",3,"info_type.csv","role_type.csv","test.csv");
 	*/
 
-	/*
+	
 
 	printf("TEST MERGESORT\n\n");
 	class mergesort msort;
@@ -229,33 +229,37 @@ InputStream4 instream2;
 
 	struct stat sb;
 
-	int file = open("../imdb/movie_link.csv", O_RDONLY);	
+	int file = open("movie_link.csv", O_RDONLY);	
 
 	fstat(file, &sb);
 	int init =  sb.st_size;
 
-	msort.extsort("../imdb/movie_link.csv", 3, 10000, 30,50);
+	//msort.extsort("../imdb/movie_link.csv", 3, 10000, 30,50);
 
 
 	file = open("mergedfile0_0.txt", O_RDONLY);	
 
 	fstat(file, &sb);
 	cout << init <<sb.st_size << endl;
-	//msort.extsort("movie_link.csv", 3, 60, 30,50);
-	//msort.extsort("role_type.csv", 3, 10, 2,50);
+	msort.extsort("complete_cast.csv", 3, 70, 40,50);
+	msort.extsort("role_type.csv", 3, 10, 2,50);
 
-	*/
-/*
+	
+
 	printf("TEST RRMERGE2\n\n");
 	RrmergeMethod2 r;
 
-	
+	/*
 	r.rrmerge1("2theoutput1.txt",2,"../imdb/info_type.csv","../imdb/role_type.csv");//2,"test.csv"
 	r.rrmerge2("2theoutput2.txt",2,"../imdb/info_type.csv","../imdb/role_type.csv");
-	r.rrmerge3("2theoutput3.txt",2,"../imdb/info_type.csv","../imdb/role_type.csv");
-	r.rrmerge4("2theoutput4.txt",2,"../imdb/info_type.csv","../imdb/role_type.csv");
-	*/
-
+	r.rrmerge3("2theoutput3.txt",10,2,"../imdb/info_type.csv","../imdb/role_type.csv");
+	r.rrmerge4("2theoutput4.txt",10,2,"../imdb/info_type.csv","../imdb/role_type.csv");*/
+	
+r.rrmerge1("2theoutput1.txt",2,"info_type.csv","role_type.csv");//2,"test.csv"
+	r.rrmerge2("2theoutput2.txt",2,"info_type.csv","role_type.csv");
+	r.rrmerge3("2theoutput3.txt",10,2,"info_type.csv","role_type.csv");
+	r.rrmerge4("2theoutput4.txt",10,2,"info_type.csv","role_type.csv");
+	
 /*
 
 	printf("TEST INPUTSTREAM3\n\n");
@@ -292,7 +296,7 @@ InputStream4 instream2;
 	cout << "sum rand is " << instream4.randjump(title,1000) << endl;
 }
 	instream4.close();
-*/
+*//*
 	string title4="longasstext.txt";
 	string title2= "testout.txt";
 	OutputStream3 outstream3;
@@ -303,7 +307,7 @@ InputStream4 instream2;
 	outstream3.writeln(str.c_str(), 200);
 	string str = "hello";
 	outstream3.writeln(str.c_str(), 2);
-	outstream3.close();
+	outstream3.close();*/
 	/*
 	string title4="shorttext.txt";
 	OutputStream4 outstream4;
