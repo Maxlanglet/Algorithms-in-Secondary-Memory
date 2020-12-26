@@ -1,5 +1,5 @@
 #include "OutputStream3.hpp"
-#define BUFFER_SIZE 5
+//#define BUFFERSIZE 5
 
 
 OutputStream3::OutputStream3(){
@@ -16,7 +16,7 @@ void OutputStream3::create(string filepath){
 }
 
 
-void OutputStream3::writeln(string str){
+void OutputStream3::writeln(string str, int B){
 	//str+="\n";
 	/*
 	if(str.substr(str.length()-1) == "\n"){
@@ -26,24 +26,24 @@ void OutputStream3::writeln(string str){
 	int offset = 0; //starts reading the string for the first time
 	int over = 0; //1 if the line has been completely processed
 
-	size_t nbytes = BUFFER_SIZE*sizeof(char); //creating the buffer in memory
-	char* buffer = (char*) malloc(BUFFER_SIZE*sizeof(char)); 
+	size_t nbytes = B*sizeof(char); //creating the buffer in memory
+	char* buffer = (char*) malloc(B*sizeof(char)); 
 	memset (buffer, 0, nbytes); //Initializing the buffer values
 	if(buffer == NULL){printf("Memory allocation failed");}
 	
 	
 	while(over==0){ //Still didn't find a \n in the buffered characters 
-		//Substring going from the offset to offset+BUFFER_SIZE, if string shorter, take as many characters as possible
-		string buff = str.substr (offset,BUFFER_SIZE); 
+		//Substring going from the offset to offset+B, if string shorter, take as many characters as possible
+		string buff = str.substr (offset,B); 
 		
-		//Puts the buffer string in the buffer, the last character is a terminating null character (so BUFFER_SIZE-1 characters are stored)
-		int j = snprintf(buffer, BUFFER_SIZE, "%s\n", buff.c_str()); 
+		//Puts the buffer string in the buffer, the last character is a terminating null character (so B-1 characters are stored)
+		int j = snprintf(buffer, B, "%s\n", buff.c_str()); 
 		
 		char*ptr = NULL;
 		ptr=buffer;
 		int nb_bytes=0 ;
 		//Iterating over the buffer to find the \n
-		while (nb_bytes <BUFFER_SIZE && *ptr != '\n' && *ptr != '\r') ptr++, nb_bytes++;
+		while (nb_bytes <B && *ptr != '\n' && *ptr != '\r') ptr++, nb_bytes++;
 		if ( *ptr == '\n'){
 			nbytes=nb_bytes+1;
 			ssize_t n = write(new_file, buffer, nbytes);
@@ -53,8 +53,8 @@ void OutputStream3::writeln(string str){
 			
 			//write what has been found so far, without the terminating character
 			ssize_t n = write(new_file, buffer, nbytes-1);
-			//loop another time starting from the next BUFFER_SIZE characters 
-			offset+=BUFFER_SIZE-1;
+			//loop another time starting from the next B characters 
+			offset+=B-1;
 		}
 	}
 }

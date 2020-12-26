@@ -78,7 +78,7 @@ void RrmergeMethod4::rrmerge2(string outputfile, int num, ... ){
 	free(list);
 }
 
-void RrmergeMethod4::rrmerge3(string outputfile, int num, ... ){
+void RrmergeMethod4::rrmerge3(string outputfile, int B, int num, ... ){
 	OutputStream3 outputstream3;
 	outputstream3.create(outputfile);
 	
@@ -99,7 +99,7 @@ void RrmergeMethod4::rrmerge3(string outputfile, int num, ... ){
 		for(int i=0;i<num;i++){
 			string s = list[i].readln(1);
 			if(s.size()!=0){
-				outputstream3.writeln(s);
+				outputstream3.writeln(s, B);
 			}else{
 				num--;
 				for (int j = i; j < num; j++) { 
@@ -111,7 +111,7 @@ void RrmergeMethod4::rrmerge3(string outputfile, int num, ... ){
 	free(list);
 }
 
-void RrmergeMethod4::rrmerge4(string outputfile, int num, ... ){
+void RrmergeMethod4::rrmerge4(string outputfile, int B, int num, ... ){
 	OutputStream4 outputstream4;
 	outputstream4.create(outputfile);
 	
@@ -132,7 +132,7 @@ void RrmergeMethod4::rrmerge4(string outputfile, int num, ... ){
 		for(int i=0;i<num;i++){
 			string s = list[i].readln(1);
 			if(s.size()!=0){
-				outputstream4.writeln(s);
+				outputstream4.writeln(s, B);
 			}else{
 				num--;
 				for (int j = i; j < num; j++) { 

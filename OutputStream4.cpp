@@ -21,12 +21,12 @@ void OutputStream4::create(string filename){
 	}
 }
 
-void OutputStream4::writeln(string str){
-	/*
+void OutputStream4::writeln(string str, size_t B){
+	
 	if(str.substr(str.length()-1) != "\n"){
 	str+="\n";
 	}
-	*/
+	
 
 	// open a file to write only ->OPEN IN ANOTHER METHOD
 
@@ -36,29 +36,42 @@ void OutputStream4::writeln(string str){
 	}*/
 
 	int filesize = lseek(new_file, 0, SEEK_END);
-	
+	cout << "file size is " << filesize << endl;
 
 
 	// size of our map
-	size_t B = getpagesize();
+	if (B % getpagesize())
+    	B = B + (getpagesize() - B % getpagesize());
+	cout << "B is " << B <<endl;
+	//size_t B = getpagesize();
 
 	// size of our text
 	size_t textsize = (strlen(str.c_str())+1); // + \0 null character
 	
 	int pagesize = getpagesize();
+
+	//number of pages needed for the text
 	int numberpages = (-1+pagesize+textsize)/pagesize;
+	//resize the file
 	int result = ftruncate(new_file, (textsize-1)+filesize);
 	//lseek(new_file, filesize, SEEK_SET);
-	int leftover = textsize-(numberpages * pagesize);
+	//int leftover = textsize-(numberpages * pagesize);
+
+	//number of pages occupied by the current file
 	int numberpagesfile = (-1+pagesize+filesize)/pagesize;
+	cout << "numberpagesfiles is" << numberpagesfile << endl;
 	if(numberpagesfile!=0 && (filesize%pagesize)!=0){numberpagesfile--;}
+	cout << "numberpagesfiles2 is" << numberpagesfile << endl;
+	//what is left on the last page
 	int restonpage = filesize-(numberpagesfile*pagesize);
 	
-	
+	cout << "restonpage is" << restonpage << endl;
 	//in case B is too big
 	if(numberpages*pagesize/B == 0){
-		size_t B = getpagesize();
+		B = getpagesize();
+		cout << "B is too big so now " << B <<endl;
 	}
+	
 	// offset is where the map is looking at in the string
 	size_t offset = 0;
 	int loop = 0;
@@ -78,17 +91,19 @@ void OutputStream4::writeln(string str){
 		// if there is still enough space to read an entire map of size B
 		if(loop==0){
 			if((textsize)>=(B-restonpage)){
-			// write B minus what is already on the page char of the string in the map
-			// offset here will always be 0
-			for (size_t j = 0; j < (B-restonpage); j++){
-				map[restonpage+j] = str[j];
-			}
+				// write B minus what is already on the page char of the string in the map
+				// offset here will always be 0
+				for (size_t j = 0; j < (B-restonpage); j++){
+					map[restonpage+j] = str[j];
+				}
+				//cout << "written B-restonpage"<< endl;
 			}
 			else{
 				// write the char remaining in the map (not of size B)
 				for (size_t j = 0; j < textsize-1; j++){
 					//map[restonpage+((textsize-1))+j] = str[j];
 					map[restonpage+j] = str[j];
+					//cout << "written textsize"<< endl;
 				}
 			}
 		}
@@ -97,6 +112,7 @@ void OutputStream4::writeln(string str){
 			// write B char of the string in the map
 			for (size_t j = 0; j < B; j++){
 				map[j] = str[j+offset];
+				//cout << "second mapping write B"<< endl;
 			}
 
 			// write the entire string (size of B)
@@ -107,6 +123,7 @@ void OutputStream4::writeln(string str){
 				for (size_t j = 0; j < (textsize-offset+restonpage-1); j++){
 					//map[((textsize-offset-1))+j] = str[j+offset];
 					map[j] = str[j+offset-restonpage];
+					//cout << "second mapping write rest"<< endl;
 				}
 		}
 		

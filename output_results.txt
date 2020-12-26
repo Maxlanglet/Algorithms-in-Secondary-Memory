@@ -1,0 +1,260 @@
+role_type.csv
+Method|Size of buffer |Characters read| average| average speed
+1  & 4096 & 160 & 14386.2 & 0.0111217 \\
+2  &  & 160 & 5.75 & 27.8261 \\
+160
+160
+160
+160
+3  &  & 160 & 25.25 & 6.33663 \\
+i= 0
+i= 1
+i= 2
+i= 3
+ & 160 & 209 & 0.76555 \\
+\hline
+role_type.csv
+Method|Size of buffer |Characters read| average| average speed
+1  & 8192 & 160 & 161.5 & 0.990712 \\
+2  &  & 160 & 5 & 32 \\
+160
+160
+160
+160
+3  &  & 160 & 25.5 & 6.27451 \\
+i= 0
+i= 1
+i= 2
+i= 3
+ & 160 & 26.25 & 6.09524 \\
+\hline
+role_type.csv
+Method|Size of buffer |Characters read| average| average speed
+1  & 12288 & 160 & 101.25 & 1.58025 \\
+2  &  & 160 & 6.75 & 23.7037 \\
+160
+160
+160
+160
+3  &  & 160 & 26.25 & 6.09524 \\
+i= 0
+i= 1
+i= 2
+i= 3
+ & 160 & 29.75 & 5.37815 \\
+\hline
+role_type.csv
+Method|Size of buffer |Characters read| average| average speed
+1  & 40960 & 160 & 79.5 & 2.01258 \\
+2  &  & 160 & 5.25 & 30.4762 \\
+160
+160
+160
+160
+3  &  & 160 & 28.75 & 5.56522 \\
+i= 0
+i= 1
+i= 2
+i= 3
+ & 160 & 336.25 & 0.475836 \\
+\hline
+role_type.csv
+Method|Size of buffer |Characters read| average| average speed
+1  & 409600 & 160 & 82.5 & 1.93939 \\
+2  &  & 160 & 5.25 & 30.4762 \\
+160
+160
+160
+160
+3  &  & 160 & 76.75 & 2.08469 \\
+i= 0
+i= 1
+i= 2
+i= 3
+ & 160 & 25.5 & 6.27451 \\
+\hline
+role_type.csv
+Method|Size of buffer |Characters read| average| average speed
+1  & 4096000 & 160 & 1811 & 0.088349 \\
+2  &  & 160 & 6.5 & 24.6154 \\
+160
+160
+160
+160
+3  &  & 160 & 67.25 & 2.37918 \\
+i= 0
+i= 1
+i= 2
+i= 3
+ & 160 & 44.75 & 3.57542 \\
+\hline
+movie_link.csv
+Method|Size of buffer |Characters read| average| average speed
+1  & 4096 & 656584 & 777831 & 0.844122 \\
+2  &  & 656584 & 23956.2 & 27.4076 \\
+656584
+656584
+656584
+656584
+3  &  & 656584 & 157338 & 4.17309 \\
+i= 0
+i= 1
+i= 2
+i= 3
+ & 160 & 26.25 & 6.09524 \\
+\hline
+movie_link.csv
+Method|Size of buffer |Characters read| average| average speed
+1  & 8192 & 656584 & 603358 & 1.08822 \\
+2  &  & 656584 & 11414 & 57.5244 \\
+656584
+656584
+656584
+656584
+3  &  & 656584 & 120878 & 5.43181 \\
+i= 0
+i= 1
+i= 2
+i= 3
+ & 160 & 29.25 & 5.47009 \\
+\hline
+movie_link.csv
+Method|Size of buffer |Characters read| average| average speed
+1  & 12288 & 656584 & 464989 & 1.41204 \\
+2  &  & 656584 & 15257.2 & 43.0342 \\
+656584
+656584
+656584
+656584
+3  &  & 656584 & 134511 & 4.88126 \\
+i= 0
+i= 1
+i= 2
+i= 3
+ & 160 & 27.75 & 5.76577 \\
+\hline
+movie_link.csv
+Method|Size of buffer |Characters read| average| average speed
+1  & 40960 & 656584 & 558714 & 1.17517 \\
+2  &  & 656584 & 11861.2 & 55.3554 \\
+656584
+656584
+656584
+656584
+3  &  & 656584 & 316153 & 2.07679 \\
+i= 0
+i= 1
+i= 2
+i= 3
+ & 160 & 30.75 & 5.20325 \\
+\hline
+movie_link.csv
+Method|Size of buffer |Characters read| average| average speed
+1  & 409600 & 656584 & 465110 & 1.41167 \\
+2  &  & 656584 & 10600 & 61.9419 \\
+656584
+656584
+656584
+656584
+3  &  & 656584 & 3.96502e+06 & 0.165594 \\
+i= 0
+i= 1
+i= 2
+i= 3
+ & 160 & 30 & 5.33333 \\
+\hline
+movie_link.csv
+Method|Size of buffer |Characters read| average| average speed
+1  & 4096000 & 656584 & 478443 & 1.37233 \\
+2  &  & 656584 & 33247.8 & 19.7482 \\
+656584
+656584
+656584
+656584
+3  &  & 656584 & 6.38797e+06 & 0.102785 \\
+i= 0
+i= 1
+i= 2
+i= 3
+ & 160 & 83.25 & 1.92192 \\
+\hline
+movie_info_idx.csv
+Method|Size of buffer |Characters read| average| average speed
+1  & 4096 & 35335875 & 3.21954e+07 & 1.09754 \\
+2  &  & 35335875 & 682225 & 51.7951 \\
+35335875
+35335875
+35335875
+35335875
+3  &  & 35335875 & 4.58122e+06 & 7.7132 \\
+i= 0
+i= 1
+i= 2
+i= 3
+ & 160 & 67 & 2.38806 \\
+\hline
+movie_info_idx.csv
+Method|Size of buffer |Characters read| average| average speed
+1  & 8192 & 35335875 & 2.6751e+07 & 1.32092 \\
+2  &  & 35335875 & 623703 & 56.655 \\
+35335875
+35335875
+35335875
+35335875
+3  &  & 35335875 & 5.36263e+06 & 6.58928 \\
+i= 0
+i= 1
+i= 2
+i= 3
+ & 160 & 28.25 & 5.66372 \\
+\hline
+movie_info_idx.csv
+Method|Size of buffer |Characters read| average| average speed
+1  & 12288 & 35335875 & 3.48482e+07 & 1.01399 \\
+2  &  & 35335875 & 606076 & 58.3027 \\
+35335875
+35335875
+35335875
+35335875
+3  &  & 35335875 & 6.29424e+06 & 5.614 \\
+i= 0
+i= 1
+i= 2
+i= 3
+ & 160 & 49.5 & 3.23232 \\
+\hline
+movie_info_idx.csv
+Method|Size of buffer |Characters read| average| average speed
+1  & 40960 & 35335875 & 2.76562e+07 & 1.27768 \\
+2  &  & 35335875 & 616761 & 57.2927 \\
+35335875
+35335875
+35335875
+35335875
+3  &  & 35335875 & 1.83942e+07 & 1.92104 \\
+i= 0
+i= 1
+i= 2
+i= 3
+ & 160 & 36.5 & 4.38356 \\
+\hline
+movie_info_idx.csv
+Method|Size of buffer |Characters read| average| average speed
+1  & 409600 & 35335875 & 3.58134e+07 & 0.986668 \\
+2  &  & 35335875 & 869951 & 40.6182 \\
+35335875
+35335875
+35335875
+35335875
+3  &  & 35335875 & 4.62377e+08 & 0.0764223 \\
+i= 0
+i= 1
+i= 2
+i= 3
+ & 160 & 75.75 & 2.11221 \\
+\hline
+movie_info_idx.csv
+Method|Size of buffer |Characters read| average| average speed
+1  & 4096000 & 35335875 & 2.71032e+07 & 1.30375 \\
+2  &  & 35335875 & 553058 & 63.8918 \\
+35335875

@@ -27,7 +27,7 @@ class OutputStream4 // : public OutputStream enlever pour le moment
 public:
 	OutputStream4();
 	~OutputStream4();
-	void writeln(string str);
+	void writeln(string str, size_t B);
 	void close2();
 	void create(string filename);
 
