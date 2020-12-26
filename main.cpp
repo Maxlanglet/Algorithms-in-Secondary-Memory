@@ -114,7 +114,7 @@ cout <<  average3/4 << " & "<< length3/(average3/4) << " \\\\" << endl;
 
 */
 {
-/*
+
 
 	int mul=1;
 
@@ -137,7 +137,7 @@ cout <<  average3/4 << " & "<< length3/(average3/4) << " \\\\" << endl;
 	for(int i=0; i<4; i++){
 		Timer timer;
 		length4 = instream4.length(mul);
-		cout << length4 << " " << i << endl;
+		//cout << length4 << " " << i << endl;
 		timer.Stop();
 		average4+=timer.getDuration();
 	}
@@ -149,8 +149,8 @@ cout <<  average3/4 << " & "<< length3/(average3/4) << " \\\\" << endl;
 
 	cout << "\\hline" << endl;
 
-	*/
 
+/*
  	InputStream4 instream4;
  	instream4.open(title.c_str());
  	instream4.seek(0);
@@ -176,7 +176,7 @@ cout <<  average3/4 << " & "<< length3/(average3/4) << " \\\\" << endl;
 	instream4.close();
 
 	cout << "\\hline" << endl;
-
+*/
 }
 
 /*
