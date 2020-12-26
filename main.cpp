@@ -16,7 +16,7 @@
 #include <string>
 
 int main(int argc, char* argv[]){
-	/*
+	
 	int size = atoi(argv[2]);
 
 	string name = argv[1];
@@ -24,18 +24,18 @@ int main(int argc, char* argv[]){
 	string title = name;
 	cout << title << endl;
 	cout << "Method|Size of buffer |Characters read| average| average speed"<< endl;
-	*/
 
-	string title = "/Users/langletmaxime/Desktop/Database_Systems_Architecture/Algorithms_in_Secondary_Memory/imdb/aka_name.csv";
+	int buffer[] = {1, 2, 3,10, 100, 1000};
+	
 
-	int size = 10000;
+	//string title = "/Users/langletmaxime/Desktop/Database_Systems_Architecture/Algorithms_in_Secondary_Memory/imdb/aka_name.csv";
 
+	//int size = 10000;
 
+/*
 	//printf("\nTEST INPUTSTREAM1\n\n");
 	InputStream1 instream ; //if () considers it a function in main 
 	instream.open("role_type.csv");
-
-	int buffer[] = {1, 2, 3,10, 100, 1000};
 
 
 float average=0;
@@ -58,7 +58,7 @@ cout <<  average/4 << " & "<< length/(average/4) << " \\\\" << endl;
 }
 
 instream.close();
-
+*/
 /*
 	//printf("TEST INPUTSTREAM2\n\n");
 	InputStream2 instream2 ; //if () considers it a function in main 
@@ -114,16 +114,42 @@ cout <<  average3/4 << " & "<< length3/(average3/4) << " \\\\" << endl;
 
 */
 {
-
 /*
+
 	int mul=1;
 
 	if (size >= 4096){
 		mul = size/4096;
 		//cout << mul<<endl;
 	}
-*/
+
 	//printf("TEST INPUTSTREAM4\n\n");
+
+	InputStream4 instream4;
+ 	instream4.open(title.c_str());
+ 	instream4.seek(0);
+
+	float average4=0;
+	int length4=0;
+
+	//cout << instream4.length(1) << endl;
+
+	for(int i=0; i<4; i++){
+		Timer timer;
+		length4 = instream4.length(mul);
+		cout << length4 << " " << i << endl;
+		timer.Stop();
+		average4+=timer.getDuration();
+	}
+	cout <<size << " & ";
+	cout << " & "<< length4 << " & ";
+	cout <<  average4/4 << " & "<< length4/(average4/4) << " \\\\" << endl;
+
+	instream4.close();
+
+	cout << "\\hline" << endl;
+
+	*/
 
  	InputStream4 instream4;
  	instream4.open(title.c_str());
@@ -138,7 +164,7 @@ cout <<  average3/4 << " & "<< length3/(average3/4) << " \\\\" << endl;
 		for(int i=0; i<4; i++){
 			Timer timer;
 			length4 = instream4.randjump(size, buffer[j]);
-			cout << length4 << endl;
+			//cout << length4 << endl;
 			timer.Stop();
 			average4+=timer.getDuration();
 		}
