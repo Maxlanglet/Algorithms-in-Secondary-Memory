@@ -23,8 +23,8 @@ public:
 	void seek(int pos);
 	bool end_of_stream();
 	void close();
-	int length(int mult);
-	int randjump(int j, int M);
+	int length(string file, int mult);
+	int randjump(string file, int j);
 private:
 	//string path;
 	int fd;

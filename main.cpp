@@ -17,8 +17,7 @@
 
 int main(int argc, char* argv[]){
 	
-	/*
-	int size = atoi(argv[2]);
+	/*int size = atoi(argv[2]);
 
 	string name = argv[1];
 
@@ -26,7 +25,7 @@ int main(int argc, char* argv[]){
 	cout << title << endl;
 	cout << "Method|Size of buffer |Characters read| average| average speed"<< endl;
 
-	//int buffer[] = {1, 2, 3,10, 100, 1000};
+	int buffer[] = {1, 2, 3,10, 100, 1000};
 	*/
 
 	string title = "/Users/langletmaxime/Desktop/Database_Systems_Architecture/Algorithms_in_Secondary_Memory/imdb/movie_link.csv";
@@ -116,13 +115,13 @@ cout <<  average3/4 << " & "<< length3/(average3/4) << " \\\\" << endl;
 */
 {
 
-
+	string title = "./role_type.csv";
 	int mul=1;
 
-	if (size >= 4096){
+	/*if (size >= 4096){
 		mul = size/4096;
 		//cout << mul<<endl;
-	}
+	}*/
 
 	//printf("TEST INPUTSTREAM4\n\n");
 
@@ -138,6 +137,7 @@ cout <<  average3/4 << " & "<< length3/(average3/4) << " \\\\" << endl;
 	cout << instream4.length(1) << endl;
 
 	for(int i=0; i<4; i++){
+		cout<<"i= "<<i<<endl;
 		Timer timer;
 		//length4 = instream4.length(mul);
 		length4 = instream4.randjump(100000, mul);
@@ -145,7 +145,7 @@ cout <<  average3/4 << " & "<< length3/(average3/4) << " \\\\" << endl;
 		timer.Stop();
 		average4+=timer.getDuration();
 	}
-	cout <<size << " & ";
+	//cout <<size << " & ";
 	cout << " & "<< length4 << " & ";
 	cout <<  average4/4 << " & "<< length4/(average4/4) << " \\\\" << endl;
 
