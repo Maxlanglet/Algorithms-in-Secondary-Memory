@@ -17,7 +17,7 @@
 
 int main(int argc, char* argv[]){
 	
-	/*int size = atoi(argv[2]);
+	int size = atoi(argv[2]);
 
 	string name = argv[1];
 
@@ -26,9 +26,9 @@ int main(int argc, char* argv[]){
 	cout << "Method|Size of buffer |Characters read| average| average speed"<< endl;
 
 	int buffer[] = {1, 2, 3,10, 100, 1000};
-	*/
+	
 
-	string title = "/Users/langletmaxime/Desktop/Database_Systems_Architecture/Algorithms_in_Secondary_Memory/imdb/movie_info_idx.csv";
+	//string title = "/Users/langletmaxime/Desktop/Database_Systems_Architecture/Algorithms_in_Secondary_Memory/imdb/movie_info_idx.csv";
 
 	//int size = 1000;
 
@@ -50,12 +50,6 @@ cout << "1 "<<" & ";
 cout << size << " & ";
 cout << length << " & ";
 cout <<  average/4 << " & "<< length/(average/4) << " \\\\" << endl;
-
-
-{
-	Timer timer;
-	cout << "sum rand is " << instream.randjump(title,1000) << endl;
-}
 
 instream.close();
 */
@@ -79,13 +73,10 @@ cout << " & "<< length2 << " & ";
 cout <<  average2/4 << " & "<< length2/(average2/4) << " \\\\" << endl;
 
 
-{
-	Timer timer;
-	cout << "sum rand is " << instream2.randjump(title,1000) << endl;
-}
 	instream2.close();
 */
 /*
+{
 	//printf("TEST INPUTSTREAM3\n\n");
 	InputStream3 instream3 ; //if () considers it a function in main 
 	instream3.open(title.c_str());
@@ -111,18 +102,18 @@ cout <<  average3/4 << " & "<< length3/(average3/4) << " \\\\" << endl;
 }
 
 	instream3.close();
-
+}
 */
 {
 
 	//string title = "./role_type.csv";
 	int mul=1;
-
-	/*if (size >= 4096){
+/*
+	if (size >= 4096){
 		mul = size/4096;
 		//cout << mul<<endl;
-	}*/
-
+	}
+*/
 	//printf("TEST INPUTSTREAM4\n\n");
 
 	InputStream4 instream4;
@@ -131,78 +122,26 @@ cout <<  average3/4 << " & "<< length3/(average3/4) << " \\\\" << endl;
 
 	float average4=0;
 	int length4=0;
-
-	mul =2;
-
-	cout << instream4.length(1) << endl;
-
-	for(int i=0; i<4; i++){
-		Timer timer;
-		//length4 = instream4.length(mul);
-		length4 = instream4.randjump(1000000, mul);
-		cout << length4 << " " << i << endl;
-		timer.Stop();
-		average4+=timer.getDuration();
-	}
-	//cout <<size << " & ";
-	cout << " & "<< length4 << " & ";
-	cout <<  average4/4 << " & "<< length4/(average4/4) << " \\\\" << endl;
-
-	instream4.close();
-
-	cout << "\\hline" << endl;
-
-
-/*
- 	InputStream4 instream4;
- 	instream4.open(title.c_str());
- 	instream4.seek(0);
-
-	float average4=0;
-	int length4=0;
-
-	cout << instream4.length(1) << endl;
-
 	for(int j=0; j<6; j++){
 		for(int i=0; i<4; i++){
 			Timer timer;
+			//length4 = instream4.length(mul);
 			length4 = instream4.randjump(size, buffer[j]);
-			//cout << length4 << endl;
 			timer.Stop();
 			average4+=timer.getDuration();
 		}
-		cout <<size << " & " << buffer[j]*4096;
-		cout << " & "<< length4 << " & ";
-		cout <<  average4/4 << " & "<< length4/(average4/4) << " \\\\" << endl;
+		
+	cout <<size << " & " << buffer[j]*4096;
+	//cout << "4 "<<" & " << size;
+	cout << " & "<< length4 << " & ";
+	cout <<  average4/4 << " & "<< length4/(average4/4) << " \\\\" << endl;
 	}
 
 	instream4.close();
 
 	cout << "\\hline" << endl;
-*/
 }
 
-/*
-InputStream4 instream;
-InputStream4 instream2;
- 	instream.open(title.c_str());
- 	instream.seek(0);
- 	instream2.open(title.c_str());
- 	instream2.seek(0);
-
-
-
-	 int buffer[] = {1, 2, 3,10, 100, 1000};
-
-	 cout << instream.randjump(size, buffer[0]) << endl;
-
-	 cout << instream2.randjump(size, buffer[1]) << endl;
-
-
-	instream.close();
-	instream2.close();
-}
-*/
 /*
 
 {
@@ -256,43 +195,6 @@ InputStream4 instream2;
 	r.rrmerge4("2theoutput4.txt",2,"../imdb/info_type.csv","../imdb/role_type.csv");
 	*/
 
-/*
-
-	printf("TEST INPUTSTREAM3\n\n");
-	InputStream3 instream3 ; //if () considers it a function in main 
-	instream3.open(title.c_str());
-	instream3.seek(0);
-	
-{
-	Timer timer;
-	cout << "length is " << instream3.length(title,10*4096) << endl;
-}
-
-{
-	Timer timer;
-	cout << "sum rand is " << instream3.randjump(title,1000,10*4096) << endl;
-}
-
-	instream3.close();
-
-
-	printf("TEST INPUTSTREAM4\n\n");
-
- 	InputStream4 instream4;
- 	instream4.open(title.c_str());
- 	instream4.seek(0);
-
-{
-	Timer timer;
-	cout << "length is " << instream4.length(title) << endl;
-}
-
-{
-	Timer timer;
-	cout << "sum rand is " << instream4.randjump(title,1000) << endl;
-}
-	instream4.close();
-*/
 	/*string title4="longasstext.txt";
 	string title2= "testout.txt";
 	OutputStream3 outstream3;
