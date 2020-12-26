@@ -35,6 +35,8 @@ int main(int argc, char* argv[]){
 	InputStream1 instream ; //if () considers it a function in main 
 	instream.open("role_type.csv");
 
+	int buffer[] = {1, 2, 3,10, 100, 1000};
+
 
 float average=0;
 int length =0;
@@ -82,8 +84,8 @@ cout <<  average2/4 << " & "<< length2/(average2/4) << " \\\\" << endl;
 	cout << "sum rand is " << instream2.randjump(title,1000) << endl;
 }
 	instream2.close();
-
-
+*/
+/*
 	//printf("TEST INPUTSTREAM3\n\n");
 	InputStream3 instream3 ; //if () considers it a function in main 
 	instream3.open(title.c_str());
@@ -93,7 +95,8 @@ float average3=0;
 int length3=0;
 for(int i=0; i<4; i++){
 	Timer timer;
-	length3 =  instream3.length(size);
+	length3 =  instream3.randjump("", size, buffer[0]*4096);
+	cout << length3 << endl;
 	timer.Stop();
 	average3+=timer.getDuration();
 }
@@ -109,9 +112,9 @@ cout <<  average3/4 << " & "<< length3/(average3/4) << " \\\\" << endl;
 
 	instream3.close();
 
-	instream3.close();
 */
 {
+
 /*
 	int mul=1;
 
@@ -125,11 +128,11 @@ cout <<  average3/4 << " & "<< length3/(average3/4) << " \\\\" << endl;
  	InputStream4 instream4;
  	instream4.open(title.c_str());
  	instream4.seek(0);
-	 int buffer[] = {1, 2, 3,10, 100, 1000};
 
 	float average4=0;
 	int length4=0;
 
+	cout << instream4.length(1) << endl;
 
 	for(int j=0; j<6; j++){
 		for(int i=0; i<4; i++){

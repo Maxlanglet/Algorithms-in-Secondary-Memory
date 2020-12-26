@@ -6,7 +6,7 @@
 
 
 InputStream4::InputStream4(){
-	offset = 0;
+	offset = 1;
 	addr = NULL;
 	init=0;
 	pos = 0;
@@ -32,7 +32,6 @@ string InputStream4::readln(int mult_page){
 
 	int pagesize = getpagesize()*mult_page;
 
-	
 	if (fd == -1)
 	   handle_error("open");
 
@@ -41,9 +40,8 @@ string InputStream4::readln(int mult_page){
 
 	pos = lseek(fd, 0, SEEK_CUR);
 
-
-	int off = pos%pagesize;
-	int page = floor(pos /pagesize);
+	int off = pos%pagesize+1;
+	int page = floor(pos/pagesize);
 
 	size_t len=pagesize;
 	int idx=0;
@@ -54,7 +52,7 @@ string InputStream4::readln(int mult_page){
 	if (rest == 0) return "";
 
 
-	while(!edl){
+	while(!edl || pos < sb.st_size){
 
 		if (offset != page){
 
@@ -62,7 +60,7 @@ string InputStream4::readln(int mult_page){
 			
 			if (offset*pagesize >= sb.st_size){
 				pagesize = getpagesize();
-				//len=getpagesize();
+				len=getpagesize();
 			}
 
 			addr =  static_cast<char*>(mmap(NULL, len, PROT_READ,MAP_PRIVATE, fd, offset*pagesize));
@@ -73,23 +71,23 @@ string InputStream4::readln(int mult_page){
 	        printf("Mapping Failed\n");
 	        handle_error("mmap");
 	    }
+
 	    p = addr;
-	    p+=off;
+	    p+=off-1;
 	    len-=off;
 
-	    while (idx < len-1 && *p != '\n' && *p != '\r') str+=*p, p++, idx++;
+	    while (idx < len && *p != '\n' && *p != '\r') str+=*p, p++, idx++;//erreur ici
 		//cout<<str<<endl;
 
 	    if ( *p == '\n' || *p == '\r'){
 	    	pos += idx+1;
-	    	lseek(fd, pos, SEEK_SET);//changer offset
+	    	lseek(fd, pos, SEEK_SET);
 			str+="\n";
 			edl=true;
 			rest-=pos;
 			return str;
 	    }
 	    else{ 
-	    	//cout << "new page" << endl;
 			pos += idx;
 			lseek(fd, pos, SEEK_SET);
 			len=pagesize;
@@ -151,8 +149,9 @@ void InputStream4::close(){
 	::close(fd);
 }
 
-int InputStream4::length(string file, int mult){
+int InputStream4::length(int mult){
 	//open(file);//TODO: enlever car on le fait avant 
+
 	struct stat sb;
 	seek(0);
 	int line_size =1;
@@ -167,7 +166,7 @@ int InputStream4::length(string file, int mult){
 		sum+=line_size;
 	}
 
-	int err = munmap(addr, getpagesize());
+	int err = munmap(addr, mult*getpagesize());
 	init=0;//to make sure we remap for real benchmarking
     if(err != 0){
         printf("UnMapping Failed\n");

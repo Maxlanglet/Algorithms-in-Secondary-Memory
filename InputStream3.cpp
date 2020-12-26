@@ -129,7 +129,7 @@ int InputStream3::randjump(string file, int j, int buffer){
 	int sum=0;
 	int k=0;
 
-	open(file);
+	//open(file);
 	struct stat sb;
 	seek(0);
 
