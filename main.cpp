@@ -16,25 +16,31 @@
 #include <string>
 
 int main(int argc, char* argv[]){
-	/*int size = atoi(argv[2]);
+	/*
+	int size = atoi(argv[2]);
 
 	string name = argv[1];
 
 	string title = name;
 	cout << title << endl;
 	cout << "Method|Size of buffer |Characters read| average| average speed"<< endl;
+	*/
+
+	string title = "/Users/langletmaxime/Desktop/Database_Systems_Architecture/Algorithms_in_Secondary_Memory/imdb/aka_name.csv";
+
+	int size = 10000;
 
 
 	//printf("\nTEST INPUTSTREAM1\n\n");
 	InputStream1 instream ; //if () considers it a function in main 
-	instream.open(title.c_str());
+	instream.open("role_type.csv");
 
 
 float average=0;
 int length =0;
 for(int i=0; i<4; i++){
 	Timer timer;
-	length = instream.length(title);
+	length = instream.randjump(title,size);
 	timer.Stop();
 	average+=timer.getDuration();
 }
@@ -51,7 +57,7 @@ cout <<  average/4 << " & "<< length/(average/4) << " \\\\" << endl;
 
 instream.close();
 
-
+/*
 	//printf("TEST INPUTSTREAM2\n\n");
 	InputStream2 instream2 ; //if () considers it a function in main 
 	instream2.open(title.c_str());
@@ -104,42 +110,73 @@ cout <<  average3/4 << " & "<< length3/(average3/4) << " \\\\" << endl;
 	instream3.close();
 
 	instream3.close();
+*/
+{
+/*
 	int mul=1;
 
 	if (size >= 4096){
 		mul = size/4096;
 		//cout << mul<<endl;
 	}
-
-
+*/
 	//printf("TEST INPUTSTREAM4\n\n");
 
  	InputStream4 instream4;
  	instream4.open(title.c_str());
  	instream4.seek(0);
+	 int buffer[] = {1, 2, 3,10, 100, 1000};
 
-float average4=0;
-int length4=0;
-for(int i=0; i<4; i++){
-	Timer timer;
-	length4 = instream4.length(title, mul);
-	timer.Stop();
-	average4+=timer.getDuration();
-}
-cout << "4 "<<" & ";
-cout << " & "<< length4 << " & ";
-cout <<  average4/4 << " & "<< length4/(average4/4) << " \\\\" << endl;
+	float average4=0;
+	int length4=0;
 
 
-{
-	Timer timer;
-	cout << "sum rand is " << instream4.randjump(title,1000) << endl;
-}
+	for(int j=0; j<6; j++){
+		for(int i=0; i<4; i++){
+			Timer timer;
+			length4 = instream4.randjump(size, buffer[j]);
+			cout << length4 << endl;
+			timer.Stop();
+			average4+=timer.getDuration();
+		}
+		cout <<size << " & " << buffer[j]*4096;
+		cout << " & "<< length4 << " & ";
+		cout <<  average4/4 << " & "<< length4/(average4/4) << " \\\\" << endl;
+	}
 
 	instream4.close();
 
 	cout << "\\hline" << endl;
 
+}
+
+/*
+InputStream4 instream;
+InputStream4 instream2;
+ 	instream.open(title.c_str());
+ 	instream.seek(0);
+ 	instream2.open(title.c_str());
+ 	instream2.seek(0);
+
+
+
+	 int buffer[] = {1, 2, 3,10, 100, 1000};
+
+	 cout << instream.randjump(size, buffer[0]) << endl;
+
+	 cout << instream2.randjump(size, buffer[1]) << endl;
+
+
+	instream.close();
+	instream2.close();
+}
+*/
+/*
+
+{
+	Timer timer;
+	cout << "sum rand is " << instream4.randjump(title,1000) << endl;
+}
 */
 	/*
 	printf("TEST RRMERGE4\n\n");
@@ -152,13 +189,30 @@ cout <<  average4/4 << " & "<< length4/(average4/4) << " \\\\" << endl;
 	r.rrmerge4("theoutput4.txt",3,"info_type.csv","role_type.csv","test.csv");
 	*/
 
+	/*
+
 	printf("TEST MERGESORT\n\n");
 	class mergesort msort;
 	//msort.extsort("../imdb/info_type.csv", 3, 10, 2);
 
-	msort.extsort("../imdb/movie_link.csv", 3, 15000, 30);
+	struct stat sb;
+
+	int file = open("../imdb/movie_link.csv", O_RDONLY);	
+
+	fstat(file, &sb);
+	int init =  sb.st_size;
+
+	msort.extsort("../imdb/movie_link.csv", 3, 10000, 30);
+
+
+	file = open("mergedfile0_0.txt", O_RDONLY);	
+
+	fstat(file, &sb);
+	cout << init <<sb.st_size << endl;
 	//msort.extsort("movie_link.csv", 3, 60, 30);
 	//msort.extsort("role_type.csv", 3, 10, 2);
+
+	*/
 /*
 	printf("TEST RRMERGE2\n\n");
 	RrmergeMethod2 r;

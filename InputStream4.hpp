@@ -24,7 +24,7 @@ public:
 	bool end_of_stream();
 	void close();
 	int length(string file, int mult);
-	int randjump(string file, int j);
+	int randjump(int j, int M);
 private:
 	//string path;
 	int fd;
