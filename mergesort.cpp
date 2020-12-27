@@ -67,7 +67,7 @@ mergesort::mergesort(){}
 
 mergesort::~mergesort(){}
 
-void mergesort::extsort(string inputfile, int k, int M, float d){
+void mergesort::extsort(string inputfile, int k, int M, float d, int B){
 	//tester savoir quel outputstream utiliser ici, pour le moment outputstream1
 	OutputStream3 outputstream1;
 
@@ -120,7 +120,7 @@ void mergesort::extsort(string inputfile, int k, int M, float d){
 	    while(it != mylist.end())
 	    {
 			string fileline = it->line;
-	        outputstream1.writeln(fileline);//toujours probleme, write tout sauf au eof
+	        outputstream1.writeln(fileline, B);//toujours probleme, write tout sauf au eof
 	        it++;
 	    }
 		mylist.clear();
@@ -144,7 +144,7 @@ void mergesort::extsort(string inputfile, int k, int M, float d){
 		for (int i = 0; i < mylist.size(); ++i)//mylist.size()
 		{
 			//cout << i << endl;
-			outputstream1.writeln(it->line);
+			outputstream1.writeln(it->line, B);
 			++it;
 			assert(it != mylist.end());
 		}
@@ -265,7 +265,7 @@ void mergesort::extsort(string inputfile, int k, int M, float d){
 					sort(mylist.begin(),mylist.end(),LineComparator());
 
 					//write the first line in the file
-					outputstream1.writeln((mylist[0].line).c_str());
+					outputstream1.writeln((mylist[0].line).c_str(), B);
 					cout << " index of WINNER " <<mylist[0].index << endl;
 					cout << " trying to open the WINNER " << (addresses[(mylist[0].index)]).c_str() << endl;
 					//opens the file of the winner using the index saved in the line structure
@@ -341,7 +341,7 @@ void mergesort::extsort(string inputfile, int k, int M, float d){
 					sort(mylist.begin(),mylist.end(),LineComparator());
 
 					//write the first line in the file
-					outputstream1.writeln((mylist[0].line).c_str());
+					outputstream1.writeln((mylist[0].line).c_str(), B);
 					cout << " index of WINNER " <<mylist[0].index << endl;
 					cout << " trying to open the WINNER " << (addresses[(mylist[0].index)]).c_str() << endl;
 					//opens the file of the winner using the index saved in the line structure

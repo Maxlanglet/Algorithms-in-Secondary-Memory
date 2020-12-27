@@ -26,8 +26,8 @@ public:
 	~RrmergeMethod2();
 	void rrmerge1(string outputfile, int num, ... );
 	void rrmerge2(string outputfile, int num, ... );
-	void rrmerge3(string outputfile, int num, ... );
-	void rrmerge4(string outputfile, int num, ... );
+	void rrmerge3(string outputfile, int B, int num, ... );
+	void rrmerge4(string outputfile, int B, int num, ... );
 private:
 };
 #endif

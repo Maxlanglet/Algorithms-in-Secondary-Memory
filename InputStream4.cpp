@@ -24,9 +24,7 @@ void InputStream4::open(string filename){
 
 
 string InputStream4::readln(int mult_page){
-	//42352
 	string str = "";
-	char *p = NULL;
 	struct stat sb;
 	bool edl=false;
 
@@ -40,11 +38,8 @@ string InputStream4::readln(int mult_page){
 
 	pos = lseek(fd, 0, SEEK_CUR);
 
-	//cout << pos << endl;
-
 	int off = (pos%pagesize);
 
-	//cout << off << endl;
 	int page = floor(pos/pagesize);
 
 
@@ -81,14 +76,9 @@ string InputStream4::readln(int mult_page){
 	        printf("Mapping Failed\n");
 	        handle_error("mmap");
 	    }
-	    p = addr;
-	    //cout << p[off] << endl;
-	    p+=off;
 
 
 	    while (idx+off < len && addr[idx+off] != '\n' && addr[idx+off] != '\r') str+=addr[idx+off], idx++;
-	    //while (idx < len && *p != '\n' && *p != '\r') str+=*p, p++, idx++;//erreur ici sur macos bigsur ou m1
-		//cout<<str<<endl;
 
 
 	    if ( addr[idx+off] == '\n' || addr[idx+off] == '\r'){
@@ -99,18 +89,7 @@ string InputStream4::readln(int mult_page){
 			rest-=pos;
 			return str;
 	    }
-	    /*
-	    if ( *p == '\n' || *p == '\r'){
-	    	pos += idx+1;
-	    	lseek(fd, pos, SEEK_SET);//changer offset
-			str+="\n";
-			edl=true;
-			rest-=pos;
-			return str;
-	    }
-	    */
 	    else{ 
-	    	//cout << "new page" << endl;
 			pos += idx;
 			lseek(fd, pos, SEEK_SET);
 			len=pagesize;
@@ -122,34 +101,6 @@ string InputStream4::readln(int mult_page){
 	}
 	return str;
 }
-
-/*
-if(jump){
-	pos = lseek(fd,idx,SEEK_CUR);					//true if randjump and then add the rest to account for when the line ends on the next page
-	//idx++;											//idx++ because jump to idx+1
-	page++;
-	offset++;
-	len = pagesize;
-	if (offset*pagesize >= sb.st_size){
-		pagesize = getpagesize();
-		len=getpagesize();
-	}
-	addr =  static_cast<char*>(mmap(NULL, len, PROT_READ,MAP_PRIVATE, fd, offset*pagesize));//
-	p = addr;
-	while (idx < len-1 && *p != '\n' && *p != '\r') str+=*p, p++, idx++;
-	if (*p == '\n' || *p == '\r'){
-    	pos = lseek(fd,idx+1,SEEK_CUR);
-    	str+="\n";
-    	return str;
-    }
-}
-else{
-	pos = lseek(fd,idx,SEEK_CUR);					//true if randjump and then add the rest to account for when the line ends on the next page
-	if (idx!=0){
-		return str;
-	}
-}
-*/
 
 
 void InputStream4::seek(int pos){
@@ -172,7 +123,6 @@ void InputStream4::close(){
 }
 
 int InputStream4::length(int mult){
-	//open(file);//TODO: enlever car on le fait avant 
 	struct stat sb;
 	seek(0);
 	int line_size =1;
@@ -200,10 +150,9 @@ int InputStream4::length(int mult){
 int InputStream4::randjump(int j, int M){
 	int sum=0;
 	int k=0;
-	//open(file);
+
 	struct stat sb;
 	seek(0);
-	jump = true;
 
 	offset = 1;
 

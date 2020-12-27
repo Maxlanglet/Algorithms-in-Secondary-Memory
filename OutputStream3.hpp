@@ -19,7 +19,7 @@ class OutputStream3// : public OutputStream enlever pour le moment
 public:
 	OutputStream3();
 	~OutputStream3();
-	void writeln(string str);
+	void writeln(string str, int B);
 	void close();
 	void create(string filepath);
 

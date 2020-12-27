@@ -31,7 +31,7 @@ void RrmergeMethod4::rrmerge1(string outputfile, int num, ... ){
 	va_end(valist); //Cleaning memory reserved for valist
 	while(num!=0){//Reading in a round-robin way until all files are processed
 		for(int i=0;i<num;i++){
-			string s = list[i].readln(1);
+			string s = list[i].readln(10);
 			if(s.size()!=0){
 				outputstream1.writeln(s);
 			}else{
@@ -64,7 +64,7 @@ void RrmergeMethod4::rrmerge2(string outputfile, int num, ... ){
 	va_end(valist); //Cleaning memory reserved for valist
 	while(num!=0){//Reading in a round-robin way until all files are processed
 		for(int i=0;i<num;i++){
-			string s = list[i].readln(1);
+			string s = list[i].readln(10);
 			if(s.size()!=0){
 				outputstream2.writeln(s);
 			}else{
@@ -78,7 +78,7 @@ void RrmergeMethod4::rrmerge2(string outputfile, int num, ... ){
 	free(list);
 }
 
-void RrmergeMethod4::rrmerge3(string outputfile, int num, ... ){
+void RrmergeMethod4::rrmerge3(string outputfile, int B, int num, ... ){
 	OutputStream3 outputstream3;
 	outputstream3.create(outputfile);
 	
@@ -97,9 +97,9 @@ void RrmergeMethod4::rrmerge3(string outputfile, int num, ... ){
 	va_end(valist); //Cleaning memory reserved for valist
 	while(num!=0){//Reading in a round-robin way until all files are processed
 		for(int i=0;i<num;i++){
-			string s = list[i].readln(1);
+			string s = list[i].readln(10);
 			if(s.size()!=0){
-				outputstream3.writeln(s);
+				outputstream3.writeln(s, B);
 			}else{
 				num--;
 				for (int j = i; j < num; j++) { 
@@ -111,7 +111,7 @@ void RrmergeMethod4::rrmerge3(string outputfile, int num, ... ){
 	free(list);
 }
 
-void RrmergeMethod4::rrmerge4(string outputfile, int num, ... ){
+void RrmergeMethod4::rrmerge4(string outputfile, int B, int num, ... ){
 	OutputStream4 outputstream4;
 	outputstream4.create(outputfile);
 	
@@ -130,9 +130,9 @@ void RrmergeMethod4::rrmerge4(string outputfile, int num, ... ){
 	va_end(valist); //Cleaning memory reserved for valist
 	while(num!=0){//Reading in a round-robin way until all files are processed
 		for(int i=0;i<num;i++){
-			string s = list[i].readln(1);
+			string s = list[i].readln(10);
 			if(s.size()!=0){
-				outputstream4.writeln(s);
+				outputstream4.writeln(s, B);
 			}else{
 				num--;
 				for (int j = i; j < num; j++) { 

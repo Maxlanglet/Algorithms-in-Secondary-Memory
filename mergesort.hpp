@@ -31,7 +31,7 @@ class mergesort
 public:
 	mergesort();
 	~mergesort();
-	void extsort(string inputfile, int k, int M, float d);
+	void extsort(string inputfile, int k, int M, float d, int B);
 	//bool compare(const string& first, const string& sec, const int k);
 private:
 	//InputStream4 instream4;
