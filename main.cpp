@@ -230,6 +230,7 @@ cout <<  average3/4 << " & "<< length3/(average3/4) << " \\\\" << endl;
 
 	file = open("theoutput4.txt", O_RDONLY);
 
+
 	fstat(file, &sb);
 	int fin4 =  sb.st_size;
 
@@ -238,18 +239,19 @@ cout <<  average3/4 << " & "<< length3/(average3/4) << " \\\\" << endl;
 }
 /*
 
+
 	printf("TEST MERGESORT\n\n");
 	class mergesort msort;
 	//msort.extsort("../imdb/info_type.csv", 3, 10, 2, 50);
 
 	struct stat sb;
 
-	int file = open("../imdb/movie_link.csv", O_RDONLY);	
+	int file = open("movie_link.csv", O_RDONLY);	
 
 	fstat(file, &sb);
 	int init =  sb.st_size;
 
-	msort.extsort("../imdb/movie_link.csv", 3, 10000, 30,50);
+	//msort.extsort("../imdb/movie_link.csv", 3, 10000, 30,50);
 
 
 	file = open("mergedfile0_0.txt", O_RDONLY);	
@@ -263,8 +265,19 @@ cout <<  average3/4 << " & "<< length3/(average3/4) << " \\\\" << endl;
 	printf("TEST RRMERGE2\n\n");
 	RrmergeMethod2 r2;
 
+
+	r.rrmerge1("2theoutput1.txt",2,"../imdb/info_type.csv","../imdb/role_type.csv");//2,"test.csv"
+	r.rrmerge2("2theoutput2.txt",2,"../imdb/info_type.csv","../imdb/role_type.csv");
+	r.rrmerge3("2theoutput3.txt",10,2,"../imdb/info_type.csv","../imdb/role_type.csv");
+	r.rrmerge4("2theoutput4.txt",10,2,"../imdb/info_type.csv","../imdb/role_type.csv");
+
+r.rrmerge1("2theoutput1.txt",2,"info_type.csv","role_type.csv");//2,"test.csv"
+	r.rrmerge2("2theoutput2.txt",2,"info_type.csv","role_type.csv");
+	r.rrmerge3("2theoutput3.txt",10,2,"info_type.csv","role_type.csv");
+	r.rrmerge4("2theoutput4.txt",10,2,"info_type.csv","role_type.csv");
+	*/
 	
-	r2.rrmerge1("2theoutput1.txt",2,"../imdb/info_type.csv","../imdb/role_type.csv");//2,"test.csv"
+/*
 
 
 	r2.rrmerge2("2theoutput2.txt",2,"../imdb/info_type.csv","../imdb/role_type.csv");
@@ -275,8 +288,6 @@ cout <<  average3/4 << " & "<< length3/(average3/4) << " \\\\" << endl;
 
 	r2.rrmerge4("theoutput4.txt",10,2,"info_type.csv","role_type.csv");
 */
-
-
 /*
 	string title4="longasstext.txt";
 	string title2= "testout.txt";
@@ -288,8 +299,7 @@ cout <<  average3/4 << " & "<< length3/(average3/4) << " \\\\" << endl;
 	outstream3.writeln(str.c_str(), 200);
 	str = "hello";
 	outstream3.writeln(str.c_str(), 2);
-	outstream3.close();
-	*/
+	outstream3.close();*/
 	/*
 	string title4="shorttext.txt";
 	OutputStream4 outstream4;
