@@ -23,6 +23,9 @@ void OutputStream3::writeln(string str, int B){
 		str=str.substr(0,str.length()-1);
 	}
 	*/
+	if(str.size()==0){
+		return;
+	}
 	int offset = 0; //starts reading the string for the first time
 	int over = 0; //1 if the line has been completely processed
 
