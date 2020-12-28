@@ -9,10 +9,10 @@ make_compile()
 
 # A CHANGER : le path de tes fichiers
 #list of the files we want to test
-files = [#"/Users/langletmaxime/Desktop/Database_Systems_Architecture/Algorithms_in_Secondary_Memory/imdb/role_type.csv"]
+files = ["/Users/langletmaxime/Desktop/Database_Systems_Architecture/Algorithms_in_Secondary_Memory/imdb/role_type.csv"]
  #"/Users/langletmaxime/Desktop/Database_Systems_Architecture/Algorithms_in_Secondary_Memory/imdb/movie_link.csv"]
  #"/Users/langletmaxime/Desktop/Database_Systems_Architecture/Algorithms_in_Secondary_Memory/imdb/movie_info_idx.csv"]
- "/Users/langletmaxime/Desktop/Database_Systems_Architecture/Algorithms_in_Secondary_Memory/imdb/complete_cast.csv"]
+ #"/Users/langletmaxime/Desktop/Database_Systems_Architecture/Algorithms_in_Secondary_Memory/imdb/complete_cast.csv"]
  #"/Users/langletmaxime/Desktop/Database_Systems_Architecture/Algorithms_in_Secondary_Memory/imdb/aka_name.csv"]
          
 #list of the buffer sizes we want to test

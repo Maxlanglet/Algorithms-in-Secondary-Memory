@@ -16,27 +16,15 @@
 #include <string>
 
 int main(int argc, char* argv[]){
-
-	RrmergeMethod2 r2 ;
-	r2.rrmerge1("output21.txt",3,"t1.txt","t2.txt","t3.txt");
-	r2.rrmerge2("output22.txt",3,"t1.txt","t2.txt","t3.txt");
-	r2.rrmerge3("output23.txt",10,3,"t1.txt","t2.txt","t3.txt");
-	r2.rrmerge4("output24.txt",1,3,"t1.txt","t2.txt","t3.txt");
-	
-	RrmergeMethod3 r4 ;
-	r4.rrmerge1("output31.txt",10,3,"t1.txt","t2.txt","t3.txt");
-	r4.rrmerge2("output32.txt",10,3,"t1.txt","t2.txt","t3.txt");
-	r4.rrmerge3("output33.txt",10,10,3,"t1.txt","t2.txt","t3.txt");
-	r4.rrmerge4("output34.txt",10,1,3,"t1.txt","t2.txt","t3.txt");
 	
 	
-	/*int size = atoi(argv[2]);
+	int size = atoi(argv[2]);
 
 	string name = argv[1];
 
 	string title = name;
 	cout << title << endl;
-	cout << "Method|Size of buffer |Characters read| average| average speed"<< endl;*/
+	cout << "Method|Size of buffer |Characters read| average| average speed"<< endl;
 	
 	//int buffer[] = {1, 2, 3,10, 100, 1000};
 
@@ -153,10 +141,17 @@ cout <<  average3/4 << " & "<< length3/(average3/4) << " \\\\" << endl;
 
 	cout << "\\hline" << endl;
 }*/
-/*
+	/*
+	RrmergeMethod3 r4 ;
+	r4.rrmerge1("output31.txt",1000,3,"t1.txt","t2.txt","t3.txt");
+	r4.rrmerge2("output32.txt",1000,3,"t1.txt","t2.txt","t3.txt");
+	r4.rrmerge3("output33.txt",1000,size,3,"t1.txt","t2.txt","t3.txt");
+	r4.rrmerge4("output34.txt",1000,size,3,"t1.txt","t2.txt","t3.txt");
+	*/
+
 {	
-	printf("TEST RRMERGE2\n\n");
-	RrmergeMethod2 r;
+	printf("TEST RRMERGE3\n\n");
+	RrmergeMethod3 r;
 
 	struct stat sb;
 	int file = open(title.c_str(), O_RDONLY);
@@ -166,14 +161,15 @@ cout <<  average3/4 << " & "<< length3/(average3/4) << " \\\\" << endl;
 	cout << init << endl;
 
 //=============================================================================
-	/*cout << "METHOD 1: " << endl;
+{
+	cout << "METHOD 1: " << endl;
 
 	int average=0;
 
 	for(int i=0; i<2; i++){
 		Timer timer;
 		//length4 = instream4.length(mul);
-		r.rrmerge1("theoutput1.txt",2,title.c_str(),title.c_str());
+		r.rrmerge1("theoutput1.txt",1000,2,title.c_str(),title.c_str());
 		timer.Stop();
 		average+=timer.getDuration();
 	}
@@ -184,17 +180,19 @@ cout <<  average3/4 << " & "<< length3/(average3/4) << " \\\\" << endl;
 	fstat(file, &sb);
 	int fin =  sb.st_size;
 
-	cout << "size of init compared to final: " <<  init << " " << fin << endl;*/
+	cout << "size of init compared to final: " <<  init << " " << fin << endl;
+}
 
 //=============================================================================
-	/*cout << "METHOD 2: " << endl;
+{
+	cout << "METHOD 2: " << endl;
 
 	int average2=0;
 
 	for(int i=0; i<2; i++){
 		Timer timer;
 		//length4 = instream4.length(mul);
-		r.rrmerge2("theoutput2.txt",2,title.c_str(),title.c_str());
+		r.rrmerge2("theoutput2.txt",1000,2,title.c_str(),title.c_str());
 		timer.Stop();
 		average2+=timer.getDuration();
 	}
@@ -205,17 +203,18 @@ cout <<  average3/4 << " & "<< length3/(average3/4) << " \\\\" << endl;
 	off_t pos2 = lseek(fd, 0, SEEK_END);
 
 	cout << "size of init compared to final: " <<  init << " " << pos2 << endl;
-}*/
+}
 
 //=============================================================================
-	/*cout << "METHOD 3: " << endl;
+{
+	cout << "METHOD 3: " << endl;
 
 	int average3=0;
 
 	for(int i=0; i<2; i++){
 		Timer timer;
 		//length4 = instream4.length(mul);
-		r.rrmerge3("theoutput3.txt",size,2,title.c_str(),title.c_str());
+		r.rrmerge3("theoutput3.txt",1000,size,2,title.c_str(),title.c_str());
 		timer.Stop();
 		average3+=timer.getDuration();
 	}
@@ -226,17 +225,18 @@ cout <<  average3/4 << " & "<< length3/(average3/4) << " \\\\" << endl;
 	fstat(file, &sb);
 	int fin3 =  sb.st_size;
 
-	cout << "size of init compared to final: " <<  init << " " << fin3 << endl;*/
+	cout << "size of init compared to final: " <<  init << " " << fin3 << endl;
+}
 
 //=============================================================================
-	/*cout << "METHOD 4: " << endl;
+	cout << "METHOD 4: " << endl;
 
 	int average4=0;
 
 	for(int i=0; i<2; i++){
 		Timer timer;
 		//length4 = instream4.length(mul);
-		r.rrmerge4("theoutput4.txt",size,2,title.c_str(),title.c_str());
+		r.rrmerge4("theoutput4.txt",1000,size,2,title.c_str(),title.c_str());
 		timer.Stop();
 		average4+=timer.getDuration();
 	}
@@ -250,7 +250,7 @@ cout <<  average3/4 << " & "<< length3/(average3/4) << " \\\\" << endl;
 
 	cout << "size of init compared to final: " <<  init << " " << fin4 << endl;
 	
-}*/
+}
 /*
 
 
