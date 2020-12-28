@@ -16,7 +16,7 @@
 #include <string>
 
 int main(int argc, char* argv[]){
-
+/*
 	RrmergeMethod2 r2 ;
 	r2.rrmerge1("output21.txt",3,"t1.txt","t2.txt","t3.txt");
 	r2.rrmerge2("output22.txt",3,"t1.txt","t2.txt","t3.txt");
@@ -29,7 +29,7 @@ int main(int argc, char* argv[]){
 	r4.rrmerge3("output33.txt",10,10,3,"t1.txt","t2.txt","t3.txt");
 	r4.rrmerge4("output34.txt",10,1,3,"t1.txt","t2.txt","t3.txt");
 	
-	
+	*/
 	/*int size = atoi(argv[2]);
 
 	string name = argv[1];
@@ -251,7 +251,7 @@ cout <<  average3/4 << " & "<< length3/(average3/4) << " \\\\" << endl;
 	cout << "size of init compared to final: " <<  init << " " << fin4 << endl;
 	
 }*/
-/*
+
 
 
 	printf("TEST MERGESORT\n\n");
@@ -265,7 +265,7 @@ cout <<  average3/4 << " & "<< length3/(average3/4) << " \\\\" << endl;
 	fstat(file, &sb);
 	int init =  sb.st_size;
 
-	//msort.extsort("../imdb/movie_link.csv", 3, 10000, 30,50);
+	//msort.extsort("movie_link.csv", 3, 10000, 30,50);
 
 
 	file = open("mergedfile0_0.txt", O_RDONLY);	
@@ -273,8 +273,9 @@ cout <<  average3/4 << " & "<< length3/(average3/4) << " \\\\" << endl;
 	fstat(file, &sb);
 	cout << init <<sb.st_size << endl;
 	//msort.extsort("movie_link.csv", 3, 60, 30,50);
-	//msort.extsort("role_type.csv", 3, 10, 2,50);
-	*/
+	msort.extsort("complete_cast.csv", 4, 1000, 500,50);
+	//msort.extsort("role_type.csv", 5, 10,5,50);
+	//msort.extsort("mergedfile0_0 copy.txt", 1, 10,5,50);
 /*
 	printf("TEST RRMERGE2\n\n");
 	RrmergeMethod2 r2;
