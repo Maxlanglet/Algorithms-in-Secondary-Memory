@@ -16,7 +16,7 @@ public:
 	OutputStream2();
 	~OutputStream2();
 	void writeln(string str);
-	void close(FILE * pFile);
+	void close();
 	void create(const char * filename);
 private:
 	FILE * new_file;// voir pq pas fstream

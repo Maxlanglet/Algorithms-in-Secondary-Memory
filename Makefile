@@ -1,7 +1,7 @@
 all: main clean
 
-main: main.o InputStream1.o OutputStream1.o Timer.o InputStream2.o InputStream3.o InputStream4.o OutputStream2.o OutputStream3.o OutputStream4.o RrmergeMethod4.o  RrmergeMethod2.o mergesort.o
-	g++ -O3 -std=c++11 main.o OutputStream1.o InputStream1.o InputStream2.o InputStream3.o InputStream4.o OutputStream2.o OutputStream3.o OutputStream4.o RrmergeMethod4.o  RrmergeMethod2.o mergesort.o Timer.o -o main
+main: main.o InputStream1.o OutputStream1.o Timer.o InputStream2.o InputStream3.o InputStream4.o OutputStream2.o OutputStream3.o OutputStream4.o RrmergeMethod3.o  RrmergeMethod2.o mergesort.o
+	g++ -O3 -std=c++11 main.o OutputStream1.o InputStream1.o InputStream2.o InputStream3.o InputStream4.o OutputStream2.o OutputStream3.o OutputStream4.o RrmergeMethod3.o  RrmergeMethod2.o mergesort.o Timer.o -o main
 
 OutputStream1.o: OutputStream1.cpp OutputStream1.hpp
 	g++ -O3 -std=c++11 -c OutputStream1.cpp
@@ -27,8 +27,8 @@ InputStream3.o: InputStream3.cpp InputStream3.hpp
 InputStream4.o: InputStream4.cpp InputStream4.hpp
 	g++ -O3 -std=c++11 -c InputStream4.cpp
 
-RrmergeMethod4.o: RrmergeMethod4.cpp RrmergeMethod4.hpp
-	g++ -O3 -std=c++11 -c RrmergeMethod4.cpp
+RrmergeMethod3.o: RrmergeMethod3.cpp RrmergeMethod3.hpp
+	g++ -O3 -std=c++11 -c RrmergeMethod3.cpp
 
 RrmergeMethod2.o: RrmergeMethod2.cpp RrmergeMethod2.hpp
 	g++ -O3 -std=c++11 -c RrmergeMethod2.cpp

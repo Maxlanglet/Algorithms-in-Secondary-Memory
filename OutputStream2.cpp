@@ -24,7 +24,7 @@ void OutputStream2::writeln(string str){
 }
 
 
-void OutputStream2::close(FILE * pFile){
-	fclose(pFile);
+void OutputStream2::close(){
+	fclose(new_file);
 }
 
