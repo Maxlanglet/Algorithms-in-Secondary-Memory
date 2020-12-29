@@ -25,6 +25,24 @@ int main(int argc, char* argv[]){
 	string title = name;
 	cout << title << endl;
 	cout << "Method|Size of buffer |Characters read| average| average speed"<< endl;
+
+/*
+	RrmergeMethod2 r2 ;
+	r2.rrmerge1("output21.txt",3,"t1.txt","t2.txt","t3.txt");
+	r2.rrmerge2("output22.txt",3,"t1.txt","t2.txt","t3.txt");
+	r2.rrmerge3("output23.txt",10,3,"t1.txt","t2.txt","t3.txt");
+	r2.rrmerge4("output24.txt",1,3,"t1.txt","t2.txt","t3.txt");
+	
+	RrmergeMethod3 r4 ;
+	r4.rrmerge1("output31.txt",10,3,"t1.txt","t2.txt","t3.txt");
+	r4.rrmerge2("output32.txt",10,3,"t1.txt","t2.txt","t3.txt");
+	r4.rrmerge3("output33.txt",10,10,3,"t1.txt","t2.txt","t3.txt");
+	r4.rrmerge4("output34.txt",10,1,3,"t1.txt","t2.txt","t3.txt");
+	
+*/
+	/*
+
+	
 	
 	//int buffer[] = {1, 2, 3,10, 100, 1000};
 
@@ -32,7 +50,7 @@ int main(int argc, char* argv[]){
 
 	//int size = 10000;
 
-/*
+
 	//printf("\nTEST INPUTSTREAM1\n\n");
 	InputStream1 instream ; //if () considers it a function in main 
 	instream.open("role_type.csv");
@@ -250,9 +268,8 @@ cout <<  average3/4 << " & "<< length3/(average3/4) << " \\\\" << endl;
 
 	cout << "size of init compared to final: " <<  init << " " << fin4 << endl;
 	
-}
-/*
 
+}
 
 	printf("TEST MERGESORT\n\n");
 	class mergesort msort;
@@ -265,7 +282,7 @@ cout <<  average3/4 << " & "<< length3/(average3/4) << " \\\\" << endl;
 	fstat(file, &sb);
 	int init =  sb.st_size;
 
-	//msort.extsort("../imdb/movie_link.csv", 3, 10000, 30,50);
+	//msort.extsort("movie_link.csv", 3, 10000, 30,50);
 
 
 	file = open("mergedfile0_0.txt", O_RDONLY);	
@@ -273,8 +290,9 @@ cout <<  average3/4 << " & "<< length3/(average3/4) << " \\\\" << endl;
 	fstat(file, &sb);
 	cout << init <<sb.st_size << endl;
 	//msort.extsort("movie_link.csv", 3, 60, 30,50);
-	//msort.extsort("role_type.csv", 3, 10, 2,50);
-	*/
+	msort.extsort("complete_cast.csv", 4, 1000, 500,50);
+	//msort.extsort("role_type.csv", 5, 10,5,50);
+	//msort.extsort("mergedfile0_0 copy.txt", 1, 10,5,50);
 /*
 	printf("TEST RRMERGE2\n\n");
 	RrmergeMethod2 r2;
