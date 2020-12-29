@@ -37,25 +37,17 @@ string InputStream4::readln(int mult_page){
 	  handle_error("fstat");
 
 	pos = lseek(fd, 0, SEEK_CUR);
-
 	int off = (pos%pagesize);
-
 	int page = floor(pos/pagesize);
 
-
 	size_t len=pagesize;
-	
-	
-
 	rest = sb.st_size-pos;
 
 	if (rest == 0) return "";
 
 	while(!edl || pos < sb.st_size){
 		int idx=0;
-
 		if (offset != page || init!=1){
-
 			int err = munmap(addr, len+1);
 			init=0;
 		    if(err != 0){
@@ -67,7 +59,6 @@ string InputStream4::readln(int mult_page){
 				pagesize = getpagesize();
 				len=offset*pagesize - sb.st_size;
 			}
-
 			addr =  static_cast<char*>(mmap(NULL, len+1, PROT_READ,MAP_PRIVATE, fd, offset*pagesize));
 			init=1;
 		}
@@ -79,8 +70,6 @@ string InputStream4::readln(int mult_page){
 
 
 	    while (idx+off < len && addr[idx+off] != '\n' && addr[idx+off] != '\r') str+=addr[idx+off], idx++;
-
-
 	    if ( addr[idx+off] == '\n' || addr[idx+off] == '\r'){
 	    	pos += idx+1;
 	    	lseek(fd, pos, SEEK_SET);

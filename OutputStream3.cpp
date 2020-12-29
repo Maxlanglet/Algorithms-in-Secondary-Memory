@@ -9,20 +9,12 @@ OutputStream3::~OutputStream3(){}
 
 
 void OutputStream3::create(string filepath){ 
-	//ofstream outfile (path);
-	//outfile.close();
 	new_file = open(filepath.c_str(), O_CREAT | O_WRONLY | O_TRUNC,S_IWUSR |S_IRUSR);
 
 }
 
 
 void OutputStream3::writeln(string str, int B){
-	//str+="\n";
-	/*
-	if(str.substr(str.length()-1) == "\n"){
-		str=str.substr(0,str.length()-1);
-	}
-	*/
 	int offset = 0; //starts reading the string for the first time
 	int over = 0; //1 if the line has been completely processed
 
@@ -57,6 +49,7 @@ void OutputStream3::writeln(string str, int B){
 			offset+=B-1;
 		}
 	}
+	free(buffer);
 }
 
 void OutputStream3::close(){

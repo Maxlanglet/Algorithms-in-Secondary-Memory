@@ -34,5 +34,9 @@ public:
 private:
 	string path;
 	int new_file;// voir pq pas fstream
+	int init;
+	char *map;
+	int curpage;
+	int buf;
 };
 #endif
