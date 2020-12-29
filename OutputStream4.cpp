@@ -22,10 +22,11 @@ void OutputStream4::create(string filename){
 }
 
 void OutputStream4::writeln(string str, size_t B){
-	
+	/*
 	if(str.substr(str.length()-1) != "\n"){
 	str+="\n";
 	}
+	*/
 	
 
 	// open a file to write only ->OPEN IN ANOTHER METHOD
@@ -35,7 +36,14 @@ void OutputStream4::writeln(string str, size_t B){
 	   handle_error("open");
 	}*/
 
-	int filesize = lseek(new_file, 0, SEEK_END);
+	struct stat sb;
+
+	if (fstat(new_file, &sb) == -1) 
+  		handle_error("fstat");
+
+
+
+	int filesize = sb.st_size;
 
 
 	// size of our map
@@ -133,7 +141,7 @@ void OutputStream4::writeln(string str, size_t B){
 				printf("Writing character %c\n", map[j]);
 		}*/
 		// Write it now to disk
-		msync(map, B, MS_SYNC);
+		//msync(map, B, MS_SYNC);
 		if (msync(map, B, MS_SYNC) == -1){
 			perror("Could not sync the file to disk");
 		}

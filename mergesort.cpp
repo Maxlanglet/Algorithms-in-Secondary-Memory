@@ -115,9 +115,9 @@ mergesort::mergesort(){}
 
 mergesort::~mergesort(){}
 
-void mergesort::extsort(string inputfile, int k, int M, float d, int B){
+void mergesort::extsort(string inputfile, int k, int M, float d){
 	//tester savoir quel outputstream utiliser ici, pour le moment outputstream1
-	OutputStream3 outputstream1;
+	OutputStream2 outputstream1;
 
 
 	InputStream2 instream2;
@@ -165,14 +165,14 @@ void mergesort::extsort(string inputfile, int k, int M, float d, int B){
 		}
 		//instream2.close();
 
-		outputstream1.create("outputfile"+to_string(j)+".txt");
+		outputstream1.create(("outputfile"+to_string(j)+".txt").c_str());
 
 		sort(mylist.begin(),mylist.end(),LineComparator());
 		it = mylist.begin();
 	    while(it != mylist.end())
 	    {
 			string fileline = it->line;
-	        outputstream1.writeln(fileline, B);//toujours probleme, write tout sauf au eof
+	        outputstream1.writeln(fileline);//toujours probleme, write tout sauf au eof
 	        it++;
 	    }
 		mylist.clear();
@@ -184,7 +184,7 @@ void mergesort::extsort(string inputfile, int k, int M, float d, int B){
 		for (int i = 0; i < mylist.size(); ++i)//mylist.size()
 		{
 			//cout << i << endl;
-			outputstream1.writeln(it->line, B);
+			outputstream1.writeln(it->line);
 			++it;
 			assert(it != mylist.end());
 		}
@@ -217,7 +217,7 @@ void mergesort::extsort(string inputfile, int k, int M, float d, int B){
 			if(y==number_of_files-1){
 				//cout << " creating the merging file" << endl;
 				//creates the file merging d or less files
-				outputstream1.create("mergedfile"+to_string(x)+"_"+to_string(y)+".txt");
+				outputstream1.create(("mergedfile"+to_string(x)+"_"+to_string(y)+".txt").c_str());
 			
 				//cout << "number of file to merge < d" << endl;
 				// the number of files left for the last bucket is
@@ -242,7 +242,7 @@ void mergesort::extsort(string inputfile, int k, int M, float d, int B){
 					sort(mylist.begin(),mylist.end(),LineComparator());
 
 					//write the first line in the file
-					outputstream1.writeln((mylist[0].line).c_str(), B);
+					outputstream1.writeln((mylist[0].line).c_str());
 					//cout << " index of WINNER " <<mylist[0].index << endl;
 					//cout << " trying to open the WINNER " << (addresses[(mylist[0].index)]).c_str() << endl;
 					//opens the file of the winner using the index saved in the line structure
@@ -300,7 +300,7 @@ void mergesort::extsort(string inputfile, int k, int M, float d, int B){
 			else{
 				//cout << " creating the merging file" << endl;
 				//creates the file merging d or less files
-				outputstream1.create("mergedfile"+to_string(x)+"_"+to_string(y)+".txt");
+				outputstream1.create(("mergedfile"+to_string(x)+"_"+to_string(y)+".txt").c_str());
 			
 				//cout << " number of file to merge >= d" << endl;
 				//adds the first line in the list of lines
@@ -321,7 +321,7 @@ void mergesort::extsort(string inputfile, int k, int M, float d, int B){
 					sort(mylist.begin(),mylist.end(),LineComparator());
 
 					//write the first line in the file
-					outputstream1.writeln((mylist[0].line).c_str(), B);
+					outputstream1.writeln((mylist[0].line).c_str());
 
 					//opens the file of the winner using the index saved in the line structure
 					instream2.open((addresses[(mylist[0].index)]).c_str());

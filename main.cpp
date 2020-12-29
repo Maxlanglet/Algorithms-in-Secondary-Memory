@@ -177,7 +177,7 @@ cout <<  average3/4 << " & "<< length3/(average3/4) << " \\\\" << endl;
 	int init =  sb.st_size;
 
 	cout << init << endl;
-
+/*
 //=============================================================================
 {
 	cout << "METHOD 1: " << endl;
@@ -224,6 +224,7 @@ cout <<  average3/4 << " & "<< length3/(average3/4) << " \\\\" << endl;
 }
 
 //=============================================================================
+*/
 {
 	cout << "METHOD 3: " << endl;
 
@@ -247,6 +248,8 @@ cout <<  average3/4 << " & "<< length3/(average3/4) << " \\\\" << endl;
 }
 
 //=============================================================================
+
+	/*
 	cout << "METHOD 4: " << endl;
 
 	int average4=0;
@@ -268,31 +271,45 @@ cout <<  average3/4 << " & "<< length3/(average3/4) << " \\\\" << endl;
 
 	cout << "size of init compared to final: " <<  init << " " << fin4 << endl;
 	
-
+*/
 }
+	/*
+{
+	int buffer[] = {1000,10000,100000};//100,500,1000,
 
 	printf("TEST MERGESORT\n\n");
 	class mergesort msort;
-	//msort.extsort("../imdb/info_type.csv", 3, 10, 2, 50);
 
 	struct stat sb;
 
-	int file = open("movie_link.csv", O_RDONLY);	
+	int file = open(title.c_str(), O_RDONLY);	
 
 	fstat(file, &sb);
 	int init =  sb.st_size;
 
-	//msort.extsort("movie_link.csv", 3, 10000, 30,50);
+	close(file);
+
+	int average=0;
+	for(int j=0;j<3;j++){
+		for(int i=0;i<4;i++){
+			Timer timer;
+			msort.extsort(title.c_str(), 4, size, buffer[j]);
+			timer.Stop();
+			average+=timer.getDuration();
+		}
+		cout << "d   M  average time" << endl;
+		cout << size << " & " << buffer[j] << " & " << average/4<< endl;
+	}
 
 
 	file = open("mergedfile0_0.txt", O_RDONLY);	
 
 	fstat(file, &sb);
-	cout << init <<sb.st_size << endl;
+	cout << "characters comparaison :"<< init <<sb.st_size << endl;
 	//msort.extsort("movie_link.csv", 3, 60, 30,50);
-	msort.extsort("complete_cast.csv", 4, 1000, 500,50);
 	//msort.extsort("role_type.csv", 5, 10,5,50);
 	//msort.extsort("mergedfile0_0 copy.txt", 1, 10,5,50);
+}*/
 /*
 	printf("TEST RRMERGE2\n\n");
 	RrmergeMethod2 r2;

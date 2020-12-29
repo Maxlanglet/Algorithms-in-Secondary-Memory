@@ -60,6 +60,7 @@ void OutputStream3::writeln(string str, int B){
 			offset+=B-1;
 		}
 	}
+	free(buffer);
 }
 
 void OutputStream3::close(){
