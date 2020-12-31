@@ -1,57 +1,44 @@
-#include "mergesort.hpp"
+#ifndef MERGESORT
+#define MERGESORT
+#include <iostream>
+#include <string>
+#include <fstream>
+#include <unistd.h>
+#include <fcntl.h>
+#include <sys/mman.h>
+#include <sys/stat.h>
+#include <stdio.h>
+#include <cstdarg>
+#include <math.h>
+#include <algorithm>
+#include <list>
+#include <cstdio>
+#include <cctype>
+#include<assert.h>
+#include <vector>
+#include <queue>
+#include "InputStream2.hpp"
+#include "InputStream3.hpp"//remove after
+#include "OutputStream1.hpp"
+#include "OutputStream2.hpp"
+#include "OutputStream3.hpp"
+#include "OutputStream4.hpp"
 
-#define handle_error(msg) \
-           do { perror(msg); exit(EXIT_FAILURE); } while (0)
+using namespace std;
 
 
-bool compare(const string& first, const string& sec, int k){
-	//TODO: trouver moyen d'envoyer k ici
-
-	int i=k-1;
-	if (tolower(first[i])<tolower(sec[i])) return true;
-	else if (tolower(first[i])>tolower(sec[i])) return false;
-
-
-	return ( first.length() < sec.length() );
-}
-
-
-struct Line
+class mergesort
 {
-    vector<string> word;
-	string line;
-	string kchar;//ajouter condition sur k ici quelque part
-	//int column;
-	int index;
-	int toseek;
-	Line(string l, vector<string> w, int k, int ind, int ts){
-		word=w;
-		line=l;
-		if(k>word.size()){
-			kchar=word[word.size()-1];
-
-		}
-		else{
-			//takes the first letter of the word in the kst column
-			kchar=word[k-1];
-		}
-		index=ind;
-		toseek=ts;
-	}
-	Line(string l, vector<string> w, int k){
-		word=w;
-		line=l;
-		if(k>word.size()){
-			kchar=word[word.size()-1];
-		}
-		else{
-			//takes the first letter of the word in the kst column
-			kchar=word[k-1];
-		}
-		index=0;
-		toseek=0;
-	}
+public:
+	mergesort();
+	~mergesort();
+	void extsort(string inputfile, int k, int M, float d, int B);
+	//bool compare(const string& first, const string& sec, const int k);
+private:
+	//InputStream4 instream4;
+	int column;
 };
+<<<<<<< HEAD
 
 
 struct LineComparator
@@ -376,3 +363,6 @@ void mergesort::extsort(string inputfile, int k, int M, float d){
 		x++;
 	}
 }
+=======
+#endif
+>>>>>>> ca6a9e414d30d2588b3bbc356eb6f76497c452ad
