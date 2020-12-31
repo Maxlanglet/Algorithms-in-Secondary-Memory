@@ -9,8 +9,6 @@ OutputStream3::~OutputStream3(){}
 
 
 void OutputStream3::create(string filepath){ 
-	//ofstream outfile (path);
-	//outfile.close();
 	new_file = open(filepath.c_str(), O_CREAT | O_WRONLY | O_TRUNC,S_IWUSR |S_IRUSR);
 
 }

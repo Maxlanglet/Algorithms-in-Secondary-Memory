@@ -27,15 +27,7 @@ void OutputStream1::writeln(string str){//pour respliquer le vis a vis avec le i
 			printf("Error writing output file\n");
 			break;
 		}
-		/*
-		line += str[i];
-		if (str[i] == '\n' || i==str.length()-1){
-			ssize_t n = write(new_file, &line, sizeof(line));
-			cout << line << endl;
-			line = "";
-			
-		}
-		*/
+
 	}
 
 }
