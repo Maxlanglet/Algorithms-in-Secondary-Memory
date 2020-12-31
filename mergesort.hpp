@@ -16,6 +16,7 @@
 #include <cctype>
 #include<assert.h>
 #include <vector>
+#include <queue>
 #include "InputStream2.hpp"
 #include "InputStream3.hpp"//remove after
 #include "OutputStream1.hpp"
