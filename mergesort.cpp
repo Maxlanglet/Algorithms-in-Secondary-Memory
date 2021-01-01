@@ -5,8 +5,6 @@
 
 
 bool compare(const string& first, const string& sec, int k){
-	//TODO: trouver moyen d'envoyer k ici
-
 	int i=k-1;
 	if (tolower(first[i])<tolower(sec[i])) return true;
 	else if (tolower(first[i])>tolower(sec[i])) return false;
@@ -20,7 +18,7 @@ struct Line
 {
     vector<string> word;
 	string line;
-	string kchar;//ajouter condition sur k ici quelque part
+	string kchar;
 	string index;
 	int toseek;
 	Line(string l, vector<string> w, int k, string ind, int ts){
@@ -80,7 +78,6 @@ vector<string> split(string line_read){
     // fill split lines
     for(int i = 0; i <int(splitIndices.size()); i++){
         strTempString = line_read.substr(splitIndices[i]+1, (splitIndices[i+1] - (splitIndices[i]+1) ));
-		//cout << "word is " << strTempString << endl;
         vector_words.push_back(strTempString);
     }
     return vector_words;
@@ -93,7 +90,6 @@ mergesort::mergesort(){}
 mergesort::~mergesort(){}
 
 void mergesort::extsort(string inputfile, int k, int M, float d){
-	//tester savoir quel outputstream utiliser ici, pour le moment outputstream1
 	OutputStream2 outputstream1;
 
 
@@ -137,7 +133,7 @@ void mergesort::extsort(string inputfile, int k, int M, float d){
 
 		outputstream1.create(("outputfile"+to_string(j)+".txt").c_str());
 		while(!mylist.empty())   {
-	        outputstream1.writeln( mylist.top().line);//toujours probleme, write tout sauf au eof
+	        outputstream1.writeln( mylist.top().line);
 			mylist.pop();
 	        
 	    }
@@ -295,7 +291,7 @@ void mergesort::extsort(string inputfile, int k, int M, float d){
 			}
 	
 		}
-		//we are going to another pass so increment x	
+		//we are going to do another pass so increment x	
 		x++;
 	}
 }
