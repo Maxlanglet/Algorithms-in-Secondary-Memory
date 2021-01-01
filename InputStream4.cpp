@@ -16,13 +16,16 @@ InputStream4::~InputStream4(){}
 
 
 void InputStream4::open(string filename){
-	// open the file
+	// opens the file in reading mode
 	fd = ::open(filename.c_str(), O_RDONLY);
 	if (fd == -1)
 	   handle_error("open");
 }
 
-
+/*Implementation of the readln method with mapping
+mult_page is an integer that specifies the number of pages to map when calling mmap
+Returns the string of the read line 
+*/
 string InputStream4::readln(int mult_page){
 	string str = "";
 	struct stat sb;
@@ -36,11 +39,11 @@ string InputStream4::readln(int mult_page){
 	if (fstat(fd, &sb) == -1) 
 	  handle_error("fstat");
 
-	pos = lseek(fd, 0, SEEK_CUR);
-	int off = (pos%pagesize);
-	int page = floor(pos/pagesize);
+	pos = lseek(fd, 0, SEEK_CUR); //position in the file
+	int off = (pos%pagesize);	  //position in the page 
+	int page = floor(pos/pagesize); //number of page in which we are currently
 
-	size_t len=pagesize;
+	size_t len=pagesize;	//length to map/unmap
 	rest = sb.st_size-pos;
 
 	if (rest == 0) return "";
@@ -91,11 +94,12 @@ string InputStream4::readln(int mult_page){
 	return str;
 }
 
-
+/*Change the position pointer place in the file*/
 void InputStream4::seek(int pos){
 	lseek (fd, pos, SEEK_SET);
 }
 
+/*Returns true if the end of the file is reached*/
 bool InputStream4::end_of_stream(){
 	int bytes_read = 1;
 
@@ -107,10 +111,16 @@ bool InputStream4::end_of_stream(){
 	}
 }
 
+/*Closes the file associated to the stream*/
 void InputStream4::close(){
 	::close(fd);
 }
 
+/*Sequential reading 
+Reads the entire file sequentially by calling readln until the line size is equal to 0
+mult is the number of pages to map at a time
+Returns the length of everything read
+*/
 int InputStream4::length(int mult){
 	struct stat sb;
 	seek(0);
@@ -123,19 +133,22 @@ int InputStream4::length(int mult){
 	  handle_error("fstat");
 
 
-	while (sum < sb.st_size){//sb.st_size-1
-		line_size = readln(mult).size();//mettre size of buffer in def of length
+	while (sum < sb.st_size){
+		line_size = readln(mult).size();
 		sum+=line_size;
 	}
 
-	int err = munmap(addr, getpagesize());
-	init=0;//to make sure we remap for real benchmarking
+	int err = munmap(addr, getpagesize()); //Unmap the last mapped region once we are finished from reading 
+	init=0;			//to make sure we remap at the next call (for real benchmarking)
     if(err != 0){
         printf("UnMapping Failed\n");
     }
 	return sum;
 }
 
+/*Reads through the file randomly
+j is the number of randomized jumps M the number of pages to map
+*/
 int InputStream4::randjump(int j, int M){
 	int sum=0;
 	int k=0;
