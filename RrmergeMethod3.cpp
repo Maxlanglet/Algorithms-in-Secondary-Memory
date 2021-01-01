@@ -10,7 +10,12 @@ RrmergeMethod3::RrmergeMethod3(){
 
 RrmergeMethod3::~RrmergeMethod3(){}
 
-
+/*
+Implementation of combined reading and writing using InputStream3 and Outputstream1
+outputfile is the name of the file where the combined files will be written
+num is the number of files to merge
+Br is the size of the inputstream buffer
+*/
 void RrmergeMethod3::rrmerge1(string outputfile, int Br, int num, ... ){
 	OutputStream1 outputstream1;
 	outputstream1.create(outputfile);
@@ -50,6 +55,12 @@ void RrmergeMethod3::rrmerge1(string outputfile, int Br, int num, ... ){
 	free(list);
 }
 
+/*
+Implementation of combined reading and writing using InputStream3 and Outputstream2
+outputfile is the name of the file where the combined files will be written
+num is the number of files to merge
+Br is the size of the inputstream buffer
+*/
 void RrmergeMethod3::rrmerge2(string outputfile, int Br, int num, ... ){
 	OutputStream2 outputstream2;
 	outputstream2.create(outputfile.c_str());
@@ -89,6 +100,13 @@ void RrmergeMethod3::rrmerge2(string outputfile, int Br, int num, ... ){
 	free(list);
 }
 
+/*
+Implementation of combined reading and writing using InputStream3 and Outputstream3
+outputfile is the name of the file where the combined files will be written
+num is the number of files to merge
+Br is the size of the inputstream buffer
+Bw is the size of the outputstream buffer
+*/
 void RrmergeMethod3::rrmerge3(string outputfile, int Br, int Bw, int num, ... ){
 	OutputStream3 outputstream3;
 	outputstream3.create(outputfile);
@@ -128,6 +146,13 @@ void RrmergeMethod3::rrmerge3(string outputfile, int Br, int Bw, int num, ... ){
 	free(list);
 }
 
+/*
+Implementation of combined reading and writing using InputStream3 and Outputstream4
+outputfile is the name of the file where the combined files will be written
+num is the number of files to merge
+Br is the size of the inputstream buffer
+Bw is the size of the outputstream buffer
+*/
 void RrmergeMethod3::rrmerge4(string outputfile, int Br, int Bw, int num, ... ){
 	OutputStream4 outputstream4;
 	outputstream4.create(outputfile);
