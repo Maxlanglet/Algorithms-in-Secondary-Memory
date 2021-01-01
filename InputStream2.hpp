@@ -9,7 +9,7 @@
 using namespace std;
 
 
-class InputStream2// : public InputStream pour interface mais ca fait des erreurs de partout alors j'enleve pour le moment
+class InputStream2
 {
 public:
 	InputStream2();
@@ -23,7 +23,6 @@ public:
 	int randjump(string file, int j);
 	int sizeoffile();
 private:
-	//const char * path;
 	FILE * file;
 	int offset;
 	int res;

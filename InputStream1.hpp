@@ -15,7 +15,7 @@
 using namespace std;
 
 
-class InputStream1// : public InputStream pour interface mais ca fait des erreurs de partout alors j'enleve pour le moment
+class InputStream1
 {
 public:
 	InputStream1();
@@ -28,7 +28,6 @@ public:
 	int length(string file);
 	int randjump(string file, int j);
 private:
-	//string path;
 	off_t offset;
 	int filp; 
 	
