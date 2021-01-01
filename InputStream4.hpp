@@ -26,12 +26,11 @@ public:
 	int length(int mult);
 	int randjump(int j, int M);
 private:
-	int fd;
-	off_t offset;
-	char *addr;
-	int init;
-	int pos;
-	size_t rest;
-	bool jump;
+	int fd;	//file descriptor
+	off_t offset; //page number in memory
+	char *addr; //our map
+	int init;	//if we have a map in memeory init = 1, else 0
+	int pos;	//position in the file
+	size_t rest;//what remains to be read in the file
 };
 #endif

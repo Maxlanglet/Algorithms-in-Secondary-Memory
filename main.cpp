@@ -24,6 +24,9 @@ int main(int argc, char* argv[]){
 
 	string title = name;
 	//title = "mergedfile.txt";
+	title = "/Users/langletmaxime/Desktop/Database_Systems_Architecture/Algorithms_in_Secondary_Memory/imdb/movie_link.csv";
+	string title2 = "/Users/langletmaxime/Desktop/Database_Systems_Architecture/Algorithms_in_Secondary_Memory/imdb/complete_cast.csv";
+	string title3 = "/Users/langletmaxime/Desktop/Database_Systems_Architecture/Algorithms_in_Secondary_Memory/imdb/movie_info_idx.csv";
 	cout << title << endl;
 	cout << "Method|Size of buffer |Characters read| average| average speed"<< endl;
 
@@ -169,7 +172,7 @@ cout <<  average3/4 << " & "<< length3/(average3/4) << " \\\\" << endl;
 	*/
 
 {	
-	printf("TEST RRMERGE3\n\n");
+	printf("TEST RRMERGE2\n\n");
 	RrmergeMethod3 r;
 
 	struct stat sb;
@@ -180,7 +183,7 @@ cout <<  average3/4 << " & "<< length3/(average3/4) << " \\\\" << endl;
 	cout << init << endl;
 
 //=============================================================================
-{
+{/*
 	//cout << "METHOD 1: " << endl;
 
 	int average=0;
@@ -188,8 +191,8 @@ cout <<  average3/4 << " & "<< length3/(average3/4) << " \\\\" << endl;
 	for(int i=0; i<4; i++){
 		Timer timer;
 		//length4 = instream4.length(mul);
-		r.rrmerge1("theoutput1.txt",1000,3,title.c_str(),title.c_str(),title.c_str());//for Rrmerge3
-		//r.rrmerge1("theoutput1.txt",3,title.c_str(),title.c_str(),title.c_str());
+		//r.rrmerge1("theoutput1.txt",1000,2,title.c_str(),title2.c_str());//for Rrmerge3
+		r.rrmerge1("theoutput1.txt",2,title.c_str(),title2.c_str());
 		timer.Stop();
 		average+=timer.getDuration();
 	}
@@ -199,10 +202,11 @@ cout <<  average3/4 << " & "<< length3/(average3/4) << " \\\\" << endl;
 	fstat(file, &sb);
 	int fin =  sb.st_size;
 
-	cout << " & " << " 1 " << " & / & " << fin << " & " << average/4 << endl;
+	cout << " & " << " 1 " << " & / & " << fin << " & " << average/4 << " \\\\" << endl;
 	//cout << "average time: " <<  << endl;
 
 	//cout << "size of init compared to final: " <<  init << " " << fin << endl;
+	*/
 }
 
 //=============================================================================
@@ -214,8 +218,8 @@ cout <<  average3/4 << " & "<< length3/(average3/4) << " \\\\" << endl;
 	for(int i=0; i<4; i++){
 		Timer timer;
 		//length4 = instream4.length(mul);
-		r.rrmerge2("theoutput2.txt",1000,3,title.c_str(),title.c_str(),title.c_str());
-		//r.rrmerge2("theoutput2.txt",3,title.c_str(),title.c_str(),title.c_str());
+		r.rrmerge2("theoutput2.txt",1000,3,title.c_str(),title2.c_str(),title3.c_str());
+		//r.rrmerge2("theoutput2.txt",3,title.c_str(),title2.c_str(),title3.c_str());
 		timer.Stop();
 		average2+=timer.getDuration();
 	}
@@ -228,7 +232,7 @@ cout <<  average3/4 << " & "<< length3/(average3/4) << " \\\\" << endl;
 	fstat(file, &sb);
 	int fin =  sb.st_size;
 
-	cout << " & " << " 2 " << " & / & " << fin << " & " << average2/4 << endl;
+	cout << " & " << " 2 " << " & / & " << fin << " & " << average2/4<< " \\\\" << endl;
 
 	//cout << "size of init compared to final: " <<  init << " " << pos2 << endl;
 }
@@ -243,13 +247,13 @@ cout <<  average3/4 << " & "<< length3/(average3/4) << " \\\\" << endl;
 	for(int i=0; i<4; i++){
 		Timer timer;
 		//length4 = instream4.length(mul);
-		r.rrmerge3("theoutput3.txt",1000,size,3,title.c_str(),title.c_str(),title.c_str());
-		//r.rrmerge3("theoutput3.txt",size,3,title.c_str(),title.c_str(),title.c_str());
+		r.rrmerge3("theoutput3.txt",1000,size,3,title.c_str(),title2.c_str(),title3.c_str());
+		//r.rrmerge3("theoutput3.txt",size,3,title.c_str(),title2.c_str(),title3.c_str());
 		timer.Stop();
 		average3+=timer.getDuration();
 	}
 
-	int file = open("theoutput2.txt", O_RDONLY);
+	int file = open("theoutput3.txt", O_RDONLY);
 
 	//off_t pos2 = lseek(fd, 0, SEEK_END);
 
@@ -257,7 +261,7 @@ cout <<  average3/4 << " & "<< length3/(average3/4) << " \\\\" << endl;
 	int fin =  sb.st_size;
 
 	//cout << "average time: " << average3/2 << " with buffer size:" << size << endl;
-	cout << " & " << " 3 " << " & "<< size <<" & " << fin << " & " << average3/4 << endl;
+	cout << " & " << " 3 " << " & "<< size <<" & " << fin << " & " << average3/4 << " \\\\"<< endl;
 
 	//cout << "size of init compared to final: " <<  init << " " << fin3 << endl;
 }
@@ -271,8 +275,8 @@ cout <<  average3/4 << " & "<< length3/(average3/4) << " \\\\" << endl;
 	for(int i=0; i<4; i++){
 		Timer timer;
 		//length4 = instream4.length(mul);
-		r.rrmerge4("theoutput4.txt",1000,size,3,title.c_str(),title.c_str(),title.c_str());
-		//r.rrmerge4("theoutput4.txt",size,3,title.c_str(),title.c_str(),title.c_str());
+		r.rrmerge4("theoutput4.txt",1000,size,3,title.c_str(),title2.c_str(),title3.c_str());
+		//r.rrmerge4("theoutput4.txt",size,3,title.c_str(),title2.c_str(),title3.c_str());
 		timer.Stop();
 		average4+=timer.getDuration();
 	}
@@ -284,15 +288,14 @@ cout <<  average3/4 << " & "<< length3/(average3/4) << " \\\\" << endl;
 	fstat(file, &sb);
 	int fin4 =  sb.st_size;
 
-	cout << " & " << " 4 " << " & "<< size <<" & " << fin4 << " & " << average4/4 << endl;
+	cout << " & " << " 4 " << " & "<< size <<" & " << fin4 << " & " << average4/4 << " \\\\"<< endl;
 	//cout << "size of init compared to final: " <<  init << " " << fin4 << endl;
 	
 
 }
 	/*
-	
 {
-	int buffer[] = {1000,10000,100000};//100,500,1000,
+	int buffer[] = {1000,10000,100000, 1000000};//100,500,1000,
 
 	printf("TEST MERGESORT\n\n");
 	class mergesort msort;
@@ -307,15 +310,15 @@ cout <<  average3/4 << " & "<< length3/(average3/4) << " \\\\" << endl;
 	close(file);
 
 	int average=0;
-	for(int j=0;j<3;j++){
+	cout << "d   M  average time" << endl;
+	for(int j=0;j<4;j++){
 		for(int i=0;i<4;i++){
 			Timer timer;
-			msort.extsort(title.c_str(), 4, size, buffer[j]);
+			msort.extsort(title.c_str(), 1, size, buffer[j]);
 			timer.Stop();
 			average+=timer.getDuration();
 		}
-		cout << "d   M  average time" << endl;
-		cout << size << " & " << buffer[j] << " & " << average/4<< endl;
+		cout << size << " & " << buffer[j] << " & " << average/4<< " \\\\"<<  endl;
 	}
 
 
@@ -323,37 +326,7 @@ cout <<  average3/4 << " & "<< length3/(average3/4) << " \\\\" << endl;
 
 	fstat(file, &sb);
 	cout << "characters comparaison :"<< init <<sb.st_size << endl;
-	//msort.extsort("movie_link.csv", 3, 60, 30,50);
-	//msort.extsort("role_type.csv", 5, 10,5,50);
-	//msort.extsort("mergedfile0_0 copy.txt", 1, 10,5,50);
 }*/
-/*
-	printf("TEST RRMERGE2\n\n");
-	RrmergeMethod2 r2;
-
-
-	r.rrmerge1("2theoutput1.txt",2,"../imdb/info_type.csv","../imdb/role_type.csv");//2,"test.csv"
-	r.rrmerge2("2theoutput2.txt",2,"../imdb/info_type.csv","../imdb/role_type.csv");
-	r.rrmerge3("2theoutput3.txt",10,2,"../imdb/info_type.csv","../imdb/role_type.csv");
-	r.rrmerge4("2theoutput4.txt",10,2,"../imdb/info_type.csv","../imdb/role_type.csv");
-
-r.rrmerge1("2theoutput1.txt",2,"info_type.csv","role_type.csv");//2,"test.csv"
-	r.rrmerge2("2theoutput2.txt",2,"info_type.csv","role_type.csv");
-	r.rrmerge3("2theoutput3.txt",10,2,"info_type.csv","role_type.csv");
-	r.rrmerge4("2theoutput4.txt",10,2,"info_type.csv","role_type.csv");
-	*/
-	
-/*
-
-
-	r2.rrmerge2("2theoutput2.txt",2,"../imdb/info_type.csv","../imdb/role_type.csv");
-
-
-	r2.rrmerge3("theoutput3.txt",10,2,"info_type.csv","role_type.csv");
-
-
-	r2.rrmerge4("theoutput4.txt",10,2,"info_type.csv","role_type.csv");
-*/
 /*
 	string title4="longasstext.txt";
 	string title2= "testout.txt";
