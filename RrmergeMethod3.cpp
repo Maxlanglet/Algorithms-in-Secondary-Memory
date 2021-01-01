@@ -29,8 +29,8 @@ void RrmergeMethod3::rrmerge1(string outputfile, int Br, int num, ... ){
 	}
 	va_end(valist); //Cleaning memory reserved for valist
 	while(num!=0){//Reading in a round-robin way until all files are processed
-		label:
 		for(int i=0;i<num;i++){
+			label:
 			string s = list[i].readln(Br);//default value
 			if(s.size()!=0){
 				outputstream1.writeln(s);
@@ -40,8 +40,9 @@ void RrmergeMethod3::rrmerge1(string outputfile, int Br, int num, ... ){
 				for (int j = i; j < num; j++) { 
 					list[j] = list[j+1];
 				}
-			}if(s.size() ==0 && i!=num-1){
-				goto label;
+				if(i!=num){
+					goto label; //stay in same posiiton unless last file in list
+				}
 			}
 		}
 	}
@@ -67,8 +68,8 @@ void RrmergeMethod3::rrmerge2(string outputfile, int Br, int num, ... ){
 	}
 	va_end(valist); //Cleaning memory reserved for valist
 	while(num!=0){//Reading in a round-robin way until all files are processed
-		label:
 		for(int i=0;i<num;i++){
+			label:
 			string s = list[i].readln(Br);
 			if(s.size()!=0){
 				outputstream2.writeln(s);
@@ -78,8 +79,9 @@ void RrmergeMethod3::rrmerge2(string outputfile, int Br, int num, ... ){
 				for (int j = i; j < num; j++) { 
 					list[j] = list[j+1];
 				}
-			}if(s.size() ==0 && i!=num-1){
-				goto label;
+				if(i!=num){
+					goto label; //stay in same posiiton unless last file in list
+				}
 			}
 		}
 	}
@@ -105,8 +107,8 @@ void RrmergeMethod3::rrmerge3(string outputfile, int Br, int Bw, int num, ... ){
 	}
 	va_end(valist); //Cleaning memory reserved for valist
 	while(num!=0){//Reading in a round-robin way until all files are processed
-		label:
 		for(int i=0;i<num;i++){
+			label:
 			string s = list[i].readln(Br);
 			if(s.size()!=0){
 				outputstream3.writeln(s, Bw);
@@ -116,8 +118,9 @@ void RrmergeMethod3::rrmerge3(string outputfile, int Br, int Bw, int num, ... ){
 				for (int j = i; j < num; j++) { 
 					list[j] = list[j+1];
 				}
-			}if(s.size() ==0 && i!=num-1){
-				goto label;
+				if(i!=num){
+					goto label; //stay in same posiiton unless last file in list
+				}
 			}
 		}
 	}
@@ -143,8 +146,8 @@ void RrmergeMethod3::rrmerge4(string outputfile, int Br, int Bw, int num, ... ){
 	}
 	va_end(valist); //Cleaning memory reserved for valist
 	while(num!=0){//Reading in a round-robin way until all files are processed
-		label:
 		for(int i=0;i<num;i++){
+			label:
 			string s = list[i].readln(Br);
 			if(s.size()!=0){
 				outputstream4.writeln(s, Bw);
@@ -154,8 +157,9 @@ void RrmergeMethod3::rrmerge4(string outputfile, int Br, int Bw, int num, ... ){
 				for (int j = i; j < num; j++) { 
 					list[j] = list[j+1];
 				}
-			}if(s.size() ==0 && i!=num-1){
-				goto label;
+				if(i!=num){
+					goto label; //stay in same posiiton unless last file in list
+				}
 			}
 		}
 	}
