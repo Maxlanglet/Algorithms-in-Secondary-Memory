@@ -32,6 +32,7 @@ Implementation of the writeln method with mapping
 B is the integer corresponding to the number of pages to map when calling mmap
 */
 void OutputStream4::writeln(string str, size_t B){
+
 	
 	int pagesize = getpagesize();
 
@@ -57,7 +58,6 @@ void OutputStream4::writeln(string str, size_t B){
 	int restonpage = filesize-(numberpagesfile*pagesize);
 	//number of pages needed for the text
 	int numberpages = ceil(((-1+pagesize+textsize)/pagesize)+(restonpage/pagesize));
-
 
 	//in case B is too big
 	if(numberpages*pagesize/B == 0){
@@ -140,7 +140,6 @@ void OutputStream4::writeln(string str, size_t B){
 		
 
 	}
-
 		// incremente the offset of B
 		offset += B;
 		loop+=1;

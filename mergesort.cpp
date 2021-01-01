@@ -86,20 +86,15 @@ vector<string> split(string line_read){
     return vector_words;
 }
 
-priority_queue<Line, vector<Line>, decltype(comparator)> clear()
-{
-   priority_queue<Line, vector<Line>, decltype(comparator)> empty(comparator);
-   return empty;
-}
 
 mergesort::mergesort(){}
 
 
 mergesort::~mergesort(){}
 
-void mergesort::extsort(string inputfile, int k, int M, float d, int B){
+void mergesort::extsort(string inputfile, int k, int M, float d){
 	//tester savoir quel outputstream utiliser ici, pour le moment outputstream1
-	OutputStream3 outputstream1;
+	OutputStream2 outputstream1;
 
 
 	InputStream2 instream2;
@@ -140,9 +135,9 @@ void mergesort::extsort(string inputfile, int k, int M, float d, int B){
 			i++;
 		}
 
-		outputstream1.create("outputfile"+to_string(j)+".txt");
+		outputstream1.create(("outputfile"+to_string(j)+".txt").c_str());
 		while(!mylist.empty())   {
-	        outputstream1.writeln( mylist.top().line, B);//toujours probleme, write tout sauf au eof
+	        outputstream1.writeln( mylist.top().line);//toujours probleme, write tout sauf au eof
 			mylist.pop();
 	        
 	    }
@@ -174,7 +169,7 @@ void mergesort::extsort(string inputfile, int k, int M, float d, int B){
 			//in case we are at the end of the list of files to merge and there is less than d files
 			if(y==number_of_files-1){
 				//creates the file merging d or less files
-				outputstream1.create("mergedfile"+to_string(x)+"_"+to_string(y)+".txt");
+				outputstream1.create(("mergedfile"+to_string(x)+"_"+to_string(y)+".txt").c_str());
 				// the number of files left for the last bucket is
 				// the initial size of addresse of the pass minus d* the number of passes we did
 				int leftover = addr_pass_size-(d*y);
@@ -194,7 +189,7 @@ void mergesort::extsort(string inputfile, int k, int M, float d, int B){
 				while(!mylist.empty()){
 
 					//write the first line in the file
-					outputstream1.writeln((mylist.top().line).c_str(), B);
+					outputstream1.writeln((mylist.top().line).c_str());
 
 					//opens the file of the winner using the index saved in the line structure
 					instream2.open((mylist.top().index).c_str());
@@ -240,7 +235,7 @@ void mergesort::extsort(string inputfile, int k, int M, float d, int B){
 			else{
 
 				//creates the file merging d files
-				outputstream1.create("mergedfile"+to_string(x)+"_"+to_string(y)+".txt");
+				outputstream1.create(("mergedfile"+to_string(x)+"_"+to_string(y)+".txt").c_str());
 
 				//adds the first line in the list of lines
 				for(int file=0; file<d; file++){
@@ -257,7 +252,7 @@ void mergesort::extsort(string inputfile, int k, int M, float d, int B){
 				// while the list of lines is not empty
 				while(!mylist.empty()){
 					//write the first line in the file
-					outputstream1.writeln((mylist.top().line).c_str(), B);
+					outputstream1.writeln((mylist.top().line).c_str());
 
 					//opens the file of the winner using the index saved in the line structure
 					instream2.open((mylist.top().index).c_str());
