@@ -4,16 +4,7 @@
            do { perror(msg); exit(EXIT_FAILURE); } while (0)
 
 
-bool compare(const string& first, const string& sec, int k){
-	int i=k-1;
-	if (tolower(first[i])<tolower(sec[i])) return true;
-	else if (tolower(first[i])>tolower(sec[i])) return false;
-
-
-	return ( first.length() < sec.length() );
-}
-
-
+//Defining structure Line
 struct Line
 {
     vector<string> word;
@@ -50,7 +41,7 @@ struct Line
 	}
 };
 
-
+//Comparator for lexicographical order
 auto comparator = [] (const Line & line1, const Line & line2)
 {
     if(line1.kchar == line2.kchar)
@@ -59,7 +50,7 @@ auto comparator = [] (const Line & line1, const Line & line2)
 };
 
 
-
+//splits the line into separate colomns
 vector<string> split(string line_read){
 
 
