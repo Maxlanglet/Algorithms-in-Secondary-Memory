@@ -3,14 +3,7 @@
 #include <iostream>
 #include <string>
 #include <fstream>
-//#include "OutputStream.hpp"
-//#ifdef _WIN32
-//#include <io.h>
-
-//#elif defined(__APPLE__)
 #include <unistd.h>
-//#define bswap_64(x) OSSwapInt64(x)
-//#endif
 #include <sys/mman.h>
 #include <sys/stat.h>
 #include <stdio.h>
@@ -22,7 +15,7 @@
 using namespace std;
 
 
-class OutputStream4 // : public OutputStream enlever pour le moment
+class OutputStream4 
 {
 public:
 	OutputStream4();
@@ -33,7 +26,7 @@ public:
 
 private:
 	string path;
-	int new_file;// voir pq pas fstream
+	int new_file;
 	int init;
 	char *map;
 	int curpage;

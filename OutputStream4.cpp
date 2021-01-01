@@ -4,7 +4,7 @@
            do { perror(msg); exit(EXIT_FAILURE); } while (0)
 
 
-
+//Initializes the attributes of the class
 OutputStream4::OutputStream4(){
 	map = NULL;
 	init=0;
@@ -14,7 +14,10 @@ OutputStream4::OutputStream4(){
 
 OutputStream4::~OutputStream4(){}
 
-
+/*
+Creates the file which name is the parameter path
+If the file already exists its content is emptied
+*/
 void OutputStream4::create(string filename){
 	path = filename;
 	mode_t mode = S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH;
@@ -24,6 +27,10 @@ void OutputStream4::create(string filename){
 	}
 }
 
+/*
+Implementation of the writeln method with mapping
+B is the integer corresponding to the number of pages to map when calling mmap
+*/
 void OutputStream4::writeln(string str, size_t B){
 	
 	int pagesize = getpagesize();
@@ -51,7 +58,7 @@ void OutputStream4::writeln(string str, size_t B){
 	//number of pages needed for the text
 	int numberpages = ceil(((-1+pagesize+textsize)/pagesize)+(restonpage/pagesize));
 
-	cout << (numberpages*pagesize/B) <<endl;
+
 	//in case B is too big
 	if(numberpages*pagesize/B == 0){
 		B = getpagesize();
@@ -68,13 +75,9 @@ void OutputStream4::writeln(string str, size_t B){
 		// add the char in the map
 		// if there is still enough space to read an entire map of size B
 		if(loop==0){
-			cout << numberpagesfile<<endl;
-			cout << curpage << endl;
 			// in case we must write at a new page
 			if ((numberpagesfile != curpage || init!=1)){
-				cout << "here"<< endl;
 				if(init==1){
-					cout << "writing the first page"<<endl;
 					// Write it now to disk
 					if (msync(map, B, MS_SYNC) == -1){
 						perror("Could not sync the file to disk");
@@ -145,6 +148,9 @@ void OutputStream4::writeln(string str, size_t B){
 	
 }
 
+/*
+Closes the file associated to the stream
+*/
 void OutputStream4::close2(){
 	close(new_file);
 }

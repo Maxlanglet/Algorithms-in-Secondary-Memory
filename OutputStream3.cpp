@@ -1,30 +1,27 @@
 #include "OutputStream3.hpp"
-//#define BUFFERSIZE 5
-
 
 OutputStream3::OutputStream3(){
 }
 
 OutputStream3::~OutputStream3(){}
 
-
+//  creates the file in writting mode if it doesnt exist, else it empties it
 void OutputStream3::create(string filepath){ 
 	new_file = open(filepath.c_str(), O_CREAT | O_WRONLY | O_TRUNC,S_IWUSR |S_IRUSR);
 
 }
 
 
+/*Implementation of the writeln method 
+B is the size of the buffer to use to write to the file
+*/
 void OutputStream3::writeln(string str, int B){
-	//str+="\n";
-	/*
-	if(str.substr(str.length()-1) == "\n"){
-		str=str.substr(0,str.length()-1);
-	}
-	*/
+	//If the line is empty the function returns immediatly
 	if(str.size()==0){
 		return;
 	}
-	int offset = 0; //starts reading the string for the first time
+
+	int offset = 0; //Starts reading the string for the first time
 	int over = 0; //1 if the line has been completely processed
 
 	size_t nbytes = B*sizeof(char); //creating the buffer in memory
@@ -48,7 +45,7 @@ void OutputStream3::writeln(string str, int B){
 		if ( *ptr == '\n'){
 			nbytes=nb_bytes+1;
 			ssize_t n = write(new_file, buffer, nbytes);
-			over=1; //ends the while loop 
+			over=1; //Ends the while loop 
 		}
 		else{
 			
@@ -61,6 +58,9 @@ void OutputStream3::writeln(string str, int B){
 	free(buffer);
 }
 
+/*
+Closes the file associated to the stream
+*/
 void OutputStream3::close(){
 	::close(new_file);
 }

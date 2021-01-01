@@ -14,7 +14,7 @@
 using namespace std;
 
 
-class OutputStream3// : public OutputStream enlever pour le moment
+class OutputStream3
 {
 public:
 	OutputStream3();
@@ -24,8 +24,6 @@ public:
 	void create(string filepath);
 
 private:
-	//string path;
 	int new_file;
-	//ofstream* new_file_pointer;// voir pq pas fstream
 };
 #endif

@@ -10,7 +10,7 @@
 using namespace std;
 
 
-class OutputStream2// : public OutputStream enlever pour le moment
+class OutputStream2
 {
 public:
 	OutputStream2();
@@ -19,6 +19,6 @@ public:
 	void close();
 	void create(const char * filename);
 private:
-	FILE * new_file;// voir pq pas fstream
+	FILE * new_file;
 };
 #endif
