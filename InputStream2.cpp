@@ -80,11 +80,9 @@ void InputStream2::close(){
 /*Reads through the file randomly
 j is the number of randomized jumps
 */
-int InputStream2::randjump(string filename, int j){
+int InputStream2::randjump(int j){
 	int sum=0;
 	int k=0;
-
-	open(filename.c_str());
 
 	//sz is the size of the file
 	fseek(file, 0L, SEEK_END);

@@ -28,7 +28,7 @@ public:
 	void seek(int pos);
 	bool end_of_stream();
 	void close();
-	int randjump(string file, int j, int buffer);
+	int randjump(int j, int buffer);
 private:
 	int fd; 
 	off_t offset;

@@ -73,7 +73,7 @@ void InputStream1::close(){
 Reads the entire file sequentially by calling readln until the line size is equel to 0
 Returns the length of everything read
 */
-int InputStream1::length(string file){
+int InputStream1::length(){
 	struct stat sb;
 	seek(0);
 
@@ -92,7 +92,7 @@ int InputStream1::length(string file){
 /*Reads through the file randomly
 j is the number of randomized jumps
 */
-int InputStream1::randjump(string file, int j){
+int InputStream1::randjump(int j){
 	int sum=0;
 	int k=0;
 

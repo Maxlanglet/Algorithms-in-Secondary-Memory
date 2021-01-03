@@ -136,7 +136,7 @@ void InputStream3::close(){
 /*Reads through the file randomly
 j is the number of randomized jumps and buffer the size of buffer to use
 */
-int InputStream3::randjump(string file, int j, int buffer){
+int InputStream3::randjump(int j, int buffer){
 	int sum=0;
 	int k=0;
 

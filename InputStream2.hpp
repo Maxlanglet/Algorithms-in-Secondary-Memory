@@ -20,7 +20,7 @@ public:
 	bool end_of_stream();
 	void close();
 	int length();
-	int randjump(string file, int j);
+	int randjump(int j);
 	int sizeoffile();
 private:
 	FILE * file;

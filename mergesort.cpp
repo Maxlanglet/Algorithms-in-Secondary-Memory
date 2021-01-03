@@ -117,27 +117,27 @@ void mergesort::extsort(string inputfile, int k, int M, float d){
 	while(!instream2.end_of_stream()){
 		addresses.push_back("outputfile"+to_string(j)+".txt");
 
-		int i =0;
+		int i =0;		//value to keep track of the number of bytes read so far
 		while(i<M){
-			if (!instream2.end_of_stream()){
-				string temp = instream2.readln();
-				vector <string> line_words;
+			if (!instream2.end_of_stream()){		//condition to stop if the file reached it's end 
+				string temp = instream2.readln();	//line read
+				vector <string> line_words;	
 				l++;
-				line_words=split(temp);
-				
+				line_words=split(temp);				//split the line
 				Line line_to_add = Line(temp,line_words, k);
-				mylist.push(line_to_add);
-				line_words.clear();				
+				mylist.push(line_to_add);			//push the line into the list
+				line_words.clear();	
+				i+=temp.size();						//adding the number of bytes read
 			}
 			else{
-				i=M;
+				i=M;	//to stop the loop
 			}
-			i++;
 		}
 
-		outputstream1.create(("outputfile"+to_string(j)+".txt").c_str());
+
+		outputstream1.create(("outputfile"+to_string(j)+".txt").c_str());	//loop to write into the file
 		while(!mylist.empty())   {
-	        outputstream1.writeln( mylist.top().line);//toujours probleme, write tout sauf au eof
+	        outputstream1.writeln( mylist.top().line);
 			mylist.pop();
 	        
 	    }
@@ -146,9 +146,9 @@ void mergesort::extsort(string inputfile, int k, int M, float d){
 		outputstream1.close();
 
 	}
-
 	
 	instream2.close();
+
 
 	int x=0;
 	string s;
